@@ -1,0 +1,107 @@
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+    <md-card>
+      <md-card-content layout='column'>
+        <pm-selector></pm-selector>
+        <div layout='column'>
+          <md-virtual-repeat-container>
+            <div md-virtual-repeat="pokemon in searched_pokemons">
+              <pm-in-list ng-click="checkPM(pokemon.id)"></pm-in-list>
+            </div>
+          </md-virtual-repeat-container>
+          *不显示PM时请拖动滚动条
+          <md-button class="md-raised md-primary" ng-click="randomPM()">随机PM</md-button>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet" ng-show="pokemon!=null">
+    <md-card>
+      <md-card-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="基本信息">
+            <div class="space-bottom"></div>
+            <div class="centered" flex layout='column'>
+              <div class="space-bottom" layout='row'>
+                <div flex>{{pokemon.id}}</div>
+                <div flex><b>{{pokemon.name}}</b></div>
+                <div flex>
+                  <p class="type_wrapper" ng-style="type_background_colors[pokemon.type1]">
+                    {{types[pokemon.type1].name}}
+                  </p>
+                </div>
+                <div flex>
+                  <p ng-if="pokemon.type2>0" class="type_wrapper" ng-style="type_background_colors[pokemon.type2]">
+                    {{types[pokemon.type2].name}}
+                  </p>
+                </div>
+              </div>
+              <div class="space-bottom" layout='column'>
+                <div ng-repeat="ability in pokemon.abilities" layout='row'>
+                  <div flex='20'>
+                    {{ability.name}}
+                  </div>
+                  <div>
+                    {{ability.description}}
+                  </div>
+                </div>
+              </div>
+              <div class="space-bottom" layout='row'>
+                <div flex layout='column'>
+                  <div>身高</div>
+                  <div>{{pokemon.height}}</div>
+                </div>
+                <div flex layout='column'>
+                  <div>体重</div>
+                  <div>{{pokemon.weight}}</div>
+                </div>
+              </div>
+              <div class="space-bottom" layout='row'>
+                <div flex layout='column'>
+                  <div>捕获率</div>
+                  <div>{{pokemon.catch_rate}}</div>
+                </div>
+                <div flex layout='column'>
+                  <div>孵化步数</div>
+                  <div>{{pokemon.birth_step}}</div>
+                </div>
+                <div flex layout='column'>
+                  <div>♂:♀</div>
+                  <div>{{pokemon.sex_rate}}</div>
+                </div>
+              </div>
+              <div>
+                努力值
+              </div>
+              <div layout='row'>
+                <div flex ng-repeat="stats_name in stats_names">
+                  {{stats_name}}
+                </div>
+              </div>
+              <div class="space-bottom" layout='row'>
+                <div flex ng-repeat="value in pokemon.base_stat">
+                  {{value}}
+                </div>
+              </div>
+              <canvas id="stats_displayer">
+              </canvas>
+            </div>
+          </md-tab>
+          <md-tab label="技能学习">
+            2
+          </md-tab>
+          <md-tab label="其他">
+            3
+          </md-tab>
+        </md-tabs>
+        </div>
+      </md-card-content>
+    </md-card>
+    <md-card flex-md='100' flex-sm='100' layout-md='row' layout-sm='row' layout-wrap>
+      <div ng-if="pokemon!=null" ng-repeat="url in pokemon.apngs">
+        <img class="apng-image" ng-src="{{url}}">
+      </div>
+    </md-card>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="vertical-align-container-out border-bottom space-bottom" ng-if='apng.load'>
+  <div class="vertical-align-container-in-bottom">
+    <img class="apng-image" ng-src='{{current.apng}}'>
+  </div>
+</div>
+<div class="centered" layout='row'>
+  <div flex>
+    <p>{{current.id}}</p>
+  </div>
+  <div flex>
+    <p>{{current.name}}</p>
+  </div>
+  <div flex>
+    <p class="type_wrapper" ng-style="type_background_colors[current.type1]">
+      {{types[current.type1].name}}
+    </p>
+  </div>
+  <div flex>
+    <p ng-if="current.type2>0" class="type_wrapper" ng-style="type_background_colors[current.type2]">
+      {{types[current.type2].name}}
+    </p>
+  </div>
+</div>
+<div class="border-bottom space-bottom">
+  <md-radio-group ng-model="current.selected_ability_index" layout='row' layout-sm='column'>
+    <div flex layout='row' layout='center center ' ng-repeat="ability in current.abilities track by $index">
+      <md-radio-button ng-value="$index+1">
+        <div>
+          {{ability.name}}
+        </div>
+        <div>
+          {{ability.description}}
+        </div>
+      </md-radio-button>
+    </div>
+  </md-radio-group>
+</div>
+<div class="border-bottom space-bottom">
+  <div layout='row'>
+    <div>能力源</div>
+    <div flex class="centered" ng-repeat="name in stats_names track by $index">
+      {{name}}
+    </div>
+  </div>
+  <div layout='row'>
+    <div>种族值</div>
+    <div flex class="centered" ng-repeat="bs in current.base_stats track by $index">
+      {{bs}}
+    </div>
+  </div>
+  <div layout='row'>
+    <div>努力值</div>
+    <div flex class="centered" ng-repeat="bss in current.base_stat track by $index">
+      {{bss}}
+    </div>
+  </div>
+  <div layout='row'>
+    <div>个体值</div>
+    <div flex class="centered" ng-repeat="iv in current.IV track by $index">
+      {{iv}}
+    </div>
+  </div>
+</div>
+<div layout>
+  <div>能力值</div>
+  <div flex class="centered" ng-repeat="stat in current.stats track by $index">
+    {{stat}}
+  </div>
+</div>
+<div class="border-bottom space-bottom">
+  <div layout='row'>
+    <div flex></div>
+    <md-radio-group ng-model="current.level" ng-change="calculate(current)" layout>
+      <md-radio-button ng-value="50" style="margin:auto 2px">
+        Lv.50
+      </md-radio-button>
+      <md-radio-button ng-value="100" style="margin:auto 2px">
+        Lv.100
+      </md-radio-button>
+    </md-radio-group>
+    <md-button class="md-raised md-primary" ng-click="open_editor($event)">
+      编辑
+    </md-button>
+  </div>
+</div>
+<div layout='row' layout-wrap>
+  <div ng-repeat="move in current.moves">
+    <div class="md-button type_wrapper move_chip" ng-style="type_background_colors[move.type]">
+      <div layout layout-align='center center'>
+        <div flex></div>
+        <div>{{move.name}}</div>
+        <div flex></div>
+        <div>
+          <label class="mdl-button mdl-js-button mdl-button--icon clean-move-icon" ng-click="remove_move($index)">
+            <i class="material-icons">close</i>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="space-bottom">
+    </div>
+  </div>
+</div>
+<div layout>
+  <div layout-padding>
+    <p>
+      {{current.item.name}}
+    </p>
+  </div>
+  <div layout-padding>
+    <p>
+      {{current.item.description}}
+    </p>
+  </div>
+  <div flex></div>
+  <div>
+    <md-input-container>
+      <md-select ng-model="current.nature" aria-label="current nature" ng-change="calculate(current)">
+        <md-option ng-repeat="nature in natures" ng-value="$index">{{nature.name}}</md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+  <div flex></div>
+  <div>
+    <md-button class='md-raised md-warn' ng-click='remove_cur()'>
+      从队伍删除
+    </md-button>
+  </div>
+</div>

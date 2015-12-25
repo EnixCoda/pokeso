@@ -1,0 +1,30 @@
+<md-bottom-sheet class="md-list" layout>
+	<md-list flex>
+		<md-list-item layout='row'>
+			<div flex class="centered"></div>
+			<div flex class="centered" ng-repeat="name in stats_names">{{name}}</div>
+		</md-list-item>
+		<md-list-item layout='row'>
+			<div flex class="centered">种族值</div>
+			<div flex ng-repeat="value in cur.base_stats track by $index" layout>
+				<div class="centered" flex>{{value}}</div>
+			</div>
+		</md-list-item>
+		<md-list-item layout='row'>
+			<div flex class="centered">努力值</div>
+			<md-input-container flex class="no-padding-bottom" ng-repeat="value in cur.base_stat track by $index">
+				<input class="centered" type="number" step="4" ng-model="cur.base_stat[$index]" min="0" max="252" ng-change="stat_change(cur.base_stat, $index)" aria-label='base stat' ng-focus="clear_this_input(cur.base_stat, $index)" ng-blur="on_blur(cur.base_stat, $index)">
+			</md-input-container>
+		</md-list-item>
+		<md-list-item layout='row'>
+			<div flex class="centered">个体值</div>
+			<md-input-container flex class="no-padding-bottom" ng-repeat="value in cur.IV track by $index">
+				<input class="centered" type="number" step="1" ng-model="cur.IV[$index]" min="0" max="31" ng-change="stat_change(cur.IV, $index)" aria-label='IV' ng-focus="clear_this_input(cur.IV, $index)" ng-blur="on_blur(cur.IV, $index)">
+			</md-input-container>
+		</md-list-item>
+		<md-list-item>
+			<div flex class="centered">能力值</div>
+			<div flex class="centered" ng-repeat="value in cur.stats track by $index">{{value}}</div>
+		</md-list-item>
+	</md-list>
+</md-bottom-sheet>

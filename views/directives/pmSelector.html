@@ -1,0 +1,14 @@
+<div layout>
+  <md-input-container flex='60'>
+    <label>ID或名称</label>
+    <input ng-model="search_key" ng-keyup="search()">
+  </md-input-container>
+  <md-input-container flex>
+  <label>世代</label>
+  <md-select ng-model="generation" ng-change="search()">
+    <md-option ng-repeat="gen in generations" value="{{gen.index}}">
+      {{gen.name}}
+    </md-option>
+  </md-select>
+  </md-input-container>
+</div>

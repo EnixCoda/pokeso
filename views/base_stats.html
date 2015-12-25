@@ -1,0 +1,84 @@
+<div class="vertical-align-container-out cover">
+  <div class="vertical-align-container-in-middle centered">
+    <div style="display: inline-block">
+      <md-progress-circular md-mode='indeterminate'></md-progress-circular>
+    </div>
+  </div>
+</div>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+    <md-card class="md-raised md-whiteframe-z3">
+      <md-card-content>
+        <pm-selector></pm-selector>
+        <div layout='column'>
+          <md-virtual-repeat-container>
+            <div md-virtual-repeat="pokemon in searched_pokemons">
+              <pm-in-list ng-click="add_card(pokemon.id)"></pm-in-list>
+            </div>
+          </md-virtual-repeat-container>
+          *不显示PM时请拖动滚动条
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div ng-show="cards.length>0" class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
+    <md-card class="md-raised">
+      <md-card-content layout-padding layout='column'>
+        <div layout='row' layout-wrap>
+          <div ng-repeat="card in cards">
+            <div class="margin-right" style="background-color:{{colors[$index]}};border-radius:20px;">
+              <md-checkbox class="faint_checkbox" ng-click="toggle_show_card($index)" ng-checked="cards[$index].show" aria-label='small card'>
+                <div layout='row' layout-align='center center'>
+                  <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.id}} pm-icon-0{{card.id}} pm-icon-00{{card.id}}"></div>
+                  <div style="color:#fff">{{card.name}}</div>
+                  <div class="border-right"></div>
+                  <div style="background-color:#fff;border-radius:50%;margin-right:-4px" class="button-clear">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="" ng-click="del_card($index)">
+                      <i class="material-icons">close</i>
+                    </label>
+                  </div>
+                </div>
+              </md-checkbox>
+            </div>
+          </div>
+          <md-progress-circular ng-show="fetching_basestats"  md-mode="indeterminate" md-diameter="20"></md-progress-circular>
+        </div>
+        <div layout='row' layout-align='center center'>
+          <canvas id="stats_displayer"></canvas>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div ng-if="false" class="mdl-cell mdl-cell--4-col" ng-repeat="card in cards">
+    <md-card class="md-raised md-whiteframe-z3">
+      <md-card-content>
+        <div layout='column'>
+          <div ng-if='apng.load' class="vertical-align-container-out border-bottom space-bottom">
+            <div class="vertical-align-container-in-bottom">
+              <img class="apng-image" ng-src='{{card.apng}}'>
+            </div>
+          </div>
+          <div layout='row' class="centered">
+            <div flex><p class="md-body-2">{{card.id}}</p></div>
+            <div flex><p class="md-body-2">{{card.name}}</p></div>
+            <div flex><p class="md-body-2">{{types[card.type1].name}}</p></div>
+            <div flex><p class="md-body-2" ng-if="card.type2>0">{{types[card.type2].name}}</p></div>
+          </div>
+          <div layout='row'>
+            <div flex ng-repeat="value in card.base_stats track by $index" layout='column' layout-align='center center'>
+              <div>{{stats_names[$index]}}</div>
+              <div>{{value}}</div>
+            </div>
+            <div flex layout='column' layout-align='center center'>
+              <div>总和</div>
+              <div>{{card.sum}}</div>
+            </div>
+          </div>
+          <div layout layout-align='center center'>
+            <md-button ng-click="del_card($index)">关闭</md-button>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

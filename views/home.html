@@ -1,0 +1,19 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet" ng-repeat="function in MainFunctions">
+    <md-card class="md-raised md-whiteframe-z4">
+      <div class="mdl-card__title">
+        <div flex>
+          <h2 class="mdl-card__title-text font-family">{{ function.name }}</h2>
+        </div>
+        <img ng-if='apng.load' class="apng-image" ng-src="{{ function.apng }}">
+      </div>
+      <div class="mdl-card__supporting-text">
+        <p ng-repeat="des in function.description">{{ des }}</p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border" ng-if="function.enterable">
+        <md-button class="md-raised" href="{{function.link}}" ng-if="!function.constructing">进入</md-button>
+        <md-button class="md-raised" ng-if="function.constructing" disabled>施工中</md-button>
+      </div>
+    </md-card>
+  </div>
+</div>

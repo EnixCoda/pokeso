@@ -1,0 +1,100 @@
+<div class="vertical-align-container-out cover">
+  <div class="vertical-align-container-in-middle centered">
+    <div style="display: inline-block">
+      <md-progress-circular md-mode='indeterminate'></md-progress-circular>
+    </div>
+  </div>
+</div>
+<div class="mdl-grid" style="max-width:1120px">
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+    <md-card class="md-raised md-whiteframe-z3">
+      <md-card-content >
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="选择PM" >
+            <pm-selector></pm-selector>
+            <div layout='column'>
+              <md-virtual-repeat-container>
+                <div md-virtual-repeat="pokemon in searched_pokemons">
+                  <pm-in-list ng-click="edit_pokemon(pokemon.id)"></pm-in-list>
+                </div>
+              </md-virtual-repeat-container>
+              *不显示PM时请拖动滚动条
+            </div>
+          </md-tab>
+          <md-tab label="选择技能">
+            <div layout="column">
+              <move-selector></move-selector>
+              <md-button ng-click="search_move()" class="md-raised md-primary">
+                搜索技能
+              </md-button>
+              <div layout='row' layout-align='space-between center'>
+                <div></div>
+                <div>ID</div>
+                <div>名称</div>
+                <div>威力</div>
+                <div>属性</div>
+                <div>类型</div>
+                <div>命中</div>
+                <div>PP值</div>
+                <div></div>
+              </div>
+              <md-virtual-repeat-container>
+                <div md-virtual-repeat="move in moves">
+                  <move-in-list ng-click="add_move(move)"></move-in-list>
+                </div>
+                <md-button class="md-warn fill-width" ng-if="cur==null">
+                  请先选择PM
+                </md-button>
+              </md-virtual-repeat-container>
+            </div>
+          </md-tab>
+          <md-tab label="选择物品">
+            <item-selector></item-selector>
+          </md-tab>
+        </md-tabs>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+    <div class="mdl-grid no-padding">
+      <div class="mdl-cell mdl-cell--12-col no-horizontal-margin fill-width">
+        <md-card class="md-raised md-whiteframe-z3">
+          <md-card-content>
+            <div layout layout-align='center center' layout-wrap>
+              <div flex></div>
+              <div layout layout-align='center center'>
+                <md-input-container>
+                  <label>看上去很乱很短的编码</label>
+                  <input ng-model="serial.text">
+                </md-input-container>
+                <label class="mdl-button mdl-js-button mdl-button--icon" ng-click="serial.text=''" ng-show="serial.text!=''">
+                  <i class="material-icons">clear</i>
+                </label>
+              </div>
+              <div>
+                <md-button class="md-primary thin-button-phone" ng-click="load()" ng-disabled='serial.text==""'>
+                  加载
+                </md-button>
+                <md-button class="md-primary thin-button-phone" ng-click="save()">
+                  保存
+                </md-button>
+              </div>
+            </div>
+            <div ui-sortable ng-model="team" ng-if="team.length>0">
+              <div ng-repeat="pokemon in team track by $index">
+                <pm-in-team ng-click="edit_pokemon(pokemon.id)" layout></pm-in-team>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col no-horizontal-margin fill-width">
+        <md-card ng-if="team.length>0" class="md-raised md-whiteframe-z3" id='cur'>
+          <md-card-content layout='column'>
+            <cur-editing ng-repeat="current in team" ng-if="current==cur"></cur-editing>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>

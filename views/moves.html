@@ -1,0 +1,117 @@
+<div class="vertical-align-container-out cover">
+  <div class="vertical-align-container-in-middle centered">
+    <div style="display: inline-block">
+      <md-progress-circular md-mode='indeterminate'></md-progress-circular>
+    </div>
+  </div>
+</div>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col border-right space-right-lite">
+        <move-selector></move-selector>
+      </div>
+    </div>
+  </div>
+  <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-tablet">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet border-right space-right-lite">
+        <div layout='column'>
+          <md-button ng-click="search_move()" class="md-raised md-primary">
+            搜索技能
+          </md-button>
+          <div layout='row' layout-align='space-between center'>
+            <div></div>
+            <div>ID</div>
+            <div>名称</div>
+            <div>威力</div>
+            <div>属性</div>
+            <div>类型</div>
+            <div>命中</div>
+            <div>PP值</div>
+            <div></div>
+          </div>
+          <md-virtual-repeat-container class="border-bottom space-bottom">
+            <div md-virtual-repeat="move in search_result_moves">
+              <move-in-list ng-click="add_move(move)"></move-in-list>
+            </div>
+          </md-virtual-repeat-container>
+          <label>已选技能列表</label>
+          <div layout layout-wrap>
+            <md-chips class="font-family fill-width" ng-model="selected_moves" md-autocomplete-snap="" md-require-match="true">
+              <md-autocomplete md-selected-item="selected_item" md-search-text="search_move_text" md-items="item in query_search(search_move_text)" md-item-text="item.name" placeholder="按ID/名称搜索技能">
+                <span md-highlight-text="search_move_text">{{item.id}} :: {{item.name}}</span>
+              </md-autocomplete>
+              <md-chip-template>
+                <span><strong>{{$chip.name}}</strong></span>
+              </md-chip-template>
+            </md-chips>
+          </div>
+        </div>
+      </div>
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+        <div layout='column'>
+          <div>
+            <div layout='row'  layout-align="space-between center">
+              <md-input-container layout='row' class="reduce-padding-bottom">
+                <md-checkbox ng-model="define_poke_type">
+                  指定PM属性
+                </md-checkbox>
+              </md-input-container>
+            </div>
+            <div layout='row'>
+              <md-input-container>
+                <label>PM属性1</label>
+                <md-select ng-model="selected_poke_type1" ng-disabled='!define_poke_type'>
+                  <md-option ng-repeat="type in types" value="{{type.id}}" ng-if="$index>0">
+                    {{type.name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container>
+                <label>PM属性2</label>
+                <md-select ng-model="selected_poke_type2" ng-disabled="selected_poke_type1==0 || !define_poke_type">
+                  <md-option value="-1">
+                    无
+                  </md-option>
+                  <md-option ng-repeat="type in types" value="{{type.id}}" ng-if="$index!=selected_poke_type1">
+                    {{type.name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+            <div layout layout-align="space-between center">
+              <md-input-container layout='row' class="reduce-padding-bottom">
+                <md-checkbox ng-model="define_poke_ability">
+                  指定PM特性
+                </md-checkbox>
+              </md-input-container>
+              <md-input-container>
+                <label>PM特性</label>
+                <md-select ng-model="selected_poke_ability" ng-disabled="!define_poke_ability">
+                  <md-option ng-repeat="ability in abilities" value="{{ability.id}}">
+                    {{ability.name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>
+          </div>
+          <div>
+            <md-button ng-click="search_poke()" class="md-raised md-primary fill-width">
+              搜索PM
+            </md-button>
+            <md-virtual-repeat-container>
+              <div layout layout-align='center center'>
+                <md-progress-linear ng-if='searching_poke' md-mode='indeterminate'></md-progress-linear>
+              </div>
+              <div md-virtual-repeat="pokemon in pokemons" layout flex>
+                <poke-can-learn ng-show="pokemon.id=='0'" layout flex></poke-can-learn>
+                <poke-can-learn ng-click="show_poke($event,$index)" ng-show="pokemon.id!='0'" layout flex></poke-can-learn>
+              </div>
+            </md-virtual-repeat-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

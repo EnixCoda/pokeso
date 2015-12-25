@@ -1,0 +1,49 @@
+<md-button class="no-margin fill-width">
+    <div layout='row' layout-wrap>
+      <div flex layout='column'>
+        <div layout='row'>
+          <span class='pm-icon pm-icon-{{pokemon.id}} pm-icon-0{{pokemon.id}} pm-icon-00{{pokemon.id}}' ></span>
+          <div class="space-right-lite">
+            {{pokemon.id}}
+          </div>
+          <div>
+            {{pokemon.name}}
+            {{sexs[pokemon.sex]}}
+          </div>
+        </div>
+        <div layout='row' layout-align='space-around center' layout-wrap>
+          <div flex>
+            Lv.{{pokemon.level}}
+          </div>
+          <div flex>
+            {{pokemon.abilities[pokemon.selected_ability_index-1].name}}
+          </div>
+          <div flex layout>
+            <div class="icon-item icon-item-{{pokemon.item.id}}"></div>
+            <div>{{pokemon.item.name}}</div>
+          </div>
+        </div>
+      </div>
+      <div flex layout='column' layout='space-between center'>
+        <div flex layout='row'>
+          <div flex>
+            {{pokemon.moves[0].name}}
+          </div>
+          <div flex>
+            {{pokemon.moves[1].name}}
+          </div>
+        </div>
+        <div flex layout='row'>
+          <div flex>
+            {{pokemon.moves[2].name}}
+          </div>
+          <div flex>
+            {{pokemon.moves[3].name}}
+          </div>
+        </div>
+      </div>
+    </div>
+</md-button>
+<div class="team_organizer" layout layout-align='center center'>
+  <i class="material-icons">view_headline</i>
+</div>
