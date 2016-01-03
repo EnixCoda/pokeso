@@ -59,7 +59,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       };
     }
   $scope.load_moves = function () {
-    $http.post(php_prefix + '/get_all_moves.php', {range: 'all'})
+    $http.post($scope.serverAddr + '/get_all_moves.php', {range: 'all'})
       .then(function (response) {
         $scope.moves = response.data;
         $('.cover').addClass('hidden');
@@ -140,7 +140,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       data.selected_moves.push($scope.selected_moves[i].id);
     }
 
-    $http.post(php_prefix + '/search_poke.php', data)
+    $http.post($scope.serverAddr + '/search_poke.php', data)
       .then(function (response) {
         $scope.pokemons = response.data;
         if ($scope.pokemons.length === 0) {
@@ -179,11 +179,10 @@ function ShowPokeController($scope, $mdDialog, $http, pokemon_id, apng) {
         name: cur
       };
     });
-
   $scope.loading_showpoke = true;
   $scope.loading_showpoke_apng = false;
   $scope.apng = apng;
-  $http.post(php_prefix + '/show_poke.php', {id: pokemon_id})
+  $http.post('//poke.so/server' + '/show_poke.php', {id: pokemon_id})
     .then(function (response) {
       $scope.pokemon = response.data;
       $scope.loading_showpoke = false;

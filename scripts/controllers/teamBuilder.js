@@ -1,7 +1,4 @@
 "use strict";
-/*global
-  alert, decode, encode, php_prefix, animate
-*/
 /**
  * @ngdoc function
  * @name pokesoApp.controller: TeamBuilderController
@@ -9,15 +6,6 @@
  * # TeamBuilderController
  * Controller of the pokesoApp
  */
-
-function set_length(length, ori) {
-  var str = String(ori);
-  var i;
-  for (i = str.length; i < length; i++) {
-    str = '0' + str;
-  }
-  return str;
-}
 
 angular.module('pokesoApp').controller('TeamBuilderController', function ($scope, $http, $mdBottomSheet) {
 
@@ -74,7 +62,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
     data.accuracy_min = $scope.accuracy_min;
     data.pp_max = $scope.pp_max;
     data.pp_min = $scope.pp_min;
-    $http.post(php_prefix + '/search_move_team.php', data)
+    $http.post($scope.serverAddr + '/search_move_team.php', data)
       .then(function (response) {
         $scope.moves = response.data;
       }, function () {
@@ -151,7 +139,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       return;
     }
 
-    $http.post(php_prefix + '/get_one_poke.php', {id: id})
+    $http.post($scope.serverAddr + '/get_one_poke.php', {id: id})
       .then(function (response) {
         $scope.team.push(response.data);
         $scope.cur = $scope.team[$scope.team.length - 1];
@@ -180,7 +168,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
   $scope.save = function () {
     if ($scope.team.length > 0) {
       $scope.serial.text = '正在压缩...';
-      $http.post(php_prefix + '/save_serial.php', {team: $scope.team})
+      $http.post($scope.serverAddr + '/save_serial.php', {team: $scope.team})
         .then(function (response) {
           var encoded = $hashdown.encode(response.data, {
               codec: $hashdown.TADPOLE
@@ -193,7 +181,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
     if ($scope.serial.text !== '') {
       var decoded;
       if (decoded = $hashdown.decode($scope.serial.text).text) {
-        $http.post(php_prefix + '/load_serial.php', {serial: decoded})
+        $http.post($scope.serverAddr + '/load_serial.php', {serial: decoded})
           .then(function (response) {
             $scope.team = response.data;
             var i;

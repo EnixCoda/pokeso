@@ -32,7 +32,7 @@ angular.module('pokesoApp').controller('SuggestionController', function ($scope,
         name: $scope.name,
         content: $scope.content
       };
-      $http.post(php_prefix + '/suggestion.php', data)
+      $http.post($scope.serverAddr + '/suggestion.php', data)
         .then(function () {
           $scope.state = '提交成功';
           $scope.state_color = '#8c8';

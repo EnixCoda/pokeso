@@ -112,9 +112,20 @@
 <script src="scripts/controllers/teamBuilder.js"></script>
 <script src="scripts/controllers/about.js"></script>
 <!-- custom code begin -->
-<script src="scripts/functions.js"></script>
+<script src="scripts/script.js"></script>
 <script src="scripts/hashdown.js"></script>
 <!-- custom code end -->
 <!-- endbuild -->
+<script>
+  $(document).ready(function () {
+    $('#title').click(function () {
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    });
+    $('.mdl-navigation__link').click(function () {
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    });
+    setTimeout("$('.cover-all').addClass('hidden')", Math.floor(Math.random() * 2000));
+  });
+</script>
 </body>
 </html>

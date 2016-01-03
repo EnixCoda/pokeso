@@ -11,7 +11,7 @@ angular.module('pokesoApp').controller('SkimController', function ($scope, $http
   $scope.pokemon = null
   $scope.checkPM = function(id) {
     $scope.pokemon = null;
-    $http.post(php_prefix + '/skim.php', {'id': id})
+    $http.post($scope.serverAddr + '/skim.php', {'id': id})
     .then(function (response) {
       $scope.pokemon = response.data;
       var base_stats, max=0;

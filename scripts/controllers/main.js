@@ -11,6 +11,8 @@ animate, APNG
  */
 
 angular.module('pokesoApp').controller('MainController', function ($scope, $http) {
+  $scope.storageAddr = '//poke.so/storage/';
+  $scope.serverAddr = '//poke.so/server/'
 
   $scope.MainFunctions = [
     {
@@ -248,7 +250,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
     $scope.apng.load = false;
   }
   function get_home_apng_urls() {
-    $http.post(php_prefix + '/get_random_apng_urls.php', {amount: $scope.MainFunctions.length})
+    $http.post($scope.serverAddr + '/get_random_apng_urls.php', {amount: $scope.MainFunctions.length})
       .then(function (response) {
         var i;
         for (i in $scope.MainFunctions) {
@@ -277,7 +279,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
   $scope.move_colors = ['#a8a878', 'c03028', 'a890f0', 'a040a0', 'e0c068', 'b8a038', 'a8b820', '705898', 'b8b8d0', 'f08030', '6890f0', '78c850', 'f8d030', 'f85888', '98d8d8', '7038f8', '705848', 'ee99ac'];
 
   $scope.pokemons = [];
-  $http.post(php_prefix + '/get_all_poke.php')
+  $http.post($scope.serverAddr + '/get_all_poke.php')
     .then(function (response) {
       $scope.pokemons = response.data;
     }, function () {
@@ -368,7 +370,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       r += 30;
     }
   }
-  
+
   $scope.start_gen = [0, 1, 152, 252, 387, 494, 650, 721];
   $scope.generation = 0;
   $scope.generations = ('全部 第一世代 第二世代 第三世代 第四世代 第五世代 第六世代').split(' ')

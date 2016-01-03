@@ -51,7 +51,6 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
     }
   };
 
-
   $scope.fetching_basestats = false;
   $scope.max_card_length = 6;
   $scope.add_card = function (id) {
@@ -63,7 +62,7 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
         }
       }
       $scope.fetching_basestats = true;
-      $http.post(php_prefix + '/get_one_poke.php', {'id': id})
+      $http.post($scope.serverAddr + '/get_one_poke.php', {'id': id})
         .then(function (response) {
           response.data.show = true;
           $scope.cards.push(response.data);
