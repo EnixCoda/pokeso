@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name pokesoApp.controller:AboutController
- * @description
- * # AboutController
- * Controller of the pokesoApp
- */
 angular.module('pokesoApp').controller('AboutController', function ($scope) {
   $scope.logs = [
     {date: '2015.11.5',  description: '创建图鉴功能'},

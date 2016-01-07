@@ -1,11 +1,4 @@
 "use strict";
-/**
- * @ngdoc function
- * @name pokesoApp.controller: BaseStatsController
- * @description
- * # BaseStatsCtroller
- * Controller of the pokesoApp
- */
 
 angular.module('pokesoApp').controller('BaseStatsController', function ($scope, $http) {
 
@@ -17,11 +10,10 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
       values = $scope.cards[card].base_stats;
       if ($scope.cards[card].show) {
         data.push($scope.cards[card]);
-      };
+      }
     }
     var max = 0;
-    var card;
-    var values, value;
+    var card, values, value;
     for (card in $scope.cards) {
       values = $scope.cards[card].base_stats;
       for (value in values) {
@@ -51,7 +43,6 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
     }
   };
 
-  $scope.fetching_basestats = false;
   $scope.max_card_length = 6;
   $scope.add_card = function (id) {
     if ($scope.cards.length < $scope.max_card_length) {
@@ -61,15 +52,28 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
           return;
         }
       }
-      $scope.fetching_basestats = true;
-      $http.post($scope.serverAddr + '/get_one_poke.php', {'id': id})
-        .then(function (response) {
-          response.data.show = true;
-          $scope.cards.push(response.data);
-          $scope.fetching_basestats = false;
-          draw_canvas();
-          animate();
-        });
+      var newPokemon = {
+        show:                   true,
+        name:                   _poke_basic.id.name,
+        type1:                  _poke_basic.id.type1,
+        type2:                  _poke_basic.id.type2,
+        ability1:               _ability[_poke_basic.id.ability1],
+        ability2:               _ability[_poke_basic.id.ability2],
+        ability3:               _ability[_poke_basic.id.ability3],
+        apng:                   '',
+        moves:                  [],
+        level:                  100,
+        nature:                 0,
+        selected_ability_index: 1,
+        IV:                     [31, 31, 31, 31, 31, 31],
+        base_stat:              [0, 0, 0, 0, 0, 0],
+        stats:                  [0, 0, 0, 0, 0, 0],
+        item:                   {},
+        base_stats:             _base_stats.id
+      };
+      $scope.cards.push(newPokemon);
+      draw_canvas();
+      animate();
     }
   };
 

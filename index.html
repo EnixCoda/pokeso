@@ -5,31 +5,24 @@
   <title>口袋搜 · PokeSo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
   <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
 
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
-  <link rel="stylesheet" href="../bower_components/material-design-lite/material.min.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <!-- custom code begin -->
+  <link rel="stylesheet" href="deps/angular-material.min.css" />
+  <link rel="stylesheet" href="deps/material.min.css" />
+
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/pm-icons.css">
   <link rel="stylesheet" href="styles/pokeball.css">
   <link rel="stylesheet" href="styles/mdl-icons.css">
-  <!-- custom code end -->
-  <!-- endbuild -->
+
 </head>
 <!--[if lte IE 8]>
 <div class="browsehappy" style="margin-left:300px;z-index:9">请使用非IE类浏览器!</div>
 <![endif]-->
 <body ng-app="pokesoApp" ng-controller='MainController'>
-<!-- Add your site or application content here -->
   <div class="vertical-align-container-out cover-all">
     <div class="vertical-align-container-in-middle centered">
       <div style="display: inline-block">
@@ -81,51 +74,45 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
     ga('create', 'UA-67911937-1', 'auto');
     ga('send', 'pageview');
   </script>
-<!-- build:js(.) scripts/vendor.js -->
-<!-- bower:js -->
-<script src="../bower_components/jquery/dist/jquery.js"></script>
-<script src="../bower_components/angular/angular.js"></script>
-<script src="../bower_components/angular-animate/angular-animate.js"></script>
-<script src="../bower_components/angular-aria/angular-aria.js"></script>
-<script src="../bower_components/angular-material/angular-material.js"></script>
-<script src="../bower_components/angular-route/angular-route.js"></script>
-<script src="../bower_components/jquery-ui/jquery-ui.js"></script>
-<script src="../bower_components/angular-ui-sortable/sortable.js"></script>
-<script src="../bower_components/material-design-lite/material.min.js"></script>
-<script src="../bower_components/apng-canvas/apng-canvas.min.js"></script>
-<!-- endbower -->
-<!-- endbuild -->
 
-<!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/app.js"></script>
-<script src="scripts/directives.js"></script>
-<script src="scripts/controllers/main.js"></script>
-<script src="scripts/controllers/home.js"></script>
-<script src="scripts/controllers/skim.js"></script>
-<script src="scripts/controllers/moves.js"></script>
-<script src="scripts/controllers/baseStats.js"></script>
-<script src="scripts/controllers/suggestion.js"></script>
-<script src="scripts/controllers/teamBuilder.js"></script>
-<script src="scripts/controllers/about.js"></script>
-<!-- custom code begin -->
-<script src="scripts/script.js"></script>
-<script src="scripts/hashdown.js"></script>
-<!-- custom code end -->
-<!-- endbuild -->
-<script>
-  $(document).ready(function () {
-    $('#title').click(function () {
-      $('.mdl-layout__drawer').removeClass('is-visible');
+  <script src="scripts/script.js"></script>
+
+  <script src="deps/jquery.min.js"></script>
+  <script src="deps/jquery-ui.min.js"></script>
+  <script src="deps/angular.min.js"></script>
+  <script src="deps/angular-animate.min.js"></script>
+  <script src="deps/angular-aria.min.js"></script>
+  <script src="deps/angular-material.min.js"></script>
+  <script src="deps/angular-route.min.js"></script>
+  <script src="deps/sortable.min.js"></script>
+  <script src="deps/material.min.js"></script>
+  <script src="deps/apng-canvas.min.js"></script>
+  <script src="deps/hashdown.min.js"></script>
+
+  <script src="scripts/app.js"></script>
+  <script src="scripts/directives.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/home.js"></script>
+  <script src="scripts/controllers/skim.js"></script>
+  <script src="scripts/controllers/moves.js"></script>
+  <script src="scripts/controllers/baseStats.js"></script>
+  <script src="scripts/controllers/suggestion.js"></script>
+  <script src="scripts/controllers/teamBuilder.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#title').click(function () {
+        $('.mdl-layout__drawer').removeClass('is-visible');
+      });
+      $('.mdl-navigation__link').click(function () {
+        $('.mdl-layout__drawer').removeClass('is-visible');
+      });
+      setTimeout("$('.cover-all').addClass('hidden')", Math.floor(Math.random() * 2000));
     });
-    $('.mdl-navigation__link').click(function () {
-      $('.mdl-layout__drawer').removeClass('is-visible');
-    });
-    setTimeout("$('.cover-all').addClass('hidden')", Math.floor(Math.random() * 2000));
-  });
-</script>
+  </script>
 </body>
 </html>

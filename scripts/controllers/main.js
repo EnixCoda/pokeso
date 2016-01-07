@@ -250,14 +250,11 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
     $scope.apng.load = false;
   }
   function get_home_apng_urls() {
-    $http.post($scope.serverAddr + '/get_random_apng_urls.php', {amount: $scope.MainFunctions.length})
-      .then(function (response) {
-        var i;
-        for (i in $scope.MainFunctions) {
-          $scope.MainFunctions[i].apng = response.data[i];
-        }
-        animate();
-      });
+    var amount = $scope.MainFunctions.length;
+    for (var i = 0; i < amount; i++) {
+      $scope.MainFunctions[i].apng = storageAddr + metadata._poke_basic[Math.floor(Math.random() * metadata._poke_basic.length)][0] + ".png";
+    }
+    animate();
   }
   get_home_apng_urls();
 
@@ -278,13 +275,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
 
   $scope.move_colors = ['#a8a878', 'c03028', 'a890f0', 'a040a0', 'e0c068', 'b8a038', 'a8b820', '705898', 'b8b8d0', 'f08030', '6890f0', '78c850', 'f8d030', 'f85888', '98d8d8', '7038f8', '705848', 'ee99ac'];
 
-  $scope.pokemons = [];
-  $http.post($scope.serverAddr + '/get_all_poke.php')
-    .then(function (response) {
-      $scope.pokemons = response.data;
-    }, function () {
-      alert('加载PM列表失败!请尝试刷新!');
-    });
+  $scope.pokemons = _pokemons;
 
   $scope.colors = ['#4caf50', '#ffc10d', '#f44336', '#9c27b0', '#2196f3', '#888888'];
 
