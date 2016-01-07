@@ -41,7 +41,6 @@
               </md-checkbox>
             </div>
           </div>
-          <md-progress-circular ng-show="fetching_basestats"  md-mode="indeterminate" md-diameter="20"></md-progress-circular>
         </div>
         <div layout='row' layout-align='center center'>
           <canvas id="stats_displayer"></canvas>
@@ -59,10 +58,18 @@
             </div>
           </div>
           <div layout='row' class="centered">
-            <div flex><p class="md-body-2">{{card.id}}</p></div>
-            <div flex><p class="md-body-2">{{card.name}}</p></div>
-            <div flex><p class="md-body-2">{{types[card.type1].name}}</p></div>
-            <div flex><p class="md-body-2" ng-if="card.type2>0">{{types[card.type2].name}}</p></div>
+            <div flex>
+              <p class="md-body-2">{{card.id}}</p>
+            </div>
+            <div flex>
+              <p class="md-body-2">{{card.name}}</p>
+            </div>
+            <div flex>
+              <p class="md-body-2">{{types[card.type1].name}}</p>
+            </div>
+            <div flex>
+              <p class="md-body-2" ng-if="card.type2>0">{{types[card.type2].name}}</p>
+            </div>
           </div>
           <div layout='row'>
             <div flex ng-repeat="value in card.base_stats track by $index" layout='column' layout-align='center center'>
