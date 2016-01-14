@@ -1,16 +1,8 @@
 <md-dialog class="showpoke_dialog" layout-padding layout-wrap aria-label="show pokemon">
-  <div layout layout-align='center center'>
-    <md-progress-circular ng-show='loading_showpoke' md-mode='indeterminate'>
-    </md-progress-circular>
-  </div>
-  <div ng-hide='loading_showpoke' layout="column" layout-padding>
-    <div class="vertical-align-container-out border-bottom space-bottom" ng-if="apng.load" >
+  <div layout="column" layout-padding>
+    <div class="vertical-align-container-out border-bottom space-bottom" ng-if="load_apng" >
       <div class="vertical-align-container-in-bottom">
-        <div ng-show='loading_showpoke_apng' layout layout-align='center center'>
-          <md-progress-circular md-mode='indeterminate'>
-          </md-progress-circular>
-        </div>
-        <img ng-show='!loading_showpoke_apng' class="apng-image" ng-src='{{pokemon.apng}}'>
+        <img class="apng-image" ng-src='{{pokemon.apng}}'>
       </div>
     </div>
     <div class="centered" layout='row'>
@@ -27,7 +19,7 @@
         <p ng-if="pokemon.type2>0">{{types[pokemon.type2].name}}</p>
       </div>
     </div>
-    <div ng-repeat="ability in pokemon.abilities" ng-if="ability!=''" layout='row'>
+    <div ng-if="ability!=undefined" ng-repeat="ability in pokemon.abilities" layout='row'>
       <div flex='30' class="centered border-right space-right">
         <p class="md-body-1">{{ability.name}}</p>
       </div>

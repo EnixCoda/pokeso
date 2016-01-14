@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -19,17 +19,20 @@
   <link rel="stylesheet" href="styles/mdl-icons.css">
 
 </head>
+<script type="text/javascript">
+  var time0 = Date.now();
+</script>
 <!--[if lte IE 8]>
 <div class="browsehappy" style="margin-left:300px;z-index:9">请使用非IE类浏览器!</div>
 <![endif]-->
 <body ng-app="pokesoApp" ng-controller='MainController'>
-  <div class="vertical-align-container-out cover-all">
+  <!-- <div class="vertical-align-container-out cover-all">
     <div class="vertical-align-container-in-middle centered">
       <div style="display: inline-block">
         <md-progress-circular md-mode='indeterminate'></md-progress-circular>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-layout--fixed-header">
       <div class="mdl-layout__header-row">
@@ -78,8 +81,6 @@
     ga('send', 'pageview');
   </script>
 
-  <script src="scripts/script.js"></script>
-
   <script src="deps/jquery.min.js"></script>
   <script src="deps/jquery-ui.min.js"></script>
   <script src="deps/angular.min.js"></script>
@@ -103,16 +104,11 @@
   <script src="scripts/controllers/teamBuilder.js"></script>
   <script src="scripts/controllers/about.js"></script>
 
-  <script>
-    $(document).ready(function () {
-      $('#title').click(function () {
-        $('.mdl-layout__drawer').removeClass('is-visible');
-      });
-      $('.mdl-navigation__link').click(function () {
-        $('.mdl-layout__drawer').removeClass('is-visible');
-      });
-      setTimeout("$('.cover-all').addClass('hidden')", Math.floor(Math.random() * 2000));
-    });
+  <script src="scripts/data/allinone.js"></script>
+  <script src="scripts/script.js"></script>
+  <script type="text/javascript">
+   var time1 = Date.now();
+   console.log('document ready: '+(time1 - time0).toString());
   </script>
 </body>
 </html>

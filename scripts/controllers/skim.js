@@ -10,20 +10,15 @@
 angular.module('pokesoApp').controller('SkimController', function ($scope, $http) {
   $scope.pokemon = null
   $scope.checkPM = function(id) {
-    $scope.pokemon = null;
-    $http.post($scope.serverAddr + '/skim.php', {'id': id})
-    .then(function (response) {
-      $scope.pokemon = response.data;
-      var base_stats, max=0;
-      for (base_stats in $scope.pokemon.base_stats) {
-        max = Math.max(max, $scope.pokemon.base_stats[base_stats]);
-      };
-      $scope.draw_canvas('stats_displayer', [$scope.pokemon], max);
-      animate();
-    }, function (response) {
-      $scope.pokemon = null;
-      alert('获取PM数据失败!');
-    });
+    $scope.pokemon = _pokemons[id];
+    $scope.pokemon.apngs      = [];
+
+    var max=0;
+    for (var i = 0; i < $scope.pokemon.base_stats.length; i++) {
+      max = Math.max(max, $scope.pokemon.base_stats[i]);
+    };
+    $scope.draw_canvas('stats_displayer', [$scope.pokemon], max);
+    animate();
   }
 
   $scope.randomPM = function() {
@@ -31,7 +26,7 @@ angular.module('pokesoApp').controller('SkimController', function ($scope, $http
   }
 
   $scope.search_key = '';
-  $scope.searched_pokemons = $scope.pokemons.slice(1);
+  $scope.searched_pokemons = _poke_basic;
   $scope.search = function () {
     var i, key = $scope.search_key;
     var this_poke;

@@ -6,18 +6,18 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
 
   function draw_canvas() {
     var data = [];
-    for (card in $scope.cards) {
-      values = $scope.cards[card].base_stats;
-      if ($scope.cards[card].show) {
-        data.push($scope.cards[card]);
+    for (var i = 0; i < $scope.cards.length; i++) {
+      values = $scope.cards[i].base_stats;
+      if ($scope.cards[i].show) {
+        data.push($scope.cards[i]);
       }
     }
     var max = 0;
-    var card, values, value;
-    for (card in $scope.cards) {
-      values = $scope.cards[card].base_stats;
-      for (value in values) {
-        max = Math.max(values[value], max);
+    var values, value;
+    for (var i = 0; i < $scope.cards.length; i++) {
+      values = $scope.cards[i].base_stats;
+      for (var j = 0; j < values.length; j++) {
+        max = Math.max(values[j], max);
       }
     }
     $scope.draw_canvas('stats_displayer', data, max);
@@ -26,15 +26,15 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
   $scope.search_key = '';
   $scope.searched_pokemons = $scope.pokemons.slice(1);
   $scope.search = function () {
-    var i, key = $scope.search_key;
+    var key = $scope.search_key;
     var this_poke;
     $scope.searched_pokemons = [];
     if (key === '') {
-      for (i in $scope.generation_index[$scope.generation]) {
+      for (var i = 0; i < $scope.generation_index[$scope.generation].length; i++) {
         $scope.searched_pokemons.push($scope.pokemons[$scope.generation_index[$scope.generation][i]]);
       }
     } else {
-      for (i in $scope.generation_index[$scope.generation]) {
+      for (var i = 0; i < $scope.generation_index[$scope.generation].length; i++) {
         this_poke = $scope.pokemons[$scope.generation_index[$scope.generation][i]];
         if (this_poke.id.indexOf(key) > -1 || this_poke.name.indexOf(key) > -1) {
           $scope.searched_pokemons.push(this_poke);
@@ -46,9 +46,8 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
   $scope.max_card_length = 6;
   $scope.add_card = function (id) {
     if ($scope.cards.length < $scope.max_card_length) {
-      var card;
-      for (card in $scope.cards) {
-        if ($scope.cards[card].id == id) {
+      for (var i = 0; i < $scope.cards.length; i++) {
+        if ($scope.cards[i].id == id) {
           return;
         }
       }
@@ -87,10 +86,4 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope, 
     draw_canvas();
   };
 
-  $(document).ready(function(){
-    $('.cover').addClass('hidden');
-    $('#stats_displayer').click(function () {
-      $('#stats_displayer').toggleClass('stats_displayer_zoom');
-    });
-  });
 });

@@ -22,55 +22,39 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
   $scope.search_result_moves = [];
   $scope.selected_moves = [];
 
-  $scope.searching_poke = false;
   $scope.define_poke_type = false;
   $scope.selected_poke_type1 = 0;
   $scope.selected_poke_type2 = 0;
   $scope.define_poke_ability = false;
   $scope.selected_poke_ability = 0;
-  $scope.pokemons = [
-    /*
-    {
-    id:'1'
-    name:'妙蛙种子'
-    type1:11
-    type2:12
-    apng:'//url'
-    }
-    */
-  ];
+  $scope.pokemons = [];
 
-    $scope.selected_item = null;
-    $scope.search_move_text = null;
-    $scope.query_search = query_search;
-    $scope.selected_moves = [];
+  $scope.selected_item = null;
+  $scope.search_move_text = null;
+  $scope.query_search = query_search;
+  $scope.selected_moves = [];
 
-    function query_search (query) {
-      if ($scope.selected_moves.length < 4) {
-        var results = query ? $scope.moves.filter(createFilterFor2(query)) : [];
-        return results;
-      }
+  function query_search (query) {
+    if ($scope.selected_moves.length < 4) {
+      var results = query ? $scope.moves.filter(createFilterFor2(query)) : [];
+      return results;
     }
+  }
 
-    function createFilterFor2(query) {
-      return function filterFn(move) {
-        return (move.id.indexOf(query) === 0) ||
-            (move.name.indexOf(query) === 0);
-      };
-    }
-  $scope.load_moves = function () {
-    $http.post($scope.serverAddr + '/get_all_moves.php', {range: 'all'})
-      .then(function (response) {
-        $scope.moves = response.data;
-        $('.cover').addClass('hidden');
-      });
-  };
-  $scope.load_moves();
+  function createFilterFor2(query) {
+    return function filterFn(move) {
+      return (move.id.indexOf(query) === 0) || (move.name.indexOf(query) === 0);
+    };
+  }
+
+  $scope.moves = _move;
+
   $scope.detect_overlap = function () {
     $scope.power_min = Math.min($scope.power_max, $scope.power_min);
     $scope.accuracy_min = Math.min($scope.accuracy_max, $scope.accuracy_min);
     $scope.pp_min = Math.min($scope.pp_max, $scope.pp_min);
   };
+
   $scope.search_move = function () {
     $scope.search_result_moves = [];
     var i, this_move;
@@ -100,6 +84,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       $scope.search_result_moves.push($scope.moves[i]);
     }
   };
+
   $scope.add_move = function (move) {
     if ($scope.selected_moves.length === 4) {
       return;
@@ -112,9 +97,11 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
     }
     $scope.selected_moves.push(move);
   };
+
   $scope.remove_move = function (index) {
     $scope.selected_moves.splice(index, 1);
   };
+
   $scope.search_poke = function () {
     if ($scope.selected_moves.length === 0) {
       $scope.pokemons = [{
@@ -126,68 +113,89 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
     if ($scope.selected_moves[0].id == '0') {
       return;
     }
-    $scope.searching_poke = true;
     $scope.pokemons = [];
-    var i;
-    var data = {};
+    var data = {
+      search: function () {
+        var pokemonids = [];
+        for (var i = 0; i < this.selected_moves.length; i++) {
+          pokemonids = pokemonids.concat(_learn_set_move_to_poke[this.selected_moves[i]]);
+        }
+        var counter = {};
+        var learnable_pokemons = [];
+        for (var i = 0; i < pokemonids.length; i++) {
+          counter[pokemonids[i]] = counter[pokemonids[i]] == undefined ? 1 : counter[pokemonids[i]] + 1;
+          if (counter[pokemonids[i]] == this.selected_moves.length) {
+            learnable_pokemons.push(_pokemons[pokemonids[i]]);
+          }
+        }
+        if (this.define_poke_type) {
+          var _learnable_pokemons = [];
+          for (var i = 0; i < learnable_pokemons.length; i++) {
+            switch (this.selected_poke_type2) {
+              case -1:
+                if ((learnable_pokemons[i].type1 == this.selected_poke_type1 && learnable_pokemons[i].type2 == null) || (learnable_pokemons[i].type2 == this.selected_poke_type1 && learnable_pokemons[i].type1 == null)) _learnable_pokemons.push(learnable_pokemons[i]);
+                break;
+              case 0:
+                if (learnable_pokemons[i].type1 == this.selected_poke_type1 || learnable_pokemons[i].type2 == this.selected_poke_type1) _learnable_pokemons.push(learnable_pokemons[i]);
+                break;
+              default:
+                if ((learnable_pokemons[i].type1 == this.selected_poke_type1 && learnable_pokemons[i].type2 == this.selected_poke_type2) || (learnable_pokemons[i].type2 == this.selected_poke_type1 && learnable_pokemons[i].type1 == this.selected_poke_type2)) _learnable_pokemons.push(learnable_pokemons[i]);
+            }
+          }
+          learnable_pokemons = _learnable_pokemons;
+        }
+        if (this.define_poke_ability) {
+          var _learnable_pokemons = [];
+          for (var i = 0; i < learnable_pokemons.length; i++) {
+            if (learnable_pokemons[i].ability1 == this.selected_poke_ability || learnable_pokemons[i].ability2 == this.selected_poke_ability || learnable_pokemons[i].ability3 == this.selected_poke_ability) _learnable_pokemons.push(learnable_pokemons[i]);
+          }
+          learnable_pokemons = _learnable_pokemons;
+        }
+        return learnable_pokemons;
+      }
+    };
     data.define_poke_type = $scope.define_poke_type;
     data.selected_poke_type1 = $scope.selected_poke_type1;
     data.selected_poke_type2 = $scope.selected_poke_type2;
     data.define_poke_ability = $scope.define_poke_ability;
     data.selected_poke_ability = $scope.selected_poke_ability;
     data.selected_moves = [];
-    for (i = 0; i < $scope.selected_moves.length; i++) {
+    for (var i = 0; i < $scope.selected_moves.length; i++) {
       data.selected_moves.push($scope.selected_moves[i].id);
     }
 
-    $http.post($scope.serverAddr + '/search_poke.php', data)
-      .then(function (response) {
-        $scope.pokemons = response.data;
-        if ($scope.pokemons.length === 0) {
-          $scope.pokemons = [{
-            id: '0',
-            name: '没有符合要求的PM'
-          }];
-        }
-        $scope.searching_poke = false;
-      }, function () {
-        alert('发生网络错误,请重试!');
-      });
+    $scope.pokemons = data.search();
+    if ($scope.pokemons.length === 0) {
+      $scope.pokemons = [{
+        id: '0',
+        name: '没有符合要求的PM'
+      }];
+    }
   };
   $scope.show_poke = function (e, i) {
-
     $mdDialog.show({
+      targetEvent: e,
       locals: {
         pokemon_id: $scope.pokemons[i].id,
-        apng: $scope.apng
+        load_apng: $scope.apng.load,
       },
       controller: ShowPokeController,
       templateUrl: 'views/show_poke.html',
       parent: angular.element(document.body),
-      targetEvent: e,
       clickOutsideToClose: true
     });
   };
 });
 
-function ShowPokeController($scope, $mdDialog, $http, pokemon_id, apng) {
-  $scope.stats_names = ['HP', '攻击', '防御', '特攻', '特防', '速度'];
-  $scope.types = ('任意 普通 格斗 飞行 毒 地面 岩石 虫 幽灵 钢 火 水 草 电 超能力 冰 龙 恶 妖精').split(' ')
-    .map(function (cur, index) {
-      return {
-        id: index,
-        name: cur
-      };
-    });
-  $scope.loading_showpoke = true;
-  $scope.loading_showpoke_apng = false;
-  $scope.apng = apng;
-  $http.post('//poke.so/server' + '/show_poke.php', {id: pokemon_id})
-    .then(function (response) {
-      $scope.pokemon = response.data;
-      $scope.loading_showpoke = false;
-      animate();
-    });
+function ShowPokeController($scope, $mdDialog, $http, pokemon_id, load_apng) {
+  $scope.stats_names = _stats_names;
+  $scope.types = _types;
+
+  $scope.pokemon      = _pokemons[pokemon_id];
+  $scope.pokemon.apng = storageAddr + pokemon_id + '.png';
+  $scope.load_apng    = load_apng;
+
+  animate();
 
   //TODO
   $scope.show_evolve = false;

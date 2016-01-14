@@ -10,7 +10,7 @@
 angular.module('pokesoApp').controller('TeamBuilderController', function ($scope, $http, $mdBottomSheet) {
 
   $scope.search_key = '';
-  $scope.searched_pokemons = $scope.pokemons.slice(1);
+  $scope.searched_pokemons = _pokemons;
   $scope.search = function () {
     var i, key = $scope.search_key;
     var this_poke;
@@ -28,46 +28,68 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       }
     }
   };
-//moves
-  $scope.selected_type_id = -2;
-  $scope.selected_kind_id = -2;
-  $scope.is_100percent_kill = false;
-  $scope.power_min = 0;
-  $scope.power_max = 250;
+  //moves
+  $scope.selected_type_id       = -2;
+  $scope.selected_kind_id       = -2;
+  $scope.is_100percent_kill     = false;
+  $scope.power_min              = 0;
+  $scope.power_max              = 250;
   $scope.is_100percent_accurate = false;
-  $scope.accuracy_min = 0;
-  $scope.accuracy_max = 100;
-  $scope.pp_min = 0;
-  $scope.pp_max = 50;
+  $scope.accuracy_min           = 0;
+  $scope.accuracy_max           = 100;
+  $scope.pp_min                 = 0;
+  $scope.pp_max                 = 50;
 
   $scope.detect_overlap = function () {
-    $scope.power_min = Math.min($scope.power_max, $scope.power_min);
+    $scope.power_min    = Math.min($scope.power_max, $scope.power_min);
     $scope.accuracy_min = Math.min($scope.accuracy_max, $scope.accuracy_min);
-    $scope.pp_min = Math.min($scope.pp_max, $scope.pp_min);
+    $scope.pp_min       = Math.min($scope.pp_max, $scope.pp_min);
   };
   $scope.moves = [];
   $scope.search_move = function () {
     if ($scope.cur === null) {
       return;
     }
-    var data = {};
-    data.poke_id = $scope.cur.id;
-    data.selected_type_id = $scope.selected_type_id;
-    data.selected_kind_id = $scope.selected_kind_id;
-    data.is_100percent_kill = $scope.is_100percent_kill;
-    data.power_max = $scope.power_max;
-    data.power_min = $scope.power_min;
+    var data = {
+      search: function() {
+        var search_result = [];
+        for (var i = 0; i < _move.length; i++) {
+          var move = _move[i];
+          if (this.is_100percent_kill) {
+            if (move.power != -1) continue;
+          } else if (this.power_min > move.power || move.power > this.power_max) continue;
+          if (this.is_100percent_accurate) {
+            if (move.accuracy != -1) continue;
+          } else if (this.accuracy_min > move.accuracy || move.accuracy > this.accuracy_max) continue;
+          if (this.pp_min > move.pp || move.pp > this.pp_max) continue;
+          if (this.selected_type_id > 0 && this.selected_type_id != move.type) continue;
+          if (this.selected_kind_id > 0 && this.selected_kind_id != move.kind) continue;
+          search_result.push(_move[i]);
+        }
+        var real_result = [];
+        for (var i = 0; i < _learn_set[poke_id].length; i++) {
+          for (var j = 0; j < search_result.length; j++) {
+            if (search_result[j].id == _learn_set[poke_id][i]) {
+              real_result.push(search_result[j]);
+            }
+          }
+        }
+        return real_result;
+      }
+    };
+    data.poke_id                = $scope.cur.id;
+    data.selected_type_id       = $scope.selected_type_id;
+    data.selected_kind_id       = $scope.selected_kind_id;
+    data.is_100percent_kill     = $scope.is_100percent_kill;
+    data.power_max              = $scope.power_max;
+    data.power_min              = $scope.power_min;
     data.is_100percent_accurate = $scope.is_100percent_accurate;
-    data.accuracy_max = $scope.accuracy_max;
-    data.accuracy_min = $scope.accuracy_min;
-    data.pp_max = $scope.pp_max;
-    data.pp_min = $scope.pp_min;
-    $http.post($scope.serverAddr + '/search_move_team.php', data)
-      .then(function (response) {
-        $scope.moves = response.data;
-      }, function () {
-        console.log('加载失败!请尝试刷新!');
-      });
+    data.accuracy_max           = $scope.accuracy_max;
+    data.accuracy_min           = $scope.accuracy_min;
+    data.pp_max                 = $scope.pp_max;
+    data.pp_min                 = $scope.pp_min;
+
+    $scope.moves = data.search();
   };
 
 //team
@@ -139,13 +161,18 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       return;
     }
 
-    $http.post($scope.serverAddr + '/get_one_poke.php', {id: id})
-      .then(function (response) {
-        $scope.team.push(response.data);
-        $scope.cur = $scope.team[$scope.team.length - 1];
-        $scope.calculate($scope.cur);
-        animate();
-      });
+    var newPokemon    = {};
+    newPokemon        = _pokemons[id];
+    newPokemon.nature = 0;
+    newPokemon.level  = 100;
+    newPokemon.sex    = 0;
+    newPokemon.moves  = [];
+    newPokemon.IV     = [31, 31, 31, 31, 31, 31];
+    newPokemon.stats  = [0, 0, 0, 0, 0, 0];
+    $scope.team.push(newPokemon);
+    $scope.cur = $scope.team[$scope.team.length - 1];
+    $scope.calculate($scope.cur);
+    animate();
   };
   $scope.remove_cur = function () {
     $scope.team.splice($.inArray($scope.cur, $scope.team), 1);
@@ -212,9 +239,6 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
     });
   };
 
-  $(document).ready(function(){
-    $('.cover').addClass('hidden');
-  });
 });
 
 angular.module('pokesoApp').controller('StatEditorController', function ($scope) {

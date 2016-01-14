@@ -1,4 +1,3 @@
-
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
     <md-card>
@@ -75,12 +74,12 @@
                 努力值
               </div>
               <div layout='row'>
-                <div flex ng-repeat="stats_name in stats_names">
+                <div flex ng-repeat="stats_name in stats_names track by $index">
                   {{stats_name}}
                 </div>
               </div>
               <div class="space-bottom" layout='row'>
-                <div flex ng-repeat="value in pokemon.base_stat">
+                <div flex ng-repeat="value in pokemon.base_stat track by $index">
                   {{value}}
                 </div>
               </div>
