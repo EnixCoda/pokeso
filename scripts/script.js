@@ -24,6 +24,7 @@ function isMobile() {
   var isiPhone = u.indexOf('iPhone') > -1;
   return isiPhone || isAndroid;
 }
+
 var Quest = {
   new: function () {
     var quest = {};
@@ -81,6 +82,7 @@ var LoadController = {
   }
 };
 var loadController = LoadController.new();
+
 function loadData ($scope) {
   if (loadController.status == 'SUCCESS') {
     $scope.pokemons   = pokemons;
@@ -143,8 +145,8 @@ function extractLearnSet () {
   learnSet = newLearnSet;
 }
 
+var canvas_colors = ('#4caf50 #ffc10d #f44336 #9c27b0 #2196f3 #888888').split(' ');
 function draw_canvas (elementId, data, max) {
-  var canvas_colors = ('#4caf50 #ffc10d #f44336 #9c27b0 #2196f3 #888888').split(' ');
   var x, y, v;
   var t = 0.017453293;
 
@@ -229,3 +231,60 @@ var typeColors = ('#ffffff #a8a878 #c03028 #a890f0 #a040a0 #e0c068 #b8a038 #a8b8
         'background-color': cur
       };
     });
+
+var loadGenerationSearcher = function ($scope) {
+  var GenerationSearcher = {
+    new: function () {
+      var searcher = {};
+      var start_gen = [0, 1, 152, 252, 387, 494, 650, 721];
+      var generation = 0;
+      var generations = ('全部 第一世代 第二世代 第三世代 第四世代 第五世代 第六世代').split(' ')
+          .map(function (cur, index) {
+            return {
+              index: index,
+              name: cur
+            };
+          });
+      var generation_index = [[], [], [], [], [], [], [], []];//[1~721], [1~151], [152~251], ...
+      (function generate_generations() {
+        var i;
+        for (i = 1; i < 721; i++) {
+          generation_index[0].push(i);
+        }
+        for (i = 1; i < start_gen.length - 1; i++) {
+          for (var j = start_gen[i]; j < start_gen[i + 1]; j++) {
+            generation_index[i].push(j);
+          }
+        }
+      })();
+      var search = function (search_key) {
+        var i, key = search_key;
+        var searched_pokemons = [];
+        if (key === "") {
+          for (i = 0; i < generation_index[generation].length; i++) {
+            searched_pokemons.push(mainData.pokemons[generation_index[generation][i]]);
+          }
+        } else {
+          var this_poke;
+          for (i = 0; i < generation_index[generation].length; i++) {
+            this_poke = mainData.pokemons[generation_index[generation][i]];
+            if (this_poke.ID.indexOf(key) == 0 || this_poke.name.indexOf(key) > -1) {
+              searched_pokemons.push(this_poke);
+            }
+          }
+        }
+        return searched_pokemons;
+      };
+      searcher.generation_index = generation_index;
+      searcher.search = search;
+      return searcher;
+    }
+  };
+  var generation_searcher = GenerationSearcher.new();
+  $scope.generation_index = generation_searcher.generation_index;
+  $scope.search_in_generations = function (search_key) {
+    $scope.searched_pokemons = generation_searcher.search(search_key);
+  };
+  $scope.search_key = '';
+  $scope.search_in_generations('');
+};

@@ -5,7 +5,7 @@
         <pm-selector></pm-selector>
         <div layout='column'>
           <md-virtual-repeat-container>
-            <div md-virtual-repeat="pokemon in searched_pokemons" ng-show="pokemon != 0">
+            <div md-virtual-repeat="pokemon in searched_pokemons" ng-show="pokemon!=0">
               <pm-in-list ng-click="checkPM(pokemon.ID)"></pm-in-list>
             </div>
           </md-virtual-repeat-container>

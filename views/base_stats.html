@@ -13,7 +13,7 @@
         <div layout='column'>
           <md-virtual-repeat-container>
             <div md-virtual-repeat="pokemon in searched_pokemons">
-              <pm-in-list ng-click="add_card(pokemon.id)"></pm-in-list>
+              <pm-in-list ng-click="add_card(pokemon.ID)"></pm-in-list>
             </div>
           </md-virtual-repeat-container>
           *不显示PM时请拖动滚动条
@@ -25,11 +25,11 @@
     <md-card class="md-raised">
       <md-card-content layout-padding layout='column'>
         <div layout='row' layout-wrap>
-          <div ng-repeat="card in cards">
-            <div class="margin-right" style="background-color:{{colors[$index]}};border-radius:20px;">
-              <md-checkbox class="faint_checkbox" ng-click="toggle_show_card($index)" ng-checked="cards[$index].show" aria-label='small card'>
+          <div ng-repeat="card in cards track by $index">
+            <div class="margin-right" style="background-color:{{backgroundColors[$index]}};border-radius:20px;">
+              <md-checkbox class="faint_checkbox" ng-click="toggle_show_card($index)" ng-checked="showCards[$index]" aria-label='small card'>
                 <div layout='row' layout-align='center center'>
-                  <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.id}} pm-icon-0{{card.id}} pm-icon-00{{card.id}}"></div>
+                  <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.ID}}"></div>
                   <div style="color:#fff">{{card.name}}</div>
                   <div class="border-right"></div>
                   <div style="background-color:#fff;border-radius:50%;margin-right:-4px" class="button-clear">
@@ -48,7 +48,7 @@
       </md-card-content>
     </md-card>
   </div>
-  <div ng-if="false" class="mdl-cell mdl-cell--4-col" ng-repeat="card in cards">
+  <div ng-if="cards.length > 0" class="mdl-cell mdl-cell--4-col" ng-repeat="card in cards">
     <md-card class="md-raised md-whiteframe-z3">
       <md-card-content>
         <div layout='column'>
@@ -59,26 +59,27 @@
           </div>
           <div layout='row' class="centered">
             <div flex>
-              <p class="md-body-2">{{card.id}}</p>
+              <p class="md-body-2">{{card.ID}}</p>
             </div>
             <div flex>
               <p class="md-body-2">{{card.name}}</p>
             </div>
             <div flex>
-              <p class="md-body-2">{{types[card.type1].name}}</p>
+              <p class="md-body-2">{{card.type1.name}}</p>
             </div>
             <div flex>
-              <p class="md-body-2" ng-if="card.type2>0">{{types[card.type2].name}}</p>
+              <p class="md-body-2" ng-if="card.type2>0">{{card.type2.name}}</p>
             </div>
           </div>
           <div layout='row'>
             <div flex ng-repeat="value in card.base_stats track by $index" layout='column' layout-align='center center'>
-              <div>{{stats_names[$index]}}</div>
+              <div>{{stat_names[$index]}}</div>
               <div>{{value}}</div>
             </div>
             <div flex layout='column' layout-align='center center'>
               <div>总和</div>
-              <div>{{card.sum}}</div>
+              <div>{{card.base_stats[0] + card.base_stats[1] + card.base_stats[2] +
+                card.base_stats[3] + card.base_stats[4] + card.base_stats[5]}}</div>
             </div>
           </div>
           <div layout layout-align='center center'>

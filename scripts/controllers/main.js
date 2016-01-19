@@ -144,25 +144,5 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
     });
   };
 
-  $scope.start_gen = [0, 1, 152, 252, 387, 494, 650, 721];
-  $scope.generation = 0;
-  $scope.generations = ('全部 第一世代 第二世代 第三世代 第四世代 第五世代 第六世代').split(' ')
-    .map(function (cur, index) {
-      return {
-        index: index,
-        name: cur
-      };
-    });
-  $scope.generation_index = [[], [], [], [], [], [], [], []];//[1~721], [1~151], [152~251], ...
-  (function generate_generations () {
-    for (var i = 1; i < 721; i++) {
-      $scope.generation_index[0].push(i);
-    }
-    for (var i = 1; i < $scope.start_gen.length - 1; i++) {
-      for (var j = $scope.start_gen[i]; j < $scope.start_gen[i + 1]; j++) {
-        $scope.generation_index[i].push(j);
-      }
-    }
-  })();
 
 });
