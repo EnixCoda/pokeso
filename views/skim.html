@@ -28,12 +28,12 @@
                 <div flex>{{pokemon.ID}}</div>
                 <div flex><b>{{pokemon.name}}</b></div>
                 <div flex>
-                  <p class="type_wrapper" ng-style="type_background_colors[pokemon.type1.ID]">
+                  <p class="type_wrapper" ng-style="typeColors[pokemon.type1.ID]">
                     {{pokemon.type1.name}}
                   </p>
                 </div>
                 <div flex>
-                  <p ng-if="pokemon.type2" class="type_wrapper" ng-style="type_background_colors[pokemon.type2.ID]">
+                  <p ng-if="pokemon.type2" class="type_wrapper" ng-style="typeColors[pokemon.type2.ID]">
                     {{pokemon.type2.name}}
                   </p>
                 </div>

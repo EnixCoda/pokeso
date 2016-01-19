@@ -197,10 +197,9 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       $scope.serial.text = '正在压缩...';
       $http.post($scope.serverAddr + '/save_serial.php', {team: $scope.team})
         .then(function (response) {
-          var encoded = $hashdown.encode(response.data, {
-              codec: $hashdown.TADPOLE
-            });
-          $scope.serial.text = encoded;
+          $scope.serial.text = $hashdown.encode(response.data, {
+            codec: $hashdown.TADPOLE
+          });
         });
     }
   };

@@ -13,10 +13,14 @@
         <p>{{pokemon.name}}</p>
       </div>
       <div flex>
-        <p>{{pokemon.type1.name}}</p>
+        <p class="type_wrapper" ng-style="typeColors[pokemon.type1.ID]">
+          {{pokemon.type1.name}}
+        </p>
       </div>
       <div flex>
-        <p ng-if="pokemon.type2.ID>0">{{pokemon.type2.name}}</p>
+        <p ng-if="pokemon.type2.ID>0" class="type_wrapper" ng-style="typeColors[pokemon.type2.ID]">
+          {{pokemon.type2.name}}
+        </p>
       </div>
     </div>
     <div ng-if="ability!=undefined" ng-repeat="ability in pokemon.abilities" layout='row'>

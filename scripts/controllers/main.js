@@ -98,13 +98,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       enterable: true
     }
   ];
-  $scope.type_background_colors = ('#ffffff #a8a878 #c03028 #a890f0 #a040a0 #e0c068 #b8a038 #a8b820 #705898 #b8b8d0 #f08030 #6890f0 #78c850 #f8d030 #f85888 #98d8d8 #7038f8 #705848 #ee99ac').split(' ')
-    .map(function (cur) {
-      return {
-        'background-color': cur
-      };
-    });
-  $scope.move_colors = ('#a8a878 c03028 a890f0 a040a0 e0c068 b8a038 a8b820 705898 b8b8d0 f08030 6890f0 78c850 f8d030 f85888 98d8d8 7038f8 705848 ee99ac').split(' ');
+  $scope.typeColors = typeColors;
 
   (function set_balls() {
     function ball_duplicate (ball, index) {

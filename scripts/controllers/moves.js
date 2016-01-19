@@ -165,7 +165,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       $mdDialog.show({
         targetEvent: e,
         locals: {
-          pokemon_id: $scope.pokemons_can_learn[i].ID,
+          pokemon: $scope.pokemons_can_learn[i],
           load_apng: $scope.apng.load,
         },
         controller: ShowPokeController,
@@ -179,12 +179,11 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
   };
   loadController.toInit(init);
 });
-function ShowPokeController($scope, $mdDialog, $http, pokemon_id, load_apng) {
-  $scope.stats_name = stat_names;
-  $scope.types = mainData.types;
-
-  $scope.pokemon      = pokemons[pokemon_id];
-  $scope.pokemon.apng = storageAddr + pokemon_id + '.png';
+function ShowPokeController($scope, $mdDialog, pokemon, load_apng) {
+  loadData($scope);
+  $scope.typeColors   = typeColors;
+  $scope.pokemon      = pokemon;
+  $scope.pokemon.apng = storageAddr + pokemon.ID + '.png';
   $scope.load_apng    = load_apng;
 
   animate();

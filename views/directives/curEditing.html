@@ -11,12 +11,12 @@
     <p>{{current.name}}</p>
   </div>
   <div flex>
-    <p class="type_wrapper" ng-style="type_background_colors[current.type1]">
+    <p class="type_wrapper" ng-style="typeColors[current.type1]">
       {{types[current.type1].name}}
     </p>
   </div>
   <div flex>
-    <p ng-if="current.type2>0" class="type_wrapper" ng-style="type_background_colors[current.type2]">
+    <p ng-if="current.type2>0" class="type_wrapper" ng-style="typeColors[current.type2]">
       {{types[current.type2].name}}
     </p>
   </div>
@@ -85,7 +85,7 @@
 </div>
 <div layout='row' layout-wrap>
   <div ng-repeat="move in current.moves">
-    <div class="md-button type_wrapper move_chip" ng-style="type_background_colors[move.type]">
+    <div class="md-button type_wrapper move_chip" ng-style="typeColors[move.type]">
       <div layout layout-align='center center'>
         <div flex></div>
         <div>{{move.name}}</div>
