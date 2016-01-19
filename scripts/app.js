@@ -1,19 +1,12 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name pokesoApp
- * @description
- * # pokesoApp
- *
- * Main module of the application.
- */
 angular
   .module('pokesoApp', [
     'ngAnimate',
     'ngAria',
     'ngRoute',
     'ngMaterial',
+    'LocalStorageModule',
     'ui.sortable'
   ])
   .config(function ($routeProvider) {
@@ -70,4 +63,10 @@ angular
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
       .accentPalette('orange');
+  })
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('pokeso')
+      .setStorageCookieDomain('poke.so')
+      .setNotify(true, true);
   });

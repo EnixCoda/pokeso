@@ -129,10 +129,8 @@ function extractData () {
 }
 
 function extractLearnSet () {
-  var newLearnSet = [];
   for (var i = 0; i < learnSet.length; i++) {
     var learn = learnSet[i];
-    newLearnSet.push({'learnerID': learn[0], 'moveID': learn[1]});
     if (!learnSet_move_poke[learn[1]]) {
       learnSet_move_poke[learn[1]] = [];
     }
@@ -142,7 +140,6 @@ function extractLearnSet () {
     }
     learnSet_poke_move[learn[0]].push(learn[1]);
   }
-  learnSet = newLearnSet;
 }
 
 var canvas_colors = ('#4caf50 #ffc10d #f44336 #9c27b0 #2196f3 #888888').split(' ');

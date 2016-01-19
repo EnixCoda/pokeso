@@ -1,37 +1,63 @@
 "use strict";
 
-angular.module('pokesoApp').controller('MainController', function ($scope, $http) {
-  loadController.init($scope);
-  $http({method: 'GET', url: serverAddr + 'data/mainData.json'})
-    .then(
-      function successCallback(response) {
-        mainData = response.data;
+angular.module('pokesoApp').controller('MainController', function ($scope, $http, localStorageService) {
+  window.onload = function () {
+    loadController.init($scope);
+    if (localStorageService.isSupported) {
+      var tmpMainData = localStorageService.get('mainDataJSON');
+      var tmpOtherData = localStorageService.get('otherDataJSON');
+      var tmpLearnSet = localStorageService.get('learnSetJSON');
+      var none = localStorageService.get('none');
+      if (!tmpMainData || !tmpOtherData || !tmpLearnSet) {
+        $http({method: 'GET', url: serverAddr + 'data/mainData.json'})
+          .then(
+              function successCallback(response) {
+                mainData = response.data;
+                loadController.questSucceeded('A');
+                if (localStorageService.isSupported) {
+                  localStorageService.set('mainDataJSON', mainData);
+                }
+              },
+              function errorCallback(response) {
+                loadController.fail();
+              }
+          );
+        $http({method: 'GET', url: serverAddr + 'data/learnSet.json'})
+          .then(
+              function successCallback(response) {
+                learnSet = response.data;
+                loadController.questSucceeded('B');
+                if (localStorageService.isSupported) {
+                  localStorageService.set('learnSetJSON', learnSet);
+                }
+              },
+              function errorCallback(response) {
+                loadController.fail();
+              }
+          );
+        $http({method: 'GET', url: serverAddr + 'data/otherData.json'})
+          .then(
+              function successCallback(response) {
+                otherData = response.data;
+                loadController.questSucceeded('C');
+                if (localStorageService.isSupported) {
+                  localStorageService.set('otherDataJSON', otherData);
+                }
+              },
+              function errorCallback(response) {
+                loadController.fail();
+              }
+          );
+      } else {
+        mainData = tmpMainData;
         loadController.questSucceeded('A');
-      },
-      function errorCallback(response) {
-        loadController.fail();
-      }
-    );
-  $http({method: 'GET', url: serverAddr + 'data/learnSet.json'})
-    .then(
-      function successCallback(response) {
-        learnSet = response.data;
+        learnSet = tmpLearnSet;
         loadController.questSucceeded('B');
-      },
-      function errorCallback(response) {
-        loadController.fail();
-      }
-    );
-  $http({method: 'GET', url: serverAddr + 'data/otherData.json'})
-    .then(
-      function successCallback (response) {
-        otherData = response.data;
+        otherData = tmpOtherData;
         loadController.questSucceeded('C');
-      },
-      function errorCallback (response) {
-        loadController.fail();
       }
-    );
+    }
+  };
 
   $scope.MainFunctions = [
     {
@@ -143,6 +169,5 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       }
     });
   };
-
 
 });
