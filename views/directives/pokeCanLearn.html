@@ -1,12 +1,12 @@
 <md-button layout flex>
   <div layout='row' layout-align='start center'>
-    <div class='pm-icon pm-icon-{{pokemon.id}} pm-icon-0{{pokemon.id}} pm-icon-00{{pokemon.id}}' >
+    <div class='pm-icon pm-icon-{{pokemon.ID}}' >
     </div>
-    <div flex='10'>{{pokemon.id}}</div>
+    <div flex='10'>{{pokemon.ID}}</div>
     <div flex>{{pokemon.name}}</div>
-    <div flex='15'>{{types[pokemon.type1].name}}</div>
+    <div flex='15'>{{pokemon.type1.name}}</div>
     <div flex='15'>
-      <div ng-if="pokemon.type2>0">{{types[pokemon.type2].name}}
+      <div ng-if="pokemon.type2>0">{{pokemon.type2.name}}
       </div>
     </div>
   </div>

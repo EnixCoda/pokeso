@@ -3,7 +3,10 @@
       <md-input-container flex>
         <label>属性</label>
         <md-select ng-model="selected_type_id">
-          <md-option ng-repeat="type in types" value="{{type.id}}">
+          <md-option value="0">
+            任意
+          </md-option>
+          <md-option ng-repeat="type in types" ng-if="type" value="{{type.ID}}">
             {{ type.name }}
           </md-option>
         </md-select>
@@ -11,7 +14,10 @@
       <md-input-container flex>
         <label>类型</label>
         <md-select ng-model="selected_kind_id">
-          <md-option ng-repeat="kind in kinds" value="{{kind.id}}">
+          <md-option value="0">
+            任意
+          </md-option>
+          <md-option ng-repeat="kind in kinds" ng-if="kind" value="{{kind.ID}}">
             {{ kind.name }}
           </md-option>
         </md-select>

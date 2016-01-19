@@ -7,16 +7,16 @@
     </div>
     <div class="centered" layout='row'>
       <div flex>
-        <p>{{pokemon.id}}</p>
+        <p>{{pokemon.ID}}</p>
       </div>
       <div flex>
         <p>{{pokemon.name}}</p>
       </div>
       <div flex>
-        <p>{{types[pokemon.type1].name}}</p>
+        <p>{{pokemon.type1.name}}</p>
       </div>
       <div flex>
-        <p ng-if="pokemon.type2>0">{{types[pokemon.type2].name}}</p>
+        <p ng-if="pokemon.type2.ID>0">{{pokemon.type2.name}}</p>
       </div>
     </div>
     <div ng-if="ability!=undefined" ng-repeat="ability in pokemon.abilities" layout='row'>
@@ -31,7 +31,7 @@
     </div>
     <div layout="column"  class="border-bottom space-bottom">
       <div class="centered" layout="row">
-        <div flex ng-repeat="name in stats_names">
+        <div flex ng-repeat="name in stat_names">
           {{name}}
         </div>
       </div>

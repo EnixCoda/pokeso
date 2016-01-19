@@ -16,7 +16,7 @@ angular.module('pokesoApp').controller('AboutController', function ($scope) {
     {date: '2015.8.7',   description: '本站成立'}
   ];
   $scope.bugs = [
-    'PM列表可能需要拖动滚动条才能显示',
+    'PM列表可能需要滚动一下才能显示，该问题是本站使用的开源库的bug导致的，暂时无法修复',
     '保存战队功能可能在iOS9下崩溃',
     '在iOS Safari浏览器下，动态图片仅在拖动画面时播放'
   ];

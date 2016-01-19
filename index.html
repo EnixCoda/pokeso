@@ -19,13 +19,10 @@
   <link rel="stylesheet" href="styles/mdl-icons.css">
 
 </head>
-<script type="text/javascript">
-  var time0 = Date.now();
-</script>
 <!--[if lte IE 8]>
 <div class="browsehappy" style="margin-left:300px;z-index:9">请使用非IE类浏览器!</div>
 <![endif]-->
-<body ng-app="pokesoApp" ng-controller='MainController'>
+<body ng-app="pokesoApp" ng-controller='MainController' ng-cloak>
   <!-- <div class="vertical-align-container-out cover-all">
     <div class="vertical-align-container-in-middle centered">
       <div style="display: inline-block">
@@ -33,6 +30,15 @@
       </div>
     </div>
   </div> -->
+  <div class="cover-all" ng-show="loading" layout="column">
+    <div flex></div>
+    <div layout="row" layout-align="center center">
+      <div>
+        {{loadingText}}
+      </div>
+    </div>
+    <div flex></div>
+  </div>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-layout--fixed-header">
       <div class="mdl-layout__header-row">
@@ -104,11 +110,6 @@
   <script src="scripts/controllers/teamBuilder.js"></script>
   <script src="scripts/controllers/about.js"></script>
 
-  <script src="scripts/data/allinone.js"></script>
   <script src="scripts/script.js"></script>
-  <script type="text/javascript">
-   var time1 = Date.now();
-   console.log('document ready: '+(time1 - time0).toString());
-  </script>
 </body>
 </html>
