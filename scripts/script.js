@@ -254,7 +254,7 @@ var loadGenerationSearcher = function ($scope) {
           }
         }
       })();
-      var search = function (search_key) {
+      var search = function (search_key, generation) {
         var i, key = search_key;
         var searched_pokemons = [];
         if (key === "") {
@@ -272,6 +272,7 @@ var loadGenerationSearcher = function ($scope) {
         }
         return searched_pokemons;
       };
+      searcher.generations = generations;
       searcher.generation_index = generation_index;
       searcher.search = search;
       return searcher;
@@ -279,9 +280,10 @@ var loadGenerationSearcher = function ($scope) {
   };
   var generation_searcher = GenerationSearcher.new();
   $scope.generation_index = generation_searcher.generation_index;
-  $scope.search_in_generations = function (search_key) {
-    $scope.searched_pokemons = generation_searcher.search(search_key);
+  $scope.search_in_generations = function (search_key, generation) {
+    $scope.searched_pokemons = generation_searcher.search(search_key, generation);
   };
+  $scope.generations = generation_searcher.generations;
   $scope.search_key = '';
-  $scope.search_in_generations('');
+  $scope.search_in_generations('', 0);
 };
