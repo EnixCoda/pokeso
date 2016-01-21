@@ -154,6 +154,12 @@ md-checkbox.md-checked.faint_checkbox .md-icon{
 .team_organizer{
   cursor:move;
 }
+.card_chip_close_icon md-icon svg{
+  color: white;
+}
+.card_chip_close_icon md-icon svg :hover{
+  color: black;
+}
 @media (max-width: 839px) and (min-width: 480px){
   .mdl-cell--4-col, .mdl-cell--4-col-tablet.mdl-cell--4-col-tablet {
     width: calc(50% - 8px);

@@ -26,17 +26,13 @@
       <md-card-content layout-padding layout='column'>
         <div layout='row' layout-wrap>
           <div ng-repeat="card in cards track by $index">
-            <div class="margin-right" style="background-color:{{backgroundColors[$index]}};border-radius:20px;">
-              <md-checkbox class="faint_checkbox" ng-click="toggle_show_card($index)" ng-checked="showCards[$index]" aria-label='small card'>
+            <div class="margin-right" style="background-color:{{backgroundColors[$index]}};border-radius:20px;margin: 10px;">
+              <md-checkbox class="faint_checkbox" style="margin: 0 10px" ng-click="toggle_show_card($index)" ng-checked="showCards[$index]" aria-label='small card'>
                 <div layout='row' layout-align='center center'>
                   <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.ID}}"></div>
                   <div style="color:#fff">{{card.name}}</div>
                   <div class="border-right"></div>
-                  <div style="background-color:#fff;border-radius:50%;margin-right:-4px" class="button-clear">
-                    <label class="mdl-button mdl-js-button mdl-button--icon" for="" ng-click="del_card($index)">
-                      <i class="material-icons">close</i>
-                    </label>
-                  </div>
+                  <md-icon md-svg-src="md-close" class="card_chip_close_icon" ng-click="del_card($index)" aria-label="Close Icon"></md-icon>
                 </div>
               </md-checkbox>
             </div>
@@ -45,6 +41,7 @@
         <div layout='row' layout-align='center center'>
           <canvas id="stats_displayer"></canvas>
         </div>
+        <md-icon md-svg-src="{{close_icon}}" style="color: #FFF;" aria-label="Close Icon"></md-icon>
       </md-card-content>
     </md-card>
   </div>
@@ -52,11 +49,12 @@
     <md-card class="md-raised md-whiteframe-z3">
       <md-card-content>
         <div layout='column'>
-          <div ng-if='apng.load' class="vertical-align-container-out border-bottom space-bottom">
+          <div ng-if='apng.load' class="vertical-align-container-out">
             <div class="vertical-align-container-in-bottom">
               <img class="apng-image" ng-src='{{card.apng}}'>
             </div>
           </div>
+          <md-divider layout-margin></md-divider>
           <div layout='row' class="centered">
             <div flex>
               <p class="md-body-2">{{card.ID}}</p>
@@ -65,10 +63,14 @@
               <p class="md-body-2">{{card.name}}</p>
             </div>
             <div flex>
-              <p class="md-body-2">{{card.type1.name}}</p>
+              <p class="type_wrapper" ng-style="typeColors[card.type1.ID]">
+                {{card.type1.name}}
+              </p>
             </div>
             <div flex>
-              <p class="md-body-2" ng-if="card.type2>0">{{card.type2.name}}</p>
+              <p class="type_wrapper" ng-style="typeColors[card.type2.ID]">
+                {{card.type2.name}}
+              </p>
             </div>
           </div>
           <div layout='row'>
@@ -82,6 +84,7 @@
                 card.base_stats[3] + card.base_stats[4] + card.base_stats[5]}}</div>
             </div>
           </div>
+          <md-divider layout-margin></md-divider>
           <div layout layout-align='center center'>
             <md-button ng-click="del_card($index)">关闭</md-button>
           </div>

@@ -74,7 +74,7 @@
                   <md-option value="-1">
                     无
                   </md-option>
-                  <md-option ng-repeat="type in types" value="{{type.ID}}" ng-if="$index!=selected_poke_type1">
+                  <md-option ng-repeat="type in types" ng-if="$index!=selected_poke_type1" value="{{type.name}}">
                     {{type.name}}
                   </md-option>
                 </md-select>

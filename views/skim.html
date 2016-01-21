@@ -51,6 +51,7 @@
               <div class="space-bottom" ng-repeat="pokemon in [pokemon]">
                 <img class="apng-image" ng-src="{{pokemon.apng}}">
               </div>
+              <md-divider layout-margin></md-divider>
               <div class="space-bottom" layout='row' layout-wrap>
                 <div flex layout='column'>
                   <div>身高</div>
@@ -86,8 +87,11 @@
                   {{value}}
                 </div>
               </div>
-              <canvas id="stats_displayer">
-              </canvas>
+              <md-divider layout-margin></md-divider>
+              <div>
+                <canvas id="stats_displayer">
+                </canvas>
+              </div>
             </div>
           </md-tab>
           <md-tab label="技能学习">

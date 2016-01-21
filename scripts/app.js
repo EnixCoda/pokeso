@@ -4,8 +4,8 @@ angular
   .module('pokesoApp', [
     'ngAnimate',
     'ngAria',
-    'ngRoute',
     'ngMaterial',
+    'ngRoute',
     'LocalStorageModule',
     'ui.sortable'
   ])
@@ -62,11 +62,17 @@ angular
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
-      .accentPalette('orange');
+      .accentPalette('orange')
+      .warnPalette('pink');
   })
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('pokeso')
       .setStorageCookieDomain('poke.so')
       .setNotify(true, true);
-  });
+  })
+  .config(['$mdIconProvider', function($mdIconProvider) {
+    $mdIconProvider
+      .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+      .defaultIconSet('img/icons/sets/core-icons.svg', 24);
+  }]);
