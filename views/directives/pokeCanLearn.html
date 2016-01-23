@@ -6,7 +6,7 @@
     <div flex>{{pokemon.name}}</div>
     <div flex='15'>{{pokemon.type1.name}}</div>
     <div flex='15'>
-      <div ng-if="pokemon.type2>0">{{pokemon.type2.name}}
+      <div ng-if="pokemon.type2!=0">{{pokemon.type2.name}}
       </div>
     </div>
   </div>

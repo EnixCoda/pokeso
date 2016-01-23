@@ -49,6 +49,7 @@ angular.module('pokesoApp').controller('BaseStatsController', function ($scope) 
       $scope.showCards[index] = !$scope.showCards[index];
       draw_canvas_prepare();
     };
+
   };
   loadController.toInit(init);
 });

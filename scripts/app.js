@@ -2,8 +2,6 @@
 
 angular
   .module('pokesoApp', [
-    'ngAnimate',
-    'ngAria',
     'ngMaterial',
     'ngRoute',
     'LocalStorageModule',

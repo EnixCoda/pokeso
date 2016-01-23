@@ -31,10 +31,10 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
   //moves
   $scope.selected_type_id       = -2;
   $scope.selected_kind_id       = -2;
-  $scope.is_100percent_kill     = false;
+  $scope.powerIndeterminable    = false;
   $scope.power_min              = 0;
   $scope.power_max              = 250;
-  $scope.is_100percent_accurate = false;
+  $scope.accuracyIndeterminable = false;
   $scope.accuracy_min           = 0;
   $scope.accuracy_max           = 100;
   $scope.pp_min                 = 0;
@@ -50,15 +50,15 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
     if ($scope.cur === null) {
       return;
     }
-    var data = {
+    var data                    = {
       search: function() {
         var search_result = [];
         for (var i = 0; i < _move.length; i++) {
           var move = _move[i];
-          if (this.is_100percent_kill) {
+          if (this.powerIndeterminable) {
             if (move.power != -1) continue;
           } else if (this.power_min > move.power || move.power > this.power_max) continue;
-          if (this.is_100percent_accurate) {
+          if (this.accuracyIndeterminable) {
             if (move.accuracy != -1) continue;
           } else if (this.accuracy_min > move.accuracy || move.accuracy > this.accuracy_max) continue;
           if (this.pp_min > move.pp || move.pp > this.pp_max) continue;
@@ -80,10 +80,10 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
     data.poke_id                = $scope.cur.id;
     data.selected_type_id       = $scope.selected_type_id;
     data.selected_kind_id       = $scope.selected_kind_id;
-    data.is_100percent_kill     = $scope.is_100percent_kill;
+    data.powerIndeterminable    = $scope.powerIndeterminable;
     data.power_max              = $scope.power_max;
     data.power_min              = $scope.power_min;
-    data.is_100percent_accurate = $scope.is_100percent_accurate;
+    data.accuracyIndeterminable = $scope.accuracyIndeterminable;
     data.accuracy_max           = $scope.accuracy_max;
     data.accuracy_min           = $scope.accuracy_min;
     data.pp_max                 = $scope.pp_max;
