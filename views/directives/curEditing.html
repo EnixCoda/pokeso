@@ -23,16 +23,39 @@
 </div>
 <div class="border-bottom space-bottom">
   <md-radio-group ng-model="current.selected_ability_index" layout='row' layout-sm='column'>
-    <div flex layout='row' layout='center center ' ng-repeat="ability in current.abilities track by $index">
-      <md-radio-button ng-value="$index+1">
-        <div>
-          {{ability.name}}
+    <md-radio-button ng-if="pokemon.ability1" ng-value="pokemon.ability1.ID">
+      <div layout='row'>
+        <div flex='30' class="centered">
+          <p class="md-body-1">{{pokemon.ability1.name}}</p>
         </div>
-        <div>
-          {{ability.description}}
+        <md-divider layout-margin></md-divider>
+        <div flex>
+          <p class="md-body-1">{{pokemon.ability1.description}}</p>
         </div>
-      </md-radio-button>
-    </div>
+      </div>
+    </md-radio-button>
+    <md-radio-button ng-if="pokemon.ability2" ng-value="pokemon.ability2.ID">
+      <div layout='row'>
+        <div flex='30' class="centered">
+          <p class="md-body-1">{{pokemon.ability2.name}}</p>
+        </div>
+        <md-divider layout-margin></md-divider>
+        <div flex>
+          <p class="md-body-1">{{pokemon.ability2.description}}</p>
+        </div>
+      </div>
+    </md-radio-button>
+    <md-radio-button ng-if="pokemon.abilityd" ng-value="pokemon.abilityd.ID">
+      <div layout='row'>
+        <div flex='30' class="centered">
+          <p class="md-body-1">{{pokemon.abilityd.name}}</p>
+        </div>
+        <md-divider layout-margin></md-divider>
+        <div flex>
+          <p class="md-body-1">{{pokemon.abilityd.description}}</p>
+        </div>
+      </div>
+    </md-radio-button>
   </md-radio-group>
 </div>
 <div class="border-bottom space-bottom">

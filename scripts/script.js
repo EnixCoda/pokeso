@@ -106,7 +106,7 @@ function extractData() {
       pokemon.ability2   = mainData.abilities[pokemon.ability2];
       pokemon.abilityd   = mainData.abilities[pokemon.abilityd];
       pokemon.type1      = mainData.types[pokemon.type1];
-      pokemon.type2      = pokemon.type2 != 0 ? mainData.types[pokemon.type2] : {ID: 0, name: "无"};
+      pokemon.type2      = pokemon.type2 ? mainData.types[pokemon.type2] : {ID: 0, name: "无"};
       pokemon.birth_step = otherData.pokemons[i].birthStep;
       pokemon.catch_rate = otherData.pokemons[i].catchRate;
       pokemon.dexInfo    = otherData.pokemons[i].dexInfo;

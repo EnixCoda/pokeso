@@ -33,18 +33,37 @@
                   </p>
                 </div>
                 <div flex>
-                  <p ng-if="pokemon.type2" class="type_wrapper" ng-style="typeColors[pokemon.type2.ID]">
+                  <p ng-if="pokemon.type2.ID" class="type_wrapper" ng-style="typeColors[pokemon.type2.ID]">
                     {{pokemon.type2.name}}
                   </p>
                 </div>
               </div>
               <div class="space-bottom" layout='column'>
-                <div ng-repeat="ability in pokemon.abilities" layout='row'>
-                  <div flex='20'>
-                    {{ability.name}}
+                <div ng-if="pokemon.ability1" layout='row'>
+                  <div flex='30' class="centered">
+                    <p class="md-body-1">{{pokemon.ability1.name}}</p>
                   </div>
-                  <div>
-                    {{ability.description}}
+                  <md-divider layout-margin></md-divider>
+                  <div flex>
+                    <p class="md-body-1">{{pokemon.ability1.description}}</p>
+                  </div>
+                </div>
+                <div ng-if="pokemon.ability2" layout='row'>
+                  <div flex='30' class="centered">
+                    <p class="md-body-1">{{pokemon.ability2.name}}</p>
+                  </div>
+                  <md-divider layout-margin></md-divider>
+                  <div flex>
+                    <p class="md-body-1">{{pokemon.ability2.description}}</p>
+                  </div>
+                </div>
+                <div ng-if="pokemon.abilityd" layout='row'>
+                  <div flex='30' class="centered">
+                    <p class="md-body-1">{{pokemon.abilityd.name}}</p>
+                  </div>
+                  <md-divider layout-margin></md-divider>
+                  <div flex>
+                    <p class="md-body-1">{{pokemon.abilityd.description}}</p>
                   </div>
                 </div>
               </div>
