@@ -4,8 +4,7 @@ angular
   .module('pokesoApp', [
     'ngMaterial',
     'ngRoute',
-    'LocalStorageModule',
-    'ui.sortable'
+    'LocalStorageModule'
   ])
   .config(function ($routeProvider) {
     $routeProvider

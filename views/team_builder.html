@@ -78,7 +78,7 @@
                 </md-button>
               </div>
             </div>
-            <div ui-sortable ng-model="team" ng-if="team.length>0">
+            <div ng-model="team" ng-if="team.length>0">
               <div ng-repeat="pokemon in team track by $index">
                 <pm-in-team ng-click="edit_pokemon(pokemon.ID)" layout></pm-in-team>
               </div>
