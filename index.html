@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
-  <link rel="icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png" />
-  <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png" />
+  <link rel="icon" href="favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png"/>
+  <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png"/>
 
-  <link rel="stylesheet" href="deps/angular-material.min.css" />
-  <link rel="stylesheet" href="deps/material.min.css" />
+  <link rel="stylesheet" href="deps/angular-material.min.css"/>
+  <link rel="stylesheet" href="deps/material.min.css"/>
 
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/pm-icons.css">
@@ -21,95 +21,79 @@
 <!--[if lte IE 8]>
 <div class="browsehappy" style="margin-left:300px;z-index:9">请使用非IE类浏览器!</div>
 <![endif]-->
-<body ng-app="pokesoApp" ng-controller='MainController' ng-cloak>
-  <!-- <div class="vertical-align-container-out cover-all">
-    <div class="vertical-align-container-in-middle centered">
-      <div style="display: inline-block">
-        <md-progress-circular md-mode='indeterminate'></md-progress-circular>
-      </div>
+<body ng-app="pokesoApp" ng-controller='MainController' ng-cloak layout="row">
+<div ng-if="false" class="vertical-align-container-out cover-all">
+  <div class="vertical-align-container-in-middle centered">
+    <div style="display: inline-block">
+      <md-progress-circular md-mode='indeterminate'></md-progress-circular>
+      {{loadingText}}
     </div>
-  </div> -->
-  <div class="cover-all" ng-show="loading" layout="column">
-    <div flex></div>
-    <div layout="row" layout-align="center center">
-      <div>
-        {{loadingText}}
-      </div>
-    </div>
-    <div flex></div>
   </div>
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-    <header class="mdl-layout__header mdl-layout__header--scroll mdl-layout--fixed-header">
-      <div class="mdl-layout__header-row">
-        <div class="mdl-layout-spacer"></div>
-        <div hidden class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-          <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
-            <i class="material-icons">search</i>
-          </label>
-          <div class="mdl-textfield__expandable-holder">
-            <input class="mdl-textfield__input" type="text" id="fixed-header-drawer-exp" />
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title"><a class="font-family" href="/" id='title'>口袋搜</a></span>
-      <nav class="mdl-navigation">
-        <div ng-repeat="function in MainFunctions track by $index">
-          <a class="mdl-navigation__link font-family" ng-if="$index!=MainFunctions.length-1 && function.enterable" href="{{function.link}}">
-            <span class="pokeball pokeball-{{function.ball}}"></span>
-            {{function.name}}
-          </a>
-        </div>
-        <div layout>
-          <div flex-gt-md='10'></div>
-          <div flex>
-            <md-switch ng-model='apng.load' aria-label='load_apng' ng-change='toggle_animation()'>
-              动态图片
-            </md-switch>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <main class="mdl-layout__content">
-      <div class="page-content" ng-view ng-cloak>
-        <!-- Your content goes here -->
-      </div>
-    </main>
+</div>
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="leftSideNav"
+            md-is-locked-open="$mdMedia('gt-md')">
+  <div class="md-toolbar-tools" layout>
+    <a href="#/">
+      <h1 class="md-toolbar-tools">POKESO·口袋搜</h1>
+    </a>
   </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-67911937-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+  <md-content layout-padding layout="column" layout-align="start stretch">
+    <md-button ng-repeat="function in MainFunctions track by $index" layout-align="start start">
+      <a class="font-family" ng-if="$index!=MainFunctions.length-1 && function.enterable" href="{{function.link}}">
+        <div layout="row" layout-align="start center">
+          <span class="pokeball pokeball-{{function.ball}}"></span>
+          {{function.name}}
+        </div>
+      </a>
+    </md-button>
+    <md-switch ng-model='apng.load' aria-label='load_apng' ng-change='toggle_animation()'>
+      动态图片
+    </md-switch>
+  </md-content>
+</md-sidenav>
+<md-content flex ng-view ng-cloak>
+</md-content>
 
-  <script src="deps/jquery.min.js"></script>
-  <script src="deps/jquery-ui.min.js"></script>
-  <script src="deps/angular.min.js"></script>
-  <script src="deps/angular-animate.min.js"></script>
-  <script src="deps/angular-aria.min.js"></script>
-  <script src="deps/angular-material.min.js"></script>
-  <script src="deps/angular-route.min.js"></script>
-  <script src="deps/angular-local-storage.min.js"></script>
-  <script src="deps/sortable.min.js"></script>
-  <script src="deps/material.min.js"></script>
-  <script src="deps/apng-canvas.min.js"></script>
-  <script src="deps/hashdown.min.js"></script>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+              (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src   = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-67911937-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
-  <script src="scripts/app.js"></script>
-  <script src="scripts/directives.js"></script>
-  <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/controllers/home.js"></script>
-  <script src="scripts/controllers/skim.js"></script>
-  <script src="scripts/controllers/moves.js"></script>
-  <script src="scripts/controllers/baseStats.js"></script>
-  <script src="scripts/controllers/suggestion.js"></script>
-  <script src="scripts/controllers/teamBuilder.js"></script>
-  <script src="scripts/controllers/about.js"></script>
+<script src="deps/jquery.min.js"></script>
+<script src="deps/jquery-ui.min.js"></script>
+<script src="deps/angular.min.js"></script>
+<script src="deps/angular-animate.min.js"></script>
+<script src="deps/angular-aria.min.js"></script>
+<script src="deps/angular-material.min.js"></script>
+<script src="deps/angular-route.min.js"></script>
+<script src="deps/angular-local-storage.min.js"></script>
+<script src="deps/sortable.min.js"></script>
+<script src="deps/material.min.js"></script>
+<script src="deps/apng-canvas.min.js"></script>
+<script src="deps/hashdown.min.js"></script>
 
-  <script src="scripts/script.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/directives.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/home.js"></script>
+<script src="scripts/controllers/skim.js"></script>
+<script src="scripts/controllers/moves.js"></script>
+<script src="scripts/controllers/baseStats.js"></script>
+<script src="scripts/controllers/suggestion.js"></script>
+<script src="scripts/controllers/teamBuilder.js"></script>
+<script src="scripts/controllers/about.js"></script>
+
+<script src="scripts/script.js"></script>
 </body>
 </html>
