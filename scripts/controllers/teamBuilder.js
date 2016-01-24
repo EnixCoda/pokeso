@@ -185,7 +185,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
         controller:    'StatEditorController',
         targetEvent:   $event,
         preserveScope: true,
-        parent:        angular.element(document.getElementById('editorWindow'))
+        //parent:        angular.element(document.getElementById('editorWindow'))
       });
     };
   };

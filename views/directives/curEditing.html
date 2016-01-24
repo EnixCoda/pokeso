@@ -23,41 +23,30 @@
   </div>
 </div>
 <div>
-  <md-radio-group ng-model="current.selected_ability_index" layout='column'>
+  <md-radio-group ng-model="current.selected_ability_index" layout="row" layout-align="space-around">
     <md-radio-button ng-if="current.ability1" ng-value="current.ability1.ID">
-      <div layout='row'>
-        <div flex='30' layout="column" layout-align="center center">
-          <p class="md-body-1">{{current.ability1.name}}</p>
-        </div>
-        <md-divider layout-margin></md-divider>
-        <div flex layout="column" layout-align="center center">
-          <p class="md-body-1">{{current.ability1.description}}</p>
-        </div>
-      </div>
+      {{current.ability1.name}}
+      <md-tooltip md-direction="bottom">
+        {{current.ability1.description}}
+      </md-tooltip>
     </md-radio-button>
-    <md-radio-button class="fill-width" ng-if="current.ability2" ng-value="current.ability2.ID">
-      <div layout="row">
-        <div flex="30" layout="column" layout-align="center center">
-          <p class="md-body-1">{{current.ability2.name}}</p>
-        </div>
-        <md-divider layout-margin></md-divider>
-        <div flex>
-          <p class="md-body-1">{{current.ability2.description}}</p>
-        </div>
-      </div>
+    <md-radio-button ng-if="current.ability2" ng-value="current.ability2.ID">
+      {{current.ability2.name}}
+      <md-tooltip md-direction="bottom">
+        {{current.ability2.description}}
+      </md-tooltip>
     </md-radio-button>
     <md-radio-button ng-if="current.abilityd" ng-value="current.abilityd.ID">
-      <div layout='row'>
-        <div flex='30' layout="column" layout-align="center center">
-          <p class="md-body-1">{{current.abilityd.name}}</p>
-        </div>
-        <md-divider layout-margin></md-divider>
-        <div flex>
-          <p class="md-body-1">{{current.abilityd.description}}</p>
-        </div>
-      </div>
+      {{current.abilityd.name}}
+      <md-tooltip md-direction="bottom">
+        {{current.abilityd.description}}
+      </md-tooltip>
     </md-radio-button>
   </md-radio-group>
+  <div layout-padding>
+    <div layout-padding>
+    </div>
+  </div>
 </div>
 <md-divider layout-margin></md-divider>
 <div>

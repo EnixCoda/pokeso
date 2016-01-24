@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('pokesoApp').controller('MainController', function ($scope, $http, localStorageService) {
+angular.module('pokesoApp').controller('MainController', function ($scope, $http, $mdSidenav, localStorageService) {
   window.onload = function () {
     loadController.init($scope);
     if (localStorageService.isSupported) {
@@ -169,5 +169,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       }
     });
   };
-
+  $scope.toggleSideNav = function () {
+    $mdSidenav('leftSideNav').toggle();
+  };
 });

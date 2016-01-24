@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>口袋搜 · PokeSo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="">
 
   <link rel="icon" href="favicon.ico"/>
@@ -12,33 +12,33 @@
 
   <link rel="stylesheet" href="deps/angular-material.min.css"/>
   <link rel="stylesheet" href="deps/material.min.css"/>
-
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/pm-icons.css">
   <link rel="stylesheet" href="styles/pokeball.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
 
 </head>
 <body ng-app="pokesoApp" ng-controller='MainController' ng-cloak layout="row">
-<div ng-show="loading" class="vertical-align-container-out cover-all">
+<div ng-if="loading" class="vertical-align-container-out cover-all">
   <div class="vertical-align-container-in-middle centered">
     <div style="display: inline-block">
       <md-progress-circular md-mode='indeterminate'></md-progress-circular>
       {{loadingText}}
       <!--[if lte IE 8]>
-      <div class="browsehappy">请使用非IE类浏览器!</div>
-      <![endif]-->
+      <div class="browsehappy">请使用非IE类浏览器!</div><![endif]-->
     </div>
   </div>
 </div>
-<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="leftSideNav"
-            md-is-locked-open="$mdMedia('gt-md')">
+<md-sidenav class="md-sidenav-left md-whiteframe-z2"
+            md-component-id="leftSideNav" md-is-locked-open="$mdMedia('gt-md')">
   <div class="md-toolbar-tools" layout>
     <a href="#/">
       <h1 class="md-toolbar-tools">POKESO·口袋搜</h1>
     </a>
   </div>
   <md-content layout-padding layout="column" layout-align="start stretch">
-    <md-button ng-repeat="function in MainFunctions track by $index" ng-if="$index!=MainFunctions.length-1 && function.enterable" layout-align="start start">
+    <md-button ng-repeat="function in MainFunctions track by $index"
+               ng-if="$index!=MainFunctions.length-1 && function.enterable" layout-align="start start">
       <a class="font-family" href="{{function.link}}">
         <div layout="row" layout-align="start center">
           <span class="pokeball pokeball-{{function.ball}}"></span>
@@ -51,6 +51,9 @@
     </md-switch>
   </md-content>
 </md-sidenav>
+<div hide-gt-md class="md-whiteframe-2dp fixedMenuIcon">
+  <md-icon md-svg-src="md-menu" aria-label="menu" ng-click="toggleSideNav()"></md-icon>
+</div>
 <md-content flex ng-view ng-cloak>
 </md-content>
 
