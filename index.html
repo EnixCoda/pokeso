@@ -38,7 +38,8 @@
   </div>
   <md-content layout-padding layout="column" layout-align="start stretch">
     <md-button ng-repeat="function in MainFunctions track by $index"
-               ng-if="$index!=MainFunctions.length-1 && function.enterable" layout-align="start start">
+               ng-if="$index!=MainFunctions.length-1 && function.enterable" layout-align="start start"
+               ng-click="$mdMedia('gt-md')?undefined:toggleSideNav()">
       <a class="font-family" href="{{function.link}}">
         <div layout="row" layout-align="start center">
           <span class="pokeball pokeball-{{function.ball}}"></span>
