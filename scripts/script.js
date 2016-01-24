@@ -1,6 +1,6 @@
 "use strict";
-var storageAddr        = '//poke.so/storage/apic/';
-var serverAddr         = '//poke.so/server/';
+var storageAddr        = "//poke.so/storage/apic/";
+var serverAddr         = "//poke.so/server/";
 var mainData           = null;
 var otherData          = null;
 var learnSet           = null;
@@ -20,8 +20,8 @@ function animate() {
 
 function isMobile() {
   var u         = navigator.userAgent;
-  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1;
-  var isiPhone  = u.indexOf('iPhone') > -1;
+  var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1;
+  var isiPhone  = u.indexOf("iPhone") > -1;
   return isiPhone || isAndroid;
 }
 
@@ -35,35 +35,36 @@ var Quest          = {
 var LoadController = {
   new: function () {
     var loadController            = {};
-    var scope;
-    var quests                    = [];
+    var scope                     = null;
+    var quests                    = {};
     quests["A"]                   = Quest.new();
     quests["B"]                   = Quest.new();
     quests["C"]                   = Quest.new();
     var inits                     = [];
-    loadController.status         = 'NORMAL';
+    loadController.status         = "NORMAL";
     loadController.init           = function ($scope) {
       scope = $scope;
+      scope.loading = true;
       return true;
     };
     loadController.toInit         = function (init) {
       inits.push(init);
-      if (loadController.status == 'SUCCESS') {
+      if (loadController.status == "SUCCESS") {
         setTimeout(init, 0);
       }
     };
     loadController.questSucceeded = function (quest) {
-      quests[quest].status = 'SUCCESS';
+      quests[quest].status = "SUCCESS";
       var allSuccess       = true;
       for (var _quest_ in quests) {
-        if (quests[_quest_].status != 'SUCCESS') {
+        if (quests[_quest_].status != "SUCCESS") {
           allSuccess = false;
           break;
         }
       }
       if (allSuccess) {
         scope.loading         = false;
-        loadController.status = 'SUCCESS';
+        loadController.status = "SUCCESS";
         extractData();
         extractLearnSet();
         for (var i = 0; i < inits.length; i++) {
@@ -72,8 +73,8 @@ var LoadController = {
       }
     };
     loadController.fail           = function (quest) {
-      quests[quest].status  = 'ERROR';
-      loadController.status = 'ERROR';
+      quests[quest].status  = "ERROR";
+      loadController.status = "ERROR";
     };
     loadController.setText        = function (text) {
       scope.loadingText = text;
@@ -84,7 +85,7 @@ var LoadController = {
 var loadController = LoadController.new();
 
 function loadData(scope) {
-  if (loadController.status == 'SUCCESS') {
+  if (loadController.status == "SUCCESS") {
     scope.pokemons   = mainData.pokemons;
     scope.stat_names = mainData.stat_names;
     scope.natures    = mainData.natures;
@@ -112,7 +113,7 @@ function extractData() {
       pokemon.dexInfo    = otherData.pokemons[i].dexInfo;
       pokemon.weight     = otherData.pokemons[i].weight;
       pokemon.height     = otherData.pokemons[i].height;
-      pokemon.apng       = storageAddr + pokemon.ID + '.png';
+      pokemon.apng       = storageAddr + pokemon.ID + ".png";
     }
     for (var i = 0; i < mainData.moves.length; i++) {
       var move = mainData.moves[i];
@@ -140,7 +141,7 @@ function extractLearnSet() {
   }
 }
 
-var canvas_colors = ('#4caf50 #ffc10d #f44336 #9c27b0 #2196f3 #888888').split(' ');
+var canvas_colors = ("#4caf50 #ffc10d #f44336 #9c27b0 #2196f3 #888888").split(" ");
 function draw_canvas(elementId, data, max) {
   var x, y, v;
   var t = 0.017453293;
@@ -148,9 +149,9 @@ function draw_canvas(elementId, data, max) {
   var new_canvas                 = document.getElementById(elementId);
   new_canvas.width               = 512;
   new_canvas.height              = 512;
-  var new_canvas_context         = new_canvas.getContext('2d');
+  var new_canvas_context         = new_canvas.getContext("2d");
   new_canvas_context.globalAlpha = 0.5;
-  new_canvas.fillStyle           = '#aaaaaa';
+  new_canvas.fillStyle           = "#aaaaaa";
 
   var width = new_canvas.width * 88 / 100;
   //cross lines
@@ -192,7 +193,7 @@ function draw_canvas(elementId, data, max) {
   //write stat names
   var name;
   new_canvas_context.fillStyle = "#000000";
-  new_canvas_context.font      = '1.5em 黑体';
+  new_canvas_context.font      = "1.5em 黑体";
   for (var i = 0; i < stat_names.length; i++) {
     name = stat_names[i];
     x    = Math.cos((-90 + i * 60) * t) * (width * (1.06 + 0.03)) / 2 + new_canvas.width / 2;
@@ -206,7 +207,7 @@ function draw_canvas(elementId, data, max) {
   new_canvas_context.globalAlpha = 0.8;
   new_canvas_context.fillStyle   = "#ffffff";
   var r                          = 30;
-  new_canvas_context.fillText('0', new_canvas.width / 2, new_canvas.width / 2 + width / 25);
+  new_canvas_context.fillText("0", new_canvas.width / 2, new_canvas.width / 2 + width / 25);
 
   //inner circles
   while (r < max) {
@@ -220,10 +221,10 @@ function draw_canvas(elementId, data, max) {
   }
 }
 
-var typeColors = ('#ffffff #a8a878 #c03028 #a890f0 #a040a0 #e0c068 #b8a038 #a8b820 #705898 #b8b8d0 #f08030 #6890f0 #78c850 #f8d030 #f85888 #98d8d8 #7038f8 #705848 #ee99ac').split(' ')
+var typeColors = ("#ffffff #a8a878 #c03028 #a890f0 #a040a0 #e0c068 #b8a038 #a8b820 #705898 #b8b8d0 #f08030 #6890f0 #78c850 #f8d030 #f85888 #98d8d8 #7038f8 #705848 #ee99ac").split(" ")
   .map(function (cur) {
     return {
-      'background-color': cur
+      "background-color": cur
     };
   });
 
@@ -233,7 +234,7 @@ var loadGenerationSearcher = function ($scope) {
       var searcher         = {};
       var start_gen        = [0, 1, 152, 252, 387, 494, 650, 721];
       var generation       = 0;
-      var generations      = ('全部 第一世代 第二世代 第三世代 第四世代 第五世代 第六世代').split(' ')
+      var generations      = ("全部 第一世代 第二世代 第三世代 第四世代 第五世代 第六世代").split(" ")
         .map(function (cur, index) {
           return {
             index: index,
@@ -284,21 +285,21 @@ var loadGenerationSearcher = function ($scope) {
   };
   $scope.generation            = generation_searcher.generation;
   $scope.generations           = generation_searcher.generations;
-  $scope.search_key            = '';
-  $scope.search_in_generations('', 0);
+  $scope.search_key            = "";
+  $scope.search_in_generations("", 0);
 };
 
-function isNumber (sth) {
+function isNumber(sth) {
   return parseFloat(sth) == sth || parseInt(sth) == sth;
 }
 
-function moveFilterInit (moveFilter) {
-  moveFilter.powerIndeterminable = false;
-  moveFilter.power_min = 0;
-  moveFilter.power_max = 250;
+function moveFilterInit(moveFilter) {
+  moveFilter.powerIndeterminable    = false;
+  moveFilter.power_min              = 0;
+  moveFilter.power_max              = 250;
   moveFilter.accuracyIndeterminable = false;
-  moveFilter.accuracy_min = 0;
-  moveFilter.accuracy_max = 100;
-  moveFilter.pp_min = 0;
-  moveFilter.pp_max = 50;
+  moveFilter.accuracy_min           = 0;
+  moveFilter.accuracy_max           = 100;
+  moveFilter.pp_min                 = 0;
+  moveFilter.pp_max                 = 50;
 }
