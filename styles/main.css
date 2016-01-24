@@ -24,7 +24,6 @@ md-sidenav {
 
 md-icon {
     outline: none;
-    /*outline-color: white;*/
     border: none;
 }
 
@@ -36,6 +35,8 @@ md-icon {
     left: 10px;
     top: 10px;
     z-index: 10;
+    outline: none;
+    border: none;
 }
 
 .mdl-card {
