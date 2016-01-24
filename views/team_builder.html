@@ -15,7 +15,7 @@
             <div layout='column'>
               <md-virtual-repeat-container>
                 <div md-virtual-repeat="pokemon in searched_pokemons">
-                  <pm-in-list ng-click="edit_pokemon(pokemon.id)"></pm-in-list>
+                  <pm-in-list ng-click="edit_pokemon(pokemon.ID)"></pm-in-list>
                 </div>
               </md-virtual-repeat-container>
               *不显示PM时请拖动滚动条
@@ -39,10 +39,10 @@
                 <div></div>
               </div>
               <md-virtual-repeat-container>
-                <div md-virtual-repeat="move in moves">
+                <div md-virtual-repeat="move in search_result_moves">
                   <move-in-list ng-click="add_move(move)"></move-in-list>
                 </div>
-                <md-button class="md-warn fill-width" ng-if="cur==null">
+                <md-button class="md-warn fill-width" ng-if="!current">
                   请先选择PM
                 </md-button>
               </md-virtual-repeat-container>
@@ -62,16 +62,14 @@
           <md-card-content>
             <div layout layout-align='center center' layout-wrap>
               <div flex></div>
-              <div layout layout-align='center center'>
+              <div layout="row" layout-align='start start'>
                 <md-input-container>
-                  <label>看上去很乱很短的编码</label>
+                  <label>奇特的蝌蚪码</label>
+                  <md-icon md-svg-src="md-close" aria-label="clear serial text" ng-click="serial.text=''"
+                           ng-show="serial.text!=''"></md-icon>
                   <input ng-model="serial.text">
                 </md-input-container>
-                <label class="mdl-button mdl-js-button mdl-button--icon" ng-click="serial.text=''" ng-show="serial.text!=''">
-                  <i class="material-icons">clear</i>
-                </label>
-              </div>
-              <div>
+                <div flex></div>
                 <md-button class="md-primary thin-button-phone" ng-click="load()" ng-disabled='serial.text==""'>
                   加载
                 </md-button>
@@ -82,16 +80,16 @@
             </div>
             <div ui-sortable ng-model="team" ng-if="team.length>0">
               <div ng-repeat="pokemon in team track by $index">
-                <pm-in-team ng-click="edit_pokemon(pokemon.id)" layout></pm-in-team>
+                <pm-in-team ng-click="edit_pokemon(pokemon.ID)" layout></pm-in-team>
               </div>
             </div>
           </md-card-content>
         </md-card>
       </div>
-      <div class="mdl-cell mdl-cell--12-col no-horizontal-margin fill-width">
-        <md-card ng-if="team.length>0" class="md-raised md-whiteframe-z3" id='cur'>
+      <div class="mdl-cell mdl-cell--12-col no-horizontal-margin fill-width" id="editorWindow">
+        <md-card ng-if="team.length>0" class="md-raised md-whiteframe-z3">
           <md-card-content layout='column'>
-            <cur-editing ng-repeat="current in team" ng-if="current==cur"></cur-editing>
+            <cur-editing ng-repeat="current in [current]"></cur-editing>
           </md-card-content>
         </md-card>
       </div>

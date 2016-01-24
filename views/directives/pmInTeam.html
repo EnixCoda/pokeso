@@ -2,9 +2,9 @@
     <div layout='row' layout-wrap>
       <div flex layout='column'>
         <div layout='row'>
-          <span class='pm-icon pm-icon-{{pokemon.id}} pm-icon-0{{pokemon.id}} pm-icon-00{{pokemon.id}}' ></span>
+          <span class='pm-icon pm-icon-{{pokemon.ID}}' ></span>
           <div class="space-right-lite">
-            {{pokemon.id}}
+            {{pokemon.ID}}
           </div>
           <div>
             {{pokemon.name}}
@@ -16,10 +16,10 @@
             Lv.{{pokemon.level}}
           </div>
           <div flex>
-            {{pokemon.abilities[pokemon.selected_ability_index-1].name}}
+            {{abilities[pokemon.selected_ability_index].name}}
           </div>
           <div flex layout>
-            <div class="icon-item icon-item-{{pokemon.item.id}}"></div>
+            <div class="icon-item icon-item-{{pokemon.item.ID}}"></div>
             <div>{{pokemon.item.name}}</div>
           </div>
         </div>

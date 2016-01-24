@@ -6,29 +6,15 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
     $scope.loaded = true;
 
     var moveFilter = {};
+    moveFilterInit(moveFilter);
     $scope.moveFilter = moveFilter;
     $scope.selected_moves = [];
-
-    $scope.query_search = function (query) {
-      function createFilterFor2(query) {
-        return function filterFn(move) {
-          if (parseInt(move) == move) {
-            return false;
-          }
-          return ((move.ID).toString().indexOf(query) === 0) || (move.name.indexOf(query) >= 0);
-        };
-      }
-      if ($scope.selected_moves.length < 4) {
-        return query ? mainData.moves.filter(createFilterFor2(query)) : [];
-      }
-    };
 
     $scope.detect_overlap = function () {
       moveFilter.power_min = Math.min(moveFilter.power_max, moveFilter.power_min);
       moveFilter.accuracy_min = Math.min(moveFilter.accuracy_max, moveFilter.accuracy_min);
       moveFilter.pp_min = Math.min(moveFilter.pp_max, moveFilter.pp_min);
     };
-
     $scope.search_move = function () {
       $scope.search_result_moves = [];
       var i, this_move;
@@ -63,6 +49,19 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       }
     };
 
+    $scope.query_search = function (query) {
+      function createFilterFor2(query) {
+        return function filterFn(move) {
+          if (parseInt(move) == move) {
+            return false;
+          }
+          return ((move.ID).toString().indexOf(query) === 0) || (move.name.indexOf(query) >= 0);
+        };
+      }
+      if ($scope.selected_moves.length < 4) {
+        return query ? mainData.moves.filter(createFilterFor2(query)) : [];
+      }
+    };
     $scope.add_move = function (move) {
       if ($scope.selected_moves.length === 4) {
         return;
@@ -74,7 +73,6 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       }
       $scope.selected_moves.push(move);
     };
-
     $scope.remove_move = function (index) {
       $scope.selected_moves.splice(index, 1);
     };

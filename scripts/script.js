@@ -270,6 +270,7 @@ var loadGenerationSearcher = function ($scope) {
         }
         return searched_pokemons;
       };
+      searcher.generation       = generation;
       searcher.generations      = generations;
       searcher.generation_index = generation_index;
       searcher.search           = search;
@@ -281,6 +282,7 @@ var loadGenerationSearcher = function ($scope) {
   $scope.search_in_generations = function (search_key, generation) {
     $scope.searched_pokemons = generation_searcher.search(search_key, generation);
   };
+  $scope.generation            = generation_searcher.generation;
   $scope.generations           = generation_searcher.generations;
   $scope.search_key            = '';
   $scope.search_in_generations('', 0);
@@ -288,4 +290,15 @@ var loadGenerationSearcher = function ($scope) {
 
 function isNumber (sth) {
   return parseFloat(sth) == sth || parseInt(sth) == sth;
+}
+
+function moveFilterInit (moveFilter) {
+  moveFilter.powerIndeterminable = false;
+  moveFilter.power_min = 0;
+  moveFilter.power_max = 250;
+  moveFilter.accuracyIndeterminable = false;
+  moveFilter.accuracy_min = 0;
+  moveFilter.accuracy_max = 100;
+  moveFilter.pp_min = 0;
+  moveFilter.pp_max = 50;
 }
