@@ -29,7 +29,8 @@ md-icon {
 
 .fixedMenuIcon {
     background-color: white;
-    padding: 10px;
+    cursor: pointer;
+    padding: 13px;
     border-radius: 55px;
     position: fixed;
     left: 10px;
@@ -37,6 +38,11 @@ md-icon {
     z-index: 10;
     outline: none;
     border: none;
+}
+
+.fixedMenuIcon:hover{
+    cursor: hand;
+    background-color: #eeeeee;
 }
 
 .mdl-card {
@@ -209,10 +215,6 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
     border-radius: 999px;
     margin-right: -4px;
     margin-top: -3px;
-}
-
-.team_organizer {
-    cursor: move;
 }
 
 .card_chip_close_icon md-icon svg {
