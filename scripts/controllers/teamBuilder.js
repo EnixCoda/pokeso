@@ -29,7 +29,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
           //invalid move, e.g: 0 for moves[0]
           continue;
         }
-        if ($.inArray(this_move.ID, learnSet_poke_move[($scope.current.ID)]) == -1) {
+        if (inArray(this_move.ID, learnSet_poke_move[($scope.current.ID)]) == -1) {
           continue;
         }
         if (moveFilter.selected_type_id && (moveFilter.selected_type_id - this_move.type.ID) * moveFilter.selected_type_id !== 0) {
@@ -126,13 +126,13 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       $scope.team.splice(index, 1);
     };
     $scope.remove_cur       = function () {
-      $scope.team.splice($.inArray($scope.current, $scope.team), 1);
+      $scope.team.splice(inArray($scope.current, $scope.team), 1);
       $scope.current             = $scope.team.length ? $scope.team[$scope.team.length - 1] : undefined;
       $scope.search_result_moves = [];
       animate();
     };
     $scope.add_move         = function (move) {
-      if (!$scope.current || $.inArray(move, $scope.current.moves) >= 0 || $scope.current.moves.length === 4) {
+      if (!$scope.current || inArray(move, $scope.current.moves) >= 0 || $scope.current.moves.length === 4) {
         return;
       }
       $scope.current.moves.push(move);

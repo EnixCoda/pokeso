@@ -303,3 +303,15 @@ function moveFilterInit(moveFilter) {
   moveFilter.pp_min                 = 0;
   moveFilter.pp_max                 = 50;
 }
+
+function inArray(value, array) {
+  if (array instanceof Array) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] == value) {
+        return i;
+      }
+    }
+  }
+  return -1;
+
+}

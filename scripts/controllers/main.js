@@ -164,7 +164,6 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
           APNG.animateImage(images[i]);
         } else {
           APNG.releaseCanvas(images[i]);
-          $('.apng-image').remove();
         }
       }
     });
