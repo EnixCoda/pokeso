@@ -19,7 +19,7 @@ The latest version this program can be always found at http://www.legendarypokem
 <meta name="keywords" content="Pokemon, IVs, IV, Calculator, Individual, Values, Stats, Stat, Hidden Power">
 <meta name="description" content="This IV Calculator / Stat Calculator / Hidden Power Calculator aims to help Pokemon trainers calculate the attributes of their Pokemon.">
 <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFFJREFUOMu1kjEOACAIA/ng/f87Lo4WimgTo4M9G0vEWexlCbG3hDiPE5A81E5DcVeaEJ9KBcAAxFdABsFtBSOJVV0KYAq46Zuno2xNl2tsmxeYhhbdfJzuqAAAAABJRU5ErkJggg==">
-<script type="text/javascript" src="//poke.so/app/deps/apng-canvas.min.js"></script>
+<script type="text/javascript" src="//poke.so/client/app/deps/apng-canvas.min.js"></script>
 <script type="text/javascript">
 	function animate(){
 		APNG.ifNeeded().then(function () {
@@ -1337,7 +1337,7 @@ function display_sprite() { //feel free to modify if you want to server sprites 
 				n = '0'+n;
 				m = n;
 			}
-			$('sprite').innerHTML += '<img class="apng-image" src="//poke.so/apic/'+m+'.png">';
+			$('sprite').innerHTML += '<img class="apng-image" src="//poke.so/storage/apic/'+m+'.png">';
 			animate()
 			i++;
 		} while(i<l);
