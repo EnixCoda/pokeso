@@ -11,7 +11,6 @@
   <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png"/>
 
   <link rel="stylesheet" href="deps/angular-material.min.css"/>
-  <link rel="stylesheet" href="deps/material.min.css"/>
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/pm-icons.css">
   <link rel="stylesheet" href="styles/pokeball.css">
@@ -32,20 +31,20 @@
 <md-sidenav class="md-sidenav-left md-whiteframe-z2"
             md-component-id="leftSideNav" md-is-locked-open="$mdMedia('gt-md')">
   <div class="md-toolbar-tools" layout>
-    <a href="#/">
+    <a href="#/"ng-click="$mdMedia('gt-md')?undefined:toggleSideNav()">
       <h1 class="md-toolbar-tools">POKESO·口袋搜</h1>
     </a>
   </div>
   <md-content layout-padding layout="column" layout-align="start stretch">
-    <md-button ng-repeat="function in MainFunctions track by $index"
-               ng-if="$index!=MainFunctions.length-1 && function.enterable" layout-align="start start"
-               ng-click="$mdMedia('gt-md')?undefined:toggleSideNav()">
-      <a class="font-family" href="{{function.link}}">
-        <div layout="row" layout-align="start center">
-          <span class="pokeball pokeball-{{function.ball}}"></span>
-          {{function.name}}
-        </div>
-      </a>
+    <md-button layout-align="start start"
+               ng-repeat="function in MainFunctions track by $index"
+               ng-if="$index!=MainFunctions.length-1 && function.enterable"
+               ng-click="$mdMedia('gt-md')?undefined:toggleSideNav()"
+               href="{{function.link}}">
+      <div layout="row" layout-align="start center">
+        <span class="pokeball pokeball-{{function.ball}}"></span>
+        {{function.name}}
+      </div>
     </md-button>
     <md-switch ng-model='apng.load' aria-label='load_apng' ng-change='toggle_animation()'>
       动态图片
@@ -65,8 +64,6 @@
 <script src="deps/angular-material.min.js"></script>
 <script src="deps/angular-route.min.js"></script>
 <script src="deps/angular-local-storage.min.js"></script>
-<script src="deps/sortable.min.js"></script>
-<script src="deps/material.min.js"></script>
 <script src="deps/apng-canvas.min.js"></script>
 <script src="deps/hashdown.min.js"></script>
 

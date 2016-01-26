@@ -1,19 +1,22 @@
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet" ng-repeat="function in MainFunctions">
-    <md-card class="md-raised md-whiteframe-z4">
-      <div class="mdl-card__title">
-        <div flex>
-          <h2 class="mdl-card__title-text font-family">{{ function.name }}</h2>
+<div layout layout-padding layout-wrap>
+  <md-card ng-repeat="function in MainFunctions" flex-xs="100" flex-sm="45" flex-md="30" flex-gt-md="20">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{function.name}}</span>
+        <span class="md-subhead">
+          <p ng-repeat="des in function.description">{{des}}</p>
+        </span>
+      </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-lg card-media">
+          <img ng-if='apng.load' class="apng-image" ng-src="{{ function.apng }}">
         </div>
-        <img ng-if='apng.load' class="apng-image" ng-src="{{ function.apng }}">
-      </div>
-      <div class="mdl-card__supporting-text">
-        <p ng-repeat="des in function.description">{{ des }}</p>
-      </div>
-      <div class="mdl-card__actions mdl-card--border" ng-if="function.enterable">
-        <md-button class="md-raised" href="{{function.link}}" ng-if="!function.constructing">进入</md-button>
-        <md-button class="md-raised" ng-if="function.constructing" disabled>施工中</md-button>
-      </div>
-    </md-card>
-  </div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button class="md-raised" href="{{function.link}}" ng-if="!function.constructing">进入</md-button>
+      <md-button class="md-raised" ng-if="function.constructing" disabled>施工中</md-button>
+    </md-card-actions>
+  </md-card>
+
 </div>

@@ -1,5 +1,5 @@
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+<div layout="row" layout-xs="column">
+  <div>
     <md-card>
       <md-card-content layout='column'>
         <pm-selector></pm-selector>
@@ -17,8 +17,8 @@
       </md-card-content>
     </md-card>
   </div>
-  <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet" ng-show="pokemon">
-    <md-card>
+  <div>
+    <md-card ng-show="pokemon">
       <md-card-content>
         <md-tabs md-dynamic-height md-border-bottom>
           <md-tab label="基本信息">

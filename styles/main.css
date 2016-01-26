@@ -45,14 +45,6 @@ md-icon {
     background-color: #eeeeee;
 }
 
-.mdl-card {
-    width: 100%;
-}
-
-.mdl-grid {
-    padding: 0;
-}
-
 .reduce-padding-bottom {
     padding-bottom: 0;
 }
@@ -167,22 +159,6 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.mdl-layout__header {
-    background-color: #2196f3;
-}
-
-.mdl-layout__drawer {
-    position: fixed;
-}
-
-.mdl-navigation__link {
-    font-size: 17px;
-}
-
-.mdl-layout-title {
-    font-size: 25px;
-}
-
 .button-clear {
 }
 
@@ -223,16 +199,6 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
 
 .card_chip_close_icon md-icon svg :hover {
     color: black;
-}
-
-@media (max-width: 839px) and (min-width: 480px) {
-    .mdl-cell--4-col, .mdl-cell--4-col-tablet.mdl-cell--4-col-tablet {
-        width: calc(50% - 8px);
-    }
-
-    .mdl-cell {
-        margin: 4px;
-    }
 }
 
 @media (max-width: 839px) and (min-width: 720px) {

@@ -1,88 +1,97 @@
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
-    <md-card class="md-raised md-whiteframe-z3">
-      <md-card-content>
-        <pm-selector></pm-selector>
-        <div layout='column'>
-          <md-virtual-repeat-container>
-            <div md-virtual-repeat="pokemon in searched_pokemons">
-              <pm-in-list ng-click="add_card(pokemon.ID)"></pm-in-list>
+<div layout="column">
+  <div layout="column" layout-gt-xs="row">
+    <div flex flex-gt-xs="30">
+      <md-card class="md-raised md-whiteframe-z3">
+        <md-card-content>
+          <pm-selector></pm-selector>
+          <div layout='column'>
+            <md-virtual-repeat-container>
+              <div md-virtual-repeat="pokemon in searched_pokemons">
+                <pm-in-list ng-click="add_card(pokemon.ID)"></pm-in-list>
+              </div>
+            </md-virtual-repeat-container>
+            *不显示PM时请拖动滚动条
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex flex-gt-xs="60">
+      <md-card ng-show="cards.length>0" class="md-raised">
+        <md-card-content layout-padding layout='column'>
+          <div layout='row' layout-wrap>
+            <div ng-repeat="card in cards track by $index">
+              <div class="margin-right"
+                   style="background-color:{{backgroundColors[$index]}};border-radius:20px;margin: 10px;">
+                <md-checkbox class="faint_checkbox" style="margin: 0 10px" ng-click="toggle_show_card($index)"
+                             ng-checked="showCards[$index]" aria-label='small card'>
+                  <div layout='row' layout-align='center center'>
+                    <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.ID}}"></div>
+                    <div style="color:#fff">{{card.name}}</div>
+                    <div class="border-right"></div>
+                    <md-icon md-svg-src="md-close" class="card_chip_close_icon" ng-click="del_card($index)"
+                             aria-label="Close Icon"></md-icon>
+                  </div>
+                </md-checkbox>
+              </div>
             </div>
-          </md-virtual-repeat-container>
-          *不显示PM时请拖动滚动条
-        </div>
-      </md-card-content>
-    </md-card>
+          </div>
+          <div layout='row' layout-align='center center'>
+            <canvas id="stats_displayer"></canvas>
+          </div>
+          <md-icon md-svg-src="md-close" aria-label="Close Icon"></md-icon>
+        </md-card-content>
+      </md-card>
+    </div>
   </div>
-  <div ng-show="cards.length>0" class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
-    <md-card class="md-raised">
-      <md-card-content layout-padding layout='column'>
-        <div layout='row' layout-wrap>
-          <div ng-repeat="card in cards track by $index">
-            <div class="margin-right" style="background-color:{{backgroundColors[$index]}};border-radius:20px;margin: 10px;">
-              <md-checkbox class="faint_checkbox" style="margin: 0 10px" ng-click="toggle_show_card($index)" ng-checked="showCards[$index]" aria-label='small card'>
-                <div layout='row' layout-align='center center'>
-                  <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.ID}}"></div>
-                  <div style="color:#fff">{{card.name}}</div>
-                  <div class="border-right"></div>
-                  <md-icon md-svg-src="md-close" class="card_chip_close_icon" ng-click="del_card($index)" aria-label="Close Icon"></md-icon>
+  <div layout="row" layout-wrap>
+    <div ng-if="cards.length > 0" ng-repeat="card in cards">
+      <md-card class="md-raised md-whiteframe-z3">
+        <md-card-content>
+          <div layout='column'>
+            <div ng-if='apng.load' class="vertical-align-container-out">
+              <div class="vertical-align-container-in-bottom">
+                <img class="apng-image" ng-src='{{card.apng}}'>
+              </div>
+            </div>
+            <md-divider layout-margin></md-divider>
+            <div layout='row' class="centered">
+              <div flex>
+                <p class="md-body-2">{{card.ID}}</p>
+              </div>
+              <div flex>
+                <p class="md-body-2">{{card.name}}</p>
+              </div>
+              <div flex>
+                <p class="type_wrapper" ng-style="typeColors[card.type1.ID]">
+                  {{card.type1.name}}
+                </p>
+              </div>
+              <div flex>
+                <p class="type_wrapper" ng-style="typeColors[card.type2.ID]">
+                  {{card.type2.name}}
+                </p>
+              </div>
+            </div>
+            <div layout='row'>
+              <div flex ng-repeat="value in card.base_stats track by $index" layout='column'
+                   layout-align='center center'>
+                <div>{{stat_names[$index]}}</div>
+                <div>{{value}}</div>
+              </div>
+              <div flex layout='column' layout-align='center center'>
+                <div>总和</div>
+                <div>{{card.base_stats[0] + card.base_stats[1] + card.base_stats[2] +
+                  card.base_stats[3] + card.base_stats[4] + card.base_stats[5]}}
                 </div>
-              </md-checkbox>
+              </div>
+            </div>
+            <md-divider layout-margin></md-divider>
+            <div layout layout-align='center center'>
+              <md-button ng-click="del_card($index)">关闭</md-button>
             </div>
           </div>
-        </div>
-        <div layout='row' layout-align='center center'>
-          <canvas id="stats_displayer"></canvas>
-        </div>
-        <md-icon md-svg-src="md-close" aria-label="Close Icon"></md-icon>
-      </md-card-content>
-    </md-card>
-  </div>
-  <div ng-if="cards.length > 0" class="mdl-cell mdl-cell--4-col" ng-repeat="card in cards">
-    <md-card class="md-raised md-whiteframe-z3">
-      <md-card-content>
-        <div layout='column'>
-          <div ng-if='apng.load' class="vertical-align-container-out">
-            <div class="vertical-align-container-in-bottom">
-              <img class="apng-image" ng-src='{{card.apng}}'>
-            </div>
-          </div>
-          <md-divider layout-margin></md-divider>
-          <div layout='row' class="centered">
-            <div flex>
-              <p class="md-body-2">{{card.ID}}</p>
-            </div>
-            <div flex>
-              <p class="md-body-2">{{card.name}}</p>
-            </div>
-            <div flex>
-              <p class="type_wrapper" ng-style="typeColors[card.type1.ID]">
-                {{card.type1.name}}
-              </p>
-            </div>
-            <div flex>
-              <p class="type_wrapper" ng-style="typeColors[card.type2.ID]">
-                {{card.type2.name}}
-              </p>
-            </div>
-          </div>
-          <div layout='row'>
-            <div flex ng-repeat="value in card.base_stats track by $index" layout='column' layout-align='center center'>
-              <div>{{stat_names[$index]}}</div>
-              <div>{{value}}</div>
-            </div>
-            <div flex layout='column' layout-align='center center'>
-              <div>总和</div>
-              <div>{{card.base_stats[0] + card.base_stats[1] + card.base_stats[2] +
-                card.base_stats[3] + card.base_stats[4] + card.base_stats[5]}}</div>
-            </div>
-          </div>
-          <md-divider layout-margin></md-divider>
-          <div layout layout-align='center center'>
-            <md-button ng-click="del_card($index)">关闭</md-button>
-          </div>
-        </div>
-      </md-card-content>
-    </md-card>
+        </md-card-content>
+      </md-card>
+    </div>
   </div>
 </div>

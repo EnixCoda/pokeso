@@ -1,12 +1,5 @@
-<!-- <div class="vertical-align-container-out cover">
-  <div class="vertical-align-container-in-middle centered">
-    <div style="display: inline-block">
-      <md-progress-circular md-mode='indeterminate'></md-progress-circular>
-    </div>
-  </div>
-</div> -->
-<div class="mdl-grid" style="max-width:1120px">
-  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+<div layout="row" layout-xs="column">
+  <div flex="nogrow">
     <md-card class="md-raised md-whiteframe-z3">
       <md-card-content>
         <md-tabs md-dynamic-height md-border-bottom>
@@ -55,45 +48,39 @@
       </md-card-content>
     </md-card>
   </div>
-  <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
-    <div class="mdl-grid no-padding">
-      <div class="mdl-cell mdl-cell--12-col no-horizontal-margin fill-width">
-        <md-card class="md-raised md-whiteframe-z3">
-          <md-card-content>
-            <div layout layout-align='center center' layout-wrap>
+  <div layout="column" flex="nogrow">
+    <md-card class="md-raised md-whiteframe-z3">
+      <md-card-content>
+        <div layout layout-align='center center' layout-wrap>
+          <div flex></div>
+          <div layout="row" layout-wrap layout-align='space-between center'>
+            <md-button class="md-primary thin-button-phone" ng-click="load()" ng-disabled='serial.text==""'>
+              加载
+            </md-button>
+            <md-button class="md-primary thin-button-phone" ng-click="save()">
+              保存
+            </md-button>
+            <md-input-container>
+              <label>奇特的蝌蚪码</label>
+              <input ng-model="serial.text">
+              <md-icon ng-show="serial.text!=''" style="outline:none" md-svg-src="md-close"
+                       aria-label="clear serial text"
+                       ng-click="serial.text=''"></md-icon>
               <div flex></div>
-              <div layout="row" layout-wrap layout-align='space-between center'>
-                <md-button class="md-primary thin-button-phone" ng-click="load()" ng-disabled='serial.text==""'>
-                  加载
-                </md-button>
-                <md-button class="md-primary thin-button-phone" ng-click="save()">
-                  保存
-                </md-button>
-                <md-input-container>
-                  <label>奇特的蝌蚪码</label>
-                  <input ng-model="serial.text">
-                  <md-icon ng-show="serial.text!=''" style="outline:none" md-svg-src="md-close"
-                           aria-label="clear serial text"
-                           ng-click="serial.text=''"></md-icon>
-                  <div flex></div>
-                </md-input-container>
-              </div>
-            </div>
-            <div ng-model="team" ng-if="team.length>0">
-              <div ng-repeat="pokemon in team track by $index">
-                <pm-in-team ng-click="edit_pokemon(pokemon.ID)" layout></pm-in-team>
-              </div>
-            </div>
-          </md-card-content>
-        </md-card>
-      </div>
-      <div class="mdl-cell mdl-cell--12-col no-horizontal-margin fill-width" id="editorWindow">
-        <md-card ng-if="team.length>0" class="md-raised md-whiteframe-z3">
-          <md-card-content layout='column'>
-            <cur-editing ng-repeat="current in [current]"></cur-editing>
-          </md-card-content>
-        </md-card>
-      </div>
-    </div>
+            </md-input-container>
+          </div>
+        </div>
+        <div ng-model="team" ng-if="team.length>0">
+          <div ng-repeat="pokemon in team track by $index">
+            <pm-in-team ng-click="edit_pokemon(pokemon.ID)" layout></pm-in-team>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+    <md-card ng-if="team.length>0" class="md-raised md-whiteframe-z3">
+      <md-card-content layout='column'>
+        <cur-editing ng-repeat="current in [current]"></cur-editing>
+      </md-card-content>
+    </md-card>
   </div>
 </div>
