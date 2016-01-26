@@ -1,5 +1,9 @@
 html, body, h5, h4, h3, h2, h1, textarea, input {
     font-family: 'Roboto', '黑体', 'Helvetica', 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .font-family {
@@ -40,7 +44,7 @@ md-icon {
     border: none;
 }
 
-.fixedMenuIcon:hover{
+.fixedMenuIcon:hover {
     cursor: hand;
     background-color: #eeeeee;
 }
