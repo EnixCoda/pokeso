@@ -1,10 +1,10 @@
-<div flex layout="column" layout-md="row" layout-gt-md="row" layout-padding>
-  <section flex flex-gt-md="33">
+<div layout layout-padding>
+  <section flex="33">
     <move-selector></move-selector>
   </section>
   <div ng-if="$mdMedia('md') || $mdMedia('gt-md')" class="border-bottom"></div>
   <div ng-if="!($mdMedia('md') || $mdMedia('gt-md'))" class="border-right"></div>
-  <div flex flex-gt-md="66" layout="column" layout-gt-md="row" layout-padding>
+  <div flex layout="row" layout-xs="column" layout-padding>
     <section flex layout="column">
       <md-button ng-click="search_move()" class="md-raised md-primary">
         搜索技能
@@ -111,15 +111,12 @@
             搜索PM
           </md-button>
           <md-virtual-repeat-container>
-            <div md-virtual-repeat="pokemon in pokemons_can_learn" ng-init="pokemons_can_learn = []" layout flex>
-              <poke-can-learn ng-show="pokemon.ID=='0'" layout flex></poke-can-learn>
-              <poke-can-learn ng-if="pokemon.ID!='0'" ng-click="show_poke($event, $index)" layout
-                              flex></poke-can-learn>
+            <div md-virtual-repeat="pokemon in pokemons_can_learn" ng-init="pokemons_can_learn = []">
+              <poke-can-learn ng-click="show_poke($event, $index)"></poke-can-learn>
             </div>
           </md-virtual-repeat-container>
         </div>
       </div>
     </section>
-    <md-divider layout layout-margin></md-divider>
   </div>
 </div>

@@ -141,7 +141,6 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
     };
 
     $scope.show_poke = function (e, i) {
-      $scope = $scope === this.$parent ? this.$parent : $scope;
       function ShowPokeController($scope, $mdDialog, pokemon, load_apng) {
         loadData($scope);
         $scope.typeColors   = typeColors;
@@ -166,6 +165,9 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
         $scope.hide = function () {
           $mdDialog.hide();
         };
+      }
+      if ($scope.pokemons_can_learn[i].ID == 0) {
+        return;
       }
       $mdDialog.show({
         targetEvent: e,
