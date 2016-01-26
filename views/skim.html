@@ -1,5 +1,5 @@
 <div layout="row" layout-xs="column">
-  <div>
+  <div flex flex-sm="40" flex-gt-sm="nogrow">
     <md-card>
       <md-card-content layout='column'>
         <pm-selector></pm-selector>
@@ -17,13 +17,13 @@
       </md-card-content>
     </md-card>
   </div>
-  <div>
+  <div flex flex-gt-md="nogrow">
     <md-card ng-show="pokemon">
       <md-card-content>
         <md-tabs md-dynamic-height md-border-bottom>
           <md-tab label="基本信息">
             <div class="space-bottom"></div>
-            <div class="centered" flex layout='column'>
+            <div class="text-centered" flex layout='column'>
               <div class="space-bottom" layout='row'>
                 <div flex>{{pokemon.ID}}</div>
                 <div flex><b>{{pokemon.name}}</b></div>
@@ -38,9 +38,12 @@
                   </p>
                 </div>
               </div>
+              <div ng-repeat="pokemon in [pokemon]">
+                <img class="apng-image" ng-src="{{pokemon.apng}}">
+              </div>
               <div layout='column'>
                 <div ng-if="pokemon.ability1" layout='row' layout-padding>
-                  <div flex='30' class="centered">
+                  <div flex='30' class="text-centered">
                     <p class="md-body-1">{{pokemon.ability1.name}}</p>
                   </div>
                   <md-divider></md-divider>
@@ -49,7 +52,7 @@
                   </div>
                 </div>
                 <div ng-if="pokemon.ability2" layout='row' layout-padding>
-                  <div flex='30' class="centered">
+                  <div flex='30' class="text-centered">
                     <p class="md-body-1">{{pokemon.ability2.name}}</p>
                   </div>
                   <md-divider></md-divider>
@@ -58,7 +61,7 @@
                   </div>
                 </div>
                 <div ng-if="pokemon.abilityd" layout='row' layout-padding>
-                  <div flex='30' class="centered">
+                  <div flex='30' class="text-centered">
                     <p class="md-body-1">{{pokemon.abilityd.name}}</p>
                   </div>
                   <md-divider></md-divider>
@@ -66,9 +69,6 @@
                     <p class="md-body-1">{{pokemon.abilityd.description}}</p>
                   </div>
                 </div>
-              </div>
-              <div ng-repeat="pokemon in [pokemon]">
-                <img class="apng-image" ng-src="{{pokemon.apng}}">
               </div>
               <md-divider layout-margin></md-divider>
               <div class="space-bottom" layout='row' layout-wrap>

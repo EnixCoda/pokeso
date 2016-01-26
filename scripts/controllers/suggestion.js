@@ -1,11 +1,5 @@
 "use strict";
-/**
-* @ngdoc function
-* @name pokesoApp.controller: SuggestionController
-* @description
-* # SuggestionController
-* Controller of the pokesoApp
-*/
+
 angular.module('pokesoApp').controller('SuggestionController', function ($scope, $http) {
   $scope.title = '';
   $scope.name = '';

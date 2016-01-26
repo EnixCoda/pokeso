@@ -4,7 +4,7 @@
   </div>
 </div>
 <md-divider layout-margin></md-divider>
-<div class="centered" layout='row'>
+<div class="text-centered" layout='row'>
   <div flex>
     <p>{{current.ID}}</p>
   </div>
@@ -52,25 +52,25 @@
 <div>
   <div layout='row'>
     <div>能力源</div>
-    <div flex class="centered" ng-repeat="name in stat_names">
+    <div flex class="text-centered" ng-repeat="name in stat_names">
       {{name}}
     </div>
   </div>
   <div layout='row'>
     <div>种族值</div>
-    <div flex class="centered" ng-repeat="bs in current.base_stats track by $index">
+    <div flex class="text-centered" ng-repeat="bs in current.base_stats track by $index">
       {{bs}}
     </div>
   </div>
   <div layout='row'>
     <div>努力值</div>
-    <div flex class="centered" ng-repeat="bss in current.base_stat track by $index">
+    <div flex class="text-centered" ng-repeat="bss in current.base_stat track by $index">
       {{bss}}
     </div>
   </div>
   <div layout='row'>
     <div>个体值</div>
-    <div flex class="centered" ng-repeat="iv in current.IV track by $index">
+    <div flex class="text-centered" ng-repeat="iv in current.IV track by $index">
       {{iv}}
     </div>
   </div>
@@ -78,7 +78,7 @@
 <md-divider layout-margin></md-divider>
 <div layout="row">
   <div>能力值</div>
-  <div flex class="centered" ng-repeat="stat in current.stats track by $index">
+  <div flex class="text-centered" ng-repeat="stat in current.stats track by $index">
     {{stat}}
   </div>
 </div>

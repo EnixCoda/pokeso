@@ -6,20 +6,13 @@ html, body, h5, h4, h3, h2, h1, textarea, input {
     -webkit-font-smoothing: antialiased;
 }
 
-.font-family {
-    font-family: 'Roboto', '黑体', 'Helvetica', 'Arial', sans-serif;
+a {
+    text-decoration: none;
+    color: #757575;
 }
 
 .apng-image {
     width: auto;
-}
-
-.set-font {
-    font-weight: 500;
-    line-height: 1;
-    text-decoration: none;
-    color: #757575;
-    font-size: 19px;
 }
 
 md-sidenav {
@@ -38,7 +31,7 @@ md-icon {
     border-radius: 55px;
     position: fixed;
     left: 10px;
-    top: 10px;
+    bottom: 10px;
     z-index: 10;
     outline: none;
     border: none;
@@ -104,25 +97,8 @@ md-icon {
     vertical-align: middle;
 }
 
-.centered {
+.text-centered {
     text-align: center
-}
-
-a {
-    text-decoration: none;
-    color: #757575;
-}
-
-.hidden {
-    display: none
-}
-
-.cover {
-    position: absolute;
-    z-index: 9999;
-    height: 100%;
-    width: 100%;
-    background-color: #fff;
 }
 
 .cover-all {
@@ -133,17 +109,8 @@ a {
     background-color: #fff;
 }
 
-@media (min-width: 1025px) {
-    .cover {
-        width: calc(100% - 240px);
-        height: calc(100% - 64px);
-    }
-}
-
 #stats_displayer {
     width: 75%;
-    padding-bottom: 50%;
-    margin-bottom: -50%;
     min-width: 240px;
     min-height: 240px;
     max-width: 768px;
@@ -154,16 +121,8 @@ a {
     -o-transition: width 0.7s;
 }
 
-.stats_displayer_zoom {
-    width: 100% !important;
-    height: 100% !important;
-}
-
 md-checkbox.md-checked.faint_checkbox .md-icon {
     background-color: rgba(0, 0, 0, 0);
-}
-
-.button-clear {
 }
 
 .no-padding {
@@ -176,10 +135,6 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
 
 .no-margin {
     margin: 0;
-}
-
-.no-horizontal-margin {
-    margin: 8px 0;
 }
 
 .fill-width {
@@ -211,22 +166,6 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
     }
 }
 
-@media (max-width: 1024px) {
-    .team_organizer {
-        display: none;
-    }
-}
-
-.showpoke_dialog {
-    width: 400px;
-}
-
-.about_content > md-card {
-    max-width: 328px;
-    width: 50%;
-    float: left;
-}
-
 .move_chip {
     min-width: 112px;
     max-width: 999px !important;
@@ -245,17 +184,11 @@ md-virtual-repeat-container {
 }
 
 @media (max-width: 720px) {
-    .about_content > md-card {
-        float: left;
-        max-width: calc(100% - 16px);
-        width: calc(100%);
-    }
-
-    .showpoke_dialog {
-        width: 100%;
-    }
-
     md-virtual-repeat-container {
         height: 240px;
     }
+}
+
+.gray-svg-icon svg{
+    fill: #666;
 }

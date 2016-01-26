@@ -15,7 +15,7 @@
         </md-card-content>
       </md-card>
     </div>
-    <div flex flex-gt-xs="60">
+    <div flex flex-sm="60" flex-gt-sm="nogrow">
       <md-card ng-show="cards.length>0" class="md-raised">
         <md-card-content layout-padding layout='column'>
           <div layout='row' layout-wrap>
@@ -54,7 +54,7 @@
               </div>
             </div>
             <md-divider layout-margin></md-divider>
-            <div layout='row' class="centered">
+            <div layout='row' class="text-centered">
               <div flex>
                 <p class="md-body-2">{{card.ID}}</p>
               </div>

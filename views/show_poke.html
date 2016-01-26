@@ -1,11 +1,12 @@
-<md-dialog class="showpoke_dialog" layout-padding layout-wrap aria-label="show pokemon">
+<md-dialog layout layout-padding layout-wrap aria-label="show pokemon">
   <div layout="column" layout-padding>
-    <div class="vertical-align-container-out border-bottom space-bottom" ng-if="load_apng" >
+    <div class="vertical-align-container-out" ng-if="load_apng" >
       <div class="vertical-align-container-in-bottom">
         <img class="apng-image" ng-src='{{pokemon.apng}}'>
       </div>
     </div>
-    <div class="centered" layout='row'>
+    <md-divider md-margin></md-divider>
+    <div class="text-centered" layout='row'>
       <div flex>
         <p>{{pokemon.ID}}</p>
       </div>
@@ -24,7 +25,7 @@
       </div>
     </div>
     <div ng-if="pokemon.ability1" layout='row' layout-padding>
-      <div flex='30' class="centered">
+      <div flex='30' class="text-centered">
         <p class="md-body-1">{{pokemon.ability1.name}}</p>
       </div>
       <md-divider></md-divider>
@@ -33,7 +34,7 @@
       </div>
     </div>
     <div ng-if="pokemon.ability2" layout='row' layout-padding>
-      <div flex='30' class="centered">
+      <div flex='30' class="text-centered">
         <p class="md-body-1">{{pokemon.ability2.name}}</p>
       </div>
       <md-divider></md-divider>
@@ -42,7 +43,7 @@
       </div>
     </div>
     <div ng-if="pokemon.abilityd" layout='row' layout-padding>
-      <div flex='30' class="centered">
+      <div flex='30' class="text-centered">
         <p class="md-body-1">{{pokemon.abilityd.name}}</p>
       </div>
       <md-divider></md-divider>
@@ -50,15 +51,14 @@
         <p class="md-body-1">{{pokemon.abilityd.description}}</p>
       </div>
     </div>
-    <div class="border-bottom space-bottom">
-    </div>
+    <md-divider md-margin></md-divider>
     <div layout="column"  class="border-bottom space-bottom">
-      <div class="centered" layout="row">
+      <div class="text-centered" layout="row">
         <div flex ng-repeat="name in stat_names">
           {{name}}
         </div>
       </div>
-      <div class="centered" layout="row">
+      <div class="text-centered" layout="row">
         <div flex ng-repeat="value in pokemon.base_stats track by $index">
           {{value}}
         </div>
@@ -67,7 +67,7 @@
     <div layout='row' layout-align='space-around center'>
       <!--TODO: Evolve Chain-->
     </div>
-    <div class="border-bottom"></div>
+    <md-divider md-margin></md-divider>
     <div class="border-bottom" ng-if='show_move_menu' layout='row' layout-align='space-around center'>
       <md-button class="md-raised">
         自主习得

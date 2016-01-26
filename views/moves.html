@@ -1,10 +1,10 @@
 <div layout layout-padding>
-  <section flex="33">
+  <section flex-xs flex-sm="50" flex-md="33" flex-lg="33">
     <move-selector></move-selector>
   </section>
   <div ng-if="$mdMedia('md') || $mdMedia('gt-md')" class="border-bottom"></div>
   <div ng-if="!($mdMedia('md') || $mdMedia('gt-md'))" class="border-right"></div>
-  <div flex layout="row" layout-xs="column" layout-padding>
+  <div flex layout="row" layout-sm="column" layout-xs="column" layout-padding>
     <section flex layout="column">
       <md-button ng-click="search_move()" class="md-raised md-primary">
         搜索技能

@@ -177,7 +177,6 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
         },
         controller: ShowPokeController,
         templateUrl: 'views/show_poke.html',
-        parent: angular.element(document.body),
         clickOutsideToClose: true
       });
     };

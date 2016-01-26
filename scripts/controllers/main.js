@@ -168,7 +168,13 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       }
     });
   };
-  $scope.toggleSideNav = function () {
-    $mdSidenav('leftSideNav').toggle();
+
+  $scope.closeSideNav    = function () {
+    $mdSidenav('leftSideNav').close();
   };
+  $scope.openSideNav    = function () {
+    $mdSidenav('leftSideNav').open();
+    $scope.userHideSideNav = false;
+  };
+
 });

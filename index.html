@@ -19,7 +19,7 @@
 </head>
 <body ng-app="pokesoApp" ng-controller='MainController' ng-cloak layout="row">
 <div ng-if="loading" class="vertical-align-container-out cover-all">
-  <div class="vertical-align-container-in-middle centered">
+  <div class="vertical-align-container-in-middle text-centered">
     <div style="display: inline-block">
       <md-progress-circular md-mode='indeterminate'></md-progress-circular>
       {{loadingText}}
@@ -29,29 +29,37 @@
   </div>
 </div>
 <md-sidenav class="md-sidenav-left md-whiteframe-z2"
-            md-component-id="leftSideNav" md-is-locked-open="$mdMedia('gt-md')">
+            md-component-id="leftSideNav"
+            md-is-open="sideNavIsOpen"
+            md-is-locked-open="!userHideSideNav && ( $mdMedia('gt-md') || $mdMedia('md') )">
   <div class="md-toolbar-tools" layout>
-    <a href="#/"ng-click="$mdMedia('gt-md')?undefined:toggleSideNav()">
+    <a href="#/" ng-click="closeSideNav()">
       <h1 class="md-toolbar-tools">POKESO·口袋搜</h1>
     </a>
   </div>
   <md-content layout-padding layout="column" layout-align="start stretch">
     <md-button layout-align="start start"
                ng-repeat="function in MainFunctions track by $index"
-               ng-if="$index!=MainFunctions.length-1 && function.enterable"
-               ng-click="$mdMedia('gt-md')?undefined:toggleSideNav()"
+               ng-if="!function.constructing"
+               ng-click="closeSideNav()"
                href="{{function.link}}">
       <div layout="row" layout-align="start center">
         <span class="pokeball pokeball-{{function.ball}}"></span>
         {{function.name}}
       </div>
     </md-button>
-    <md-switch ng-model='apng.load' aria-label='load_apng' ng-change='toggle_animation()'>
-      动态图片
-    </md-switch>
+    <div layout="row" layout-align="space-between center">
+      <md-switch ng-model='apng.load' aria-label='load_apng' ng-change='toggle_animation()'>
+        动态图片
+      </md-switch>
+      <div ng-click="userHideSideNav = true; sideNavIsOpen = false">
+        <md-icon class="gray-svg-icon" md-svg-src="//poke.so/storage/icons/ic_keyboard_arrow_left_black_24px.svg"
+                 aria-label="hide menu"></md-icon>
+      </div>
+    </div>
   </md-content>
 </md-sidenav>
-<div hide-gt-md class="md-whiteframe-2dp fixedMenuIcon" ng-click="toggleSideNav()">
+<div ng-show="!sideNavIsOpen" class="md-whiteframe-2dp fixedMenuIcon" ng-click="openSideNav()">
   <md-icon md-svg-src="md-menu" aria-label="menu"></md-icon>
 </div>
 <md-content flex ng-view ng-cloak>
