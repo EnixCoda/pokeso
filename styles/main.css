@@ -19,7 +19,7 @@ md-sidenav {
     width: 240px;
 }
 
-md-icon {
+md-icon, svg, div {
     outline: none;
     border: none;
 }
@@ -147,9 +147,18 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
 
 .clean-move-icon {
     background-color: #fff;
-    border-radius: 999px;
+    border-radius: 100%;
+    min-width: 28px;
+    min-height: 28px;
     margin-right: -4px;
-    margin-top: -3px;
+    -webkit-transition: background-color 0.3s;
+}
+.clean-move-icon:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
+.clean-move-icon svg:hover {
+    fill: white;
 }
 
 .card_chip_close_icon md-icon svg {
@@ -167,15 +176,16 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
 }
 
 .move_chip {
-    min-width: 112px;
-    max-width: 999px !important;
+    padding: 3px 6px;
+    margin: 2px;
 }
 
 .type_wrapper {
+    display: inline-block;
     border-radius: 999px;
     color: white;
-    max-width: 56px;
-    margin: 0 2px;
+    min-width: 54px;
+    max-height: 36px;
 }
 
 md-virtual-repeat-container {

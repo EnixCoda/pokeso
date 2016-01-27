@@ -12,14 +12,10 @@
     <p>{{current.name}}</p>
   </div>
   <div flex>
-    <p class="type_wrapper" ng-style="typeColors[current.type1.ID]">
-      {{current.type1.name}}
-    </p>
+    <type-wrapper type="current.type1" colors="typeColors"></type-wrapper>
   </div>
   <div flex>
-    <p ng-if="current.type2.ID" class="type_wrapper" ng-style="typeColors[current.type2.ID]">
-      {{current.type2.name}}
-    </p>
+    <type-wrapper type="current.type2" colors="typeColors"></type-wrapper>
   </div>
 </div>
 <div>
@@ -100,18 +96,14 @@
 </div>
 <md-divider layout-margin></md-divider>
 <div layout='row' layout-wrap>
-  <div ng-repeat="move in current.moves">
-    <div class="md-button type_wrapper move_chip" ng-style="typeColors[move.type.ID]">
-      <div layout layout-align='center center'>
-        <div flex></div>
-        <div>{{move.name}}</div>
-        <div flex></div>
-        <div>
-          <label class="clean-move-icon" ng-click="remove_move($index)">
-            <md-icon md-svg-src="md-close" aria-label="remove move"></md-icon>
-          </label>
-        </div>
-      </div>
+  <div flex="23" flex-xs="46" ng-repeat="move in current.moves" class="type_wrapper move_chip"
+       style="background-color: {{typeColors[move.type.ID]}}">
+    <div layout layout-align='space-between center'>
+      <div flex></div>
+      <div>{{move.name}}</div>
+      <div flex></div>
+      <md-icon class="clean-move-icon" ng-click="remove_move($index)" md-svg-src="md-close"
+               aria-label="remove move"></md-icon>
     </div>
   </div>
 </div>

@@ -44,8 +44,8 @@
     </div>
   </div>
   <div layout="row" layout-wrap>
-    <div ng-if="cards.length > 0" ng-repeat="card in cards">
-      <md-card class="md-raised md-whiteframe-z3">
+    <md-card flex-xs="100" flex-sm="45" flex-md="31" flex-gt-md="25" ng-if="cards.length > 0" ng-repeat="card in cards"
+               class="md-raised md-whiteframe-z3">
         <md-card-content>
           <div layout='column'>
             <div ng-if='apng.load' class="vertical-align-container-out">
@@ -62,14 +62,10 @@
                 <p class="md-body-2">{{card.name}}</p>
               </div>
               <div flex>
-                <p class="type_wrapper" ng-style="typeColors[card.type1.ID]">
-                  {{card.type1.name}}
-                </p>
+                <type-wrapper type="pokemon.type1" colors="typeColors"></type-wrapper>
               </div>
               <div flex>
-                <p class="type_wrapper" ng-style="typeColors[card.type2.ID]">
-                  {{card.type2.name}}
-                </p>
+                <type-wrapper type="pokemon.type2" colors="typeColors"></type-wrapper>
               </div>
             </div>
             <div layout='row'>
@@ -92,6 +88,5 @@
           </div>
         </md-card-content>
       </md-card>
-    </div>
   </div>
 </div>

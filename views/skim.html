@@ -28,19 +28,16 @@
                 <div flex>{{pokemon.ID}}</div>
                 <div flex><b>{{pokemon.name}}</b></div>
                 <div flex>
-                  <p class="type_wrapper" ng-style="typeColors[pokemon.type1.ID]">
-                    {{pokemon.type1.name}}
-                  </p>
+                  <type-wrapper type="pokemon.type1" colors="typeColors"></type-wrapper>
                 </div>
                 <div flex>
-                  <p ng-if="pokemon.type2.ID" class="type_wrapper" ng-style="typeColors[pokemon.type2.ID]">
-                    {{pokemon.type2.name}}
-                  </p>
+                  <type-wrapper type="pokemon.type2" colors="typeColors"></type-wrapper>
                 </div>
               </div>
               <div ng-repeat="pokemon in [pokemon]">
                 <img class="apng-image" ng-src="{{pokemon.apng}}">
               </div>
+              <md-divider layout-margin></md-divider>
               <div layout='column'>
                 <div ng-if="pokemon.ability1" layout='row' layout-padding>
                   <div flex='30' class="text-centered">

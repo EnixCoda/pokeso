@@ -24,22 +24,10 @@
         </div>
       </div>
     </div>
-    <div flex layout='column' layout='space-between center'>
-      <div flex layout='row'>
-        <div flex>
-          {{pokemon.moves[0].name}}
-        </div>
-        <div flex>
-          {{pokemon.moves[1].name}}
-        </div>
-      </div>
-      <div flex layout='row'>
-        <div flex>
-          {{pokemon.moves[2].name}}
-        </div>
-        <div flex>
-          {{pokemon.moves[3].name}}
-        </div>
+    <div flex layout='row' layout-wrap>
+      <div flex="45" ng-repeat="move in pokemon.moves"
+           style="color: {{typeColors[move.type.ID]}}">
+        {{move.name}}
       </div>
     </div>
   </div>

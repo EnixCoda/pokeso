@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name pokesoApp directives
- * @description
- * # pokesoApp directives
- *
- * Directives of the application.
- */
 angular.module('pokesoApp')
   .directive('pmInList', function () {
     return {
@@ -54,6 +46,16 @@ angular.module('pokesoApp')
   .directive('curEditing', function () {
     return {
       templateUrl: 'views/directives/curEditing.html',
+      restrict: 'E'
+    };
+  })
+  .directive('typeWrapper', function () {
+    return {
+      templateUrl: 'views/directives/typeWrapper.html',
+      scope: {
+        type: '=',
+        colors: '='
+      },
       restrict: 'E'
     };
   });
