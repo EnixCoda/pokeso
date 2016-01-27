@@ -14,13 +14,15 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
 
     var moveFilter = {};
     moveFilterInit(moveFilter);
-    $scope.moveFilter     = moveFilter;
+    $scope.moveFilter = moveFilter;
+
     $scope.detect_overlap = function () {
       moveFilter.power_min    = Math.min(moveFilter.power_max, moveFilter.power_min);
       moveFilter.accuracy_min = Math.min(moveFilter.accuracy_max, moveFilter.accuracy_min);
       moveFilter.pp_min       = Math.min(moveFilter.pp_max, moveFilter.pp_min);
     };
-    $scope.search_move    = function () {
+
+    $scope.search_move = function () {
       $scope.search_result_moves = [];
       var i, this_move;
       for (i in mainData.moves) {
@@ -78,7 +80,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       }
     };
 
-    $scope.edit_pokemon     = function (ID) {
+    $scope.edit_pokemon = function (ID) {
       ID = parseInt(ID);
       if ($scope.current && $scope.current.ID == ID) {
         return;
@@ -97,81 +99,75 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
         return;
       }
 
-      //copy pokemon;
       var newPokemon = {
-            ID:         $scope.pokemons[ID].ID,
-            name:       $scope.pokemons[ID].name,
-            apng:       $scope.pokemons[ID].apng,
-            ability1:   $scope.pokemons[ID].ability1,
-            ability2:   $scope.pokemons[ID].ability2,
-            abilityd:   $scope.pokemons[ID].abilityd,
-            type1:      $scope.pokemons[ID].type1,
-            type2:      $scope.pokemons[ID].type2,
-            base_stats: $scope.pokemons[ID].base_stats,
-            base_stat:  [0, 0, 0, 0, 0, 0],
-            IV:         [31, 31, 31, 31, 31, 31],
-            stats:      [0, 0, 0, 0, 0, 0],
-            level:      100,
-            natureID:   1,
-            sex:        0,
-            moves:      []
-          }
-        ;
+        ID:         $scope.pokemons[ID].ID,
+        name:       $scope.pokemons[ID].name,
+        apng:       $scope.pokemons[ID].apng,
+        ability1:   $scope.pokemons[ID].ability1,
+        ability2:   $scope.pokemons[ID].ability2,
+        abilityd:   $scope.pokemons[ID].abilityd,
+        type1:      $scope.pokemons[ID].type1,
+        type2:      $scope.pokemons[ID].type2,
+        base_stats: $scope.pokemons[ID].base_stats,
+        base_stat:  [0, 0, 0, 0, 0, 0],
+        IV:         [31, 31, 31, 31, 31, 31],
+        stats:      [0, 0, 0, 0, 0, 0],
+        level:      100,
+        natureID:   1,
+        sex:        0,
+        moves:      []
+      };
       $scope.team.push(newPokemon);
       $scope.current = newPokemon;
       $scope.calculate(newPokemon);
       animate();
     };
+
     $scope.remove_from_team = function (index) {
       $scope.team.splice(index, 1);
     };
-    $scope.remove_cur       = function () {
+
+    $scope.remove_cur = function () {
       $scope.team.splice(inArray($scope.current, $scope.team), 1);
       $scope.current             = $scope.team.length ? $scope.team[$scope.team.length - 1] : undefined;
       $scope.search_result_moves = [];
       animate();
     };
-    $scope.add_move         = function (move) {
+
+    $scope.add_move = function (move) {
       if (!$scope.current || inArray(move, $scope.current.moves) >= 0 || $scope.current.moves.length === 4) {
         return;
       }
       $scope.current.moves.push(move);
     };
-    $scope.remove_move      = function (index) {
+
+    $scope.remove_move = function (index) {
       $scope.current.moves.splice(index, 1);
     };
 
-    //save as serial
     $scope.serial = {text: ''};
-    $scope.save   = function () {
+
+    $scope.save = function () {
       if ($scope.team.length > 0) {
         $scope.serial.text = '正在压缩...';
-        $http.post($scope.serverAddr + '/save_serial.php', {team: $scope.team})
-          .then(function (response) {
-            $scope.serial.text = $hashdown.encode(response.data, {
-              codec: $hashdown.TADPOLE
-            });
-          });
+        $scope.serial.text = $hashdown.encode(JSON.stringify($scope.team), {
+          codec: $hashdown.TADPOLE
+        });
       }
     };
-    $scope.load   = function () {
-      if ($scope.serial.text !== '') {
-        var decoded;
-        if (decoded = $hashdown.decode($scope.serial.text).text) {
-          $http.post($scope.serverAddr + '/load_serial.php', {serial: decoded})
-            .then(function (response) {
-              $scope.team = response.data;
-              var i;
-              for (i in $scope.team) {
-                $scope.calculate($scope.team[i]);
-              }
-              $scope.current = $scope.team[0];
-              animate();
-            });
-        } else {
-          alert('错误的编码!');
+
+    $scope.load = function () {
+      try {
+        $scope.team = JSON.parse($hashdown.decode($scope.serial.text).text);
+        for (var i = 0; i < $scope.team.length; i++) {
+          $scope.calculate($scope.team[i]);
         }
+        $scope.current = $scope.team[0];
+      } catch (err) {
+        alert('无法解析的编码');
+        //TODO: set warn message
       }
+      animate();
     };
 
     //open stat editor
@@ -184,7 +180,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
         scope:         $scope,
         controller:    'StatEditorController',
         targetEvent:   $event,
-        preserveScope: true,
+        preserveScope: true
         //parent:        angular.element(document.getElementById('editorWindow'))
       });
     };

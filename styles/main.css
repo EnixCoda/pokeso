@@ -169,7 +169,7 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
     color: black;
 }
 
-@media (max-width: 839px) and (min-width: 720px) {
+@media (max-width: 600px) {
     .thin-button-phone {
         min-width: 40px
     }
@@ -193,7 +193,7 @@ md-virtual-repeat-container {
     width: calc(100% - 0px);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
     md-virtual-repeat-container {
         height: 240px;
     }
