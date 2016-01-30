@@ -5,7 +5,7 @@
         <pm-selector></pm-selector>
         <div layout='column'>
           <md-virtual-repeat-container>
-            <div md-virtual-repeat="pokemon in searched_pokemons" ng-show="pokemon!=0">
+            <div md-virtual-repeat="pokemon in searchedPokemons" ng-show="pokemon!=0">
               <pm-in-list ng-click="checkPM(pokemon.ID)"></pm-in-list>
             </div>
           </md-virtual-repeat-container>
@@ -79,33 +79,33 @@
                 </div>
                 <div flex layout='column'>
                   <div>捕获率</div>
-                  <div>{{pokemon.catch_rate}}%</div>
+                  <div>{{pokemon.catchRate}}%</div>
                 </div>
                 <div flex layout='column'>
                   <div>孵化步数</div>
-                  <div>{{pokemon.birth_step}}</div>
+                  <div>{{pokemon.birthStep}}</div>
                 </div>
                 <div flex layout='column'>
                   <div>♂:♀</div>
-                  <div>{{pokemon.sex_rate.male}}:{{pokemon.sex_rate.female}}</div>
+                  <div>{{pokemon.sexRate.male}}:{{pokemon.sexRate.female}}</div>
                 </div>
               </div>
               <div>
                 努力值
               </div>
               <div layout='row'>
-                <div flex ng-repeat="stat_name in stat_names track by $index">
-                  {{stat_name}}
+                <div flex ng-repeat="statName in statNames track by $index">
+                  {{statName}}
                 </div>
               </div>
               <div class="space-bottom" layout='row'>
-                <div flex ng-repeat="value in pokemon.base_stat track by $index">
+                <div flex ng-repeat="value in pokemon.baseStat track by $index">
                   {{value}}
                 </div>
               </div>
               <md-divider layout-margin></md-divider>
               <div>
-                <canvas id="stats_displayer">
+                <canvas id="statsGraph">
                 </canvas>
               </div>
             </div>

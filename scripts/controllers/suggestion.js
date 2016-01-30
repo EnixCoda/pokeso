@@ -1,21 +1,15 @@
 "use strict";
 
 angular.module('pokesoApp').controller('SuggestionController', function ($scope, $http) {
-  $scope.title = '';
-  $scope.name = '';
-  $scope.content = '';
-  $scope.state = '';
-  $scope.state_color = '#f88';
-  $scope.fontsize = 15;
-  $scope.editFontSize = function (i) {
-    if (11 < $scope.fontsize + i && $scope.fontsize + i < 27) {
-      $scope.fontsize += i;
-    }
-  };
+  $scope.title        = '';
+  $scope.name         = '';
+  $scope.content      = '';
+  $scope.state        = '';
+  $scope.stateColor   = '#f88';
 
   $scope.submit = function () {
-    $scope.state_color = '#f88';
-    $scope.state = '正在提交';
+    $scope.stateColor = '#f88';
+    $scope.state      = '正在提交';
     if ($scope.title !== '' || $scope.content !== '') {
       if ($scope.title.length < 5 && $scope.content.length < 5) {
         $scope.state = '内容过短';
@@ -26,10 +20,10 @@ angular.module('pokesoApp').controller('SuggestionController', function ($scope,
         name: $scope.name,
         content: $scope.content
       };
-      $http.post($scope.serverAddr + '/suggestion.php', data)
+      $http.post(serverAddr + '/suggestion.php', data)
         .then(function () {
-          $scope.state = '提交成功';
-          $scope.state_color = '#8c8';
+          $scope.state      = '提交成功';
+          $scope.stateColor = '#8c8';
         }, function () {
           $scope.state = '提交失败, 请重试';
         });

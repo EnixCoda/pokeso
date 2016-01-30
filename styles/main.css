@@ -22,6 +22,7 @@ md-sidenav {
 md-icon, svg, div {
     outline: none;
     border: none;
+    /*cursor: pointer;*/
 }
 
 .fixedMenuIcon {
@@ -109,7 +110,7 @@ md-icon, svg, div {
     background-color: #fff;
 }
 
-#stats_displayer {
+#statsGraph {
     width: 75%;
     min-width: 240px;
     min-height: 240px;
@@ -180,7 +181,7 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
     margin: 2px;
 }
 
-.type_wrapper {
+.type-wrapper {
     display: inline-block;
     border-radius: 999px;
     color: white;

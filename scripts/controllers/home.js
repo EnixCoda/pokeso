@@ -7,5 +7,5 @@
  * Controller of the pokesoApp
  */
 angular.module('pokesoApp').controller('HomeController', function ($scope) {
-  animate();
+  animateAPNG();
 });

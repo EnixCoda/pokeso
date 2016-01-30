@@ -19,7 +19,7 @@
   </div>
 </div>
 <div>
-  <md-radio-group ng-model="current.selected_ability_index" layout="row" layout-align="space-around">
+  <md-radio-group ng-model="current.selectedAbilityIndex" layout="row" layout-align="space-around">
     <md-radio-button ng-if="current.ability1" ng-value="current.ability1.ID">
       {{current.ability1.name}}
       <md-tooltip md-direction="bottom">
@@ -48,19 +48,19 @@
 <div>
   <div layout='row'>
     <div>能力源</div>
-    <div flex class="text-centered" ng-repeat="name in stat_names">
+    <div flex class="text-centered" ng-repeat="name in statNames">
       {{name}}
     </div>
   </div>
   <div layout='row'>
     <div>种族值</div>
-    <div flex class="text-centered" ng-repeat="bs in current.base_stats track by $index">
+    <div flex class="text-centered" ng-repeat="bs in current.baseStats track by $index">
       {{bs}}
     </div>
   </div>
   <div layout='row'>
     <div>努力值</div>
-    <div flex class="text-centered" ng-repeat="bss in current.base_stat track by $index">
+    <div flex class="text-centered" ng-repeat="bss in current.baseStat track by $index">
       {{bss}}
     </div>
   </div>
@@ -89,20 +89,20 @@
         Lv.100
       </md-radio-button>
     </md-radio-group>
-    <md-button class="md-raised md-primary" ng-click="open_editor($event)">
+    <md-button class="md-raised md-primary" ng-click="openEditor($event)">
       编辑
     </md-button>
   </div>
 </div>
 <md-divider layout-margin></md-divider>
 <div layout='row' layout-wrap>
-  <div flex="23" flex-xs="46" ng-repeat="move in current.moves" class="type_wrapper move_chip"
+  <div flex="23" flex-xs="46" ng-repeat="move in current.moves" class="type-wrapper move_chip"
        style="background-color: {{typeColors[move.type.ID]}}">
     <div layout layout-align='space-between center'>
       <div flex></div>
       <div>{{move.name}}</div>
       <div flex></div>
-      <md-icon class="clean-move-icon" ng-click="remove_move($index)" md-svg-src="md-close"
+      <md-icon class="clean-move-icon" ng-click="removeMove($index)" md-svg-src="md-close"
                aria-label="remove move"></md-icon>
     </div>
   </div>
@@ -126,7 +126,7 @@
   </div>
   <div flex></div>
   <div>
-    <md-button class='md-raised md-warn' ng-click='remove_cur()'>
+    <md-button class='md-raised md-warn' ng-click='removeCurrent()'>
       从队伍删除
     </md-button>
   </div>

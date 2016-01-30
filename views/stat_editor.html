@@ -2,24 +2,24 @@
 	<md-list flex>
 		<md-list-item layout='row'>
 			<div flex class="text-centered"></div>
-			<div flex class="text-centered" ng-repeat="name in stat_names">{{name}}</div>
+			<div flex class="text-centered" ng-repeat="name in statNames">{{name}}</div>
 		</md-list-item>
 		<md-list-item layout='row'>
 			<div flex class="text-centered">种族值</div>
-			<div flex ng-repeat="value in current.base_stats track by $index" layout>
+			<div flex ng-repeat="value in current.baseStats track by $index" layout>
 				<div class="text-centered" flex>{{value}}</div>
 			</div>
 		</md-list-item>
 		<md-list-item layout='row'>
 			<div flex class="text-centered">努力值</div>
-			<md-input-container flex class="no-padding-bottom" ng-repeat="value in current.base_stat track by $index">
-				<input class="text-centered" type="number" step="4" ng-model="current.base_stat[$index]" min="0" max="252" ng-change="stat_change(current.base_stat, $index)" aria-label='base stat' ng-focus="clear_this_input(current.base_stat, $index)" ng-blur="on_blur(current.base_stat, $index)">
+			<md-input-container flex class="no-padding-bottom" ng-repeat="value in current.baseStat track by $index">
+				<input class="text-centered" type="number" step="4" ng-model="current.baseStat[$index]" min="0" max="252" ng-change="statChange(current.baseStat, $index)" aria-label='base stat' ng-focus="clearThisInput(current.baseStat, $index)" ng-blur="onBlur(current.baseStat, $index)">
 			</md-input-container>
 		</md-list-item>
 		<md-list-item layout='row'>
 			<div flex class="text-centered">个体值</div>
 			<md-input-container flex class="no-padding-bottom" ng-repeat="value in current.IV track by $index">
-				<input class="text-centered" type="number" step="1" ng-model="current.IV[$index]" min="0" max="31" ng-change="stat_change(current.IV, $index)" aria-label='IV' ng-focus="clear_this_input(current.IV, $index)" ng-blur="on_blur(current.IV, $index)">
+				<input class="text-centered" type="number" step="1" ng-model="current.IV[$index]" min="0" max="31" ng-change="statChange(current.IV, $index)" aria-label='IV' ng-focus="clearThisInput(current.IV, $index)" ng-blur="onBlur(current.IV, $index)">
 			</md-input-container>
 		</md-list-item>
 		<md-list-item>

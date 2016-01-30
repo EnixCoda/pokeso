@@ -6,7 +6,7 @@
   <div ng-if="!($mdMedia('md') || $mdMedia('gt-md'))" class="border-right"></div>
   <div flex layout="row" layout-sm="column" layout-xs="column" layout-padding>
     <section flex layout="column">
-      <md-button ng-click="search_move()" class="md-raised md-primary">
+      <md-button ng-click="searchMove()" class="md-raised md-primary">
         搜索技能
       </md-button>
       <div layout='row' layout-align='space-between center'>
@@ -21,17 +21,17 @@
         <div></div>
       </div>
       <md-virtual-repeat-container class="border-bottom space-bottom">
-        <div md-virtual-repeat="move in search_result_moves">
-          <move-in-list ng-click="add_move(move)"></move-in-list>
+        <div md-virtual-repeat="move in searchResultMoves">
+          <move-in-list ng-click="addMove(move)"></move-in-list>
         </div>
       </md-virtual-repeat-container>
       <label>已选技能列表</label>
       <div layout layout-wrap>
-        <md-chips class="font-family fill-width" ng-model="selected_moves" md-require-match="true">
-          <md-autocomplete md-selected-item="selected_item" md-search-text="search_move_text"
-                           md-items="move in query_search(search_move_text)" md-item-text="move.name"
+        <md-chips class="font-family fill-width" ng-model="selectedMoves" md-require-match="true">
+          <md-autocomplete md-selected-item="selectedItem" md-search-text="searchMoveText"
+                           md-items="move in querySearch(searchMoveText)" md-item-text="move.name"
                            placeholder="通过技能ID/名称搜索">
-            <span md-highlight-text="search_move_text">{{("000" + move.ID).substr(-3)}} :: {{move.name}}</span>
+            <span md-highlight-text="searchMoveText">{{("000" + move.ID).substr(-3)}} :: {{move.name}}</span>
           </md-autocomplete>
           <md-chip-template>
             <span><strong>{{$chip.name}}</strong></span>
@@ -47,37 +47,37 @@
           <div layout='row' layout-align="space-between center">
             <div>
               <md-input-container layout='row' class="reduce-padding-bottom">
-                <md-checkbox ng-model="moveFilter.define_poke_type" ng-init="moveFilter.define_poke_type = false">
+                <md-checkbox ng-model="moveFilter.definePokeType" ng-init="moveFilter.definePokeType = false">
                   指定PM属性
                 </md-checkbox>
               </md-input-container>
             </div>
-            <div ng-show="moveFilter.define_poke_type" layout-align="space-between center">
+            <div ng-show="moveFilter.definePokeType" layout-align="space-between center">
               <md-input-container>
                 <label>PM属性1</label>
-                <md-select ng-model="moveFilter.selected_poke_type1.ID"
-                           ng-init="moveFilter.selected_poke_type1 = {ID: 0}"
-                           ng-disabled='!moveFilter.define_poke_type'
-                           ng-value="!moveFilter.define_poke_type?undefined:1">
+                <md-select ng-model="moveFilter.selectedPokeType1.ID"
+                           ng-init="moveFilter.selectedPokeType1 = {ID: 0}"
+                           ng-disabled='!moveFilter.definePokeType'
+                           ng-value="!moveFilter.definePokeType?undefined:1">
                   <md-option ng-repeat="type in types" value="{{type.ID}}" ng-if="$index>0">
                     {{type.name}}
                   </md-option>
                 </md-select>
               </md-input-container>
             </div>
-            <div ng-show="moveFilter.define_poke_type" layout-align="space-between center">
+            <div ng-show="moveFilter.definePokeType" layout-align="space-between center">
               <md-input-container>
                 <label>PM属性2</label>
-                <md-select ng-model="moveFilter.selected_poke_type2.ID"
-                           ng-init="moveFilter.selected_poke_type2 = {ID: -1}"
-                           ng-disabled="!moveFilter.define_poke_type || !moveFilter.selected_poke_type1.ID">
+                <md-select ng-model="moveFilter.selectedPokeType2.ID"
+                           ng-init="moveFilter.selectedPokeType2 = {ID: -1}"
+                           ng-disabled="!moveFilter.definePokeType || !moveFilter.selectedPokeType1.ID">
                   <md-option value="-1">
                     无
                   </md-option>
                   <md-option value="0">
                     任意
                   </md-option>
-                  <md-option ng-repeat="type in types" ng-if="type && type.ID != moveFilter.selected_poke_type1.ID"
+                  <md-option ng-repeat="type in types" ng-if="type && type.ID != moveFilter.selectedPokeType1.ID"
                              value="{{type.ID}}">
                     {{type.name}}
                   </md-option>
@@ -88,16 +88,16 @@
           <div layout layout-align="space-between center">
             <div>
               <md-input-container layout='row' class="reduce-padding-bottom">
-                <md-checkbox ng-model="moveFilter.define_poke_ability" ng-disabled="true">
+                <md-checkbox ng-model="moveFilter.definePokeAbility" ng-disabled="true">
                   指定PM特性
                 </md-checkbox>
               </md-input-container>
             </div>
-            <div ng-show="moveFilter.define_poke_ability" layout-align="center center">
+            <div ng-show="moveFilter.definePokeAbility" layout-align="center center">
               <md-input-container>
                 <label>PM特性</label>
-                <md-select ng-model="moveFilter.selected_poke_ability" ng-init="moveFilter.define_poke_ability = false"
-                           ng-disabled="!moveFilter.define_poke_ability">
+                <md-select ng-model="moveFilter.selectedPokeAbility" ng-init="moveFilter.definePokeAbility = false"
+                           ng-disabled="!moveFilter.definePokeAbility">
                   <md-option ng-repeat="ability in abilities" value="{{ability.ID}}">
                     {{ability.name}}
                   </md-option>
@@ -107,12 +107,12 @@
           </div>
         </div>
         <div>
-          <md-button ng-click="search_poke()" class="md-raised md-primary fill-width">
+          <md-button ng-click="searchPoke()" class="md-raised md-primary fill-width">
             搜索PM
           </md-button>
           <md-virtual-repeat-container>
-            <div md-virtual-repeat="pokemon in pokemons_can_learn" ng-init="pokemons_can_learn = []">
-              <poke-can-learn ng-click="show_poke($event, $index)"></poke-can-learn>
+            <div md-virtual-repeat="pokemon in pokemonsCanLearn" ng-init="pokemonsCanLearn = []">
+              <poke-can-learn ng-click="showPoke($event, $index)"></poke-can-learn>
             </div>
           </md-virtual-repeat-container>
         </div>

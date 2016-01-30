@@ -6,8 +6,8 @@
           <pm-selector></pm-selector>
           <div layout='column'>
             <md-virtual-repeat-container>
-              <div md-virtual-repeat="pokemon in searched_pokemons">
-                <pm-in-list ng-click="add_card(pokemon.ID)"></pm-in-list>
+              <div md-virtual-repeat="pokemon in searchedPokemons">
+                <pm-in-list ng-click="addCard(pokemon.ID)"></pm-in-list>
               </div>
             </md-virtual-repeat-container>
             *不显示PM时请拖动滚动条
@@ -22,13 +22,13 @@
             <div ng-repeat="card in cards track by $index">
               <div class="margin-right"
                    style="background-color:{{backgroundColors[$index]}};border-radius:20px;margin: 10px;">
-                <md-checkbox class="faint_checkbox" style="margin: 0 10px" ng-click="toggle_show_card($index)"
+                <md-checkbox class="faint_checkbox" style="margin: 0 10px" ng-click="toggleShowCard($index)"
                              ng-checked="showCards[$index]" aria-label='small card'>
                   <div layout='row' layout-align='center center'>
                     <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.ID}}"></div>
                     <div style="color:#fff">{{card.name}}</div>
                     <div class="border-right"></div>
-                    <md-icon md-svg-src="md-close" class="card_chip_close_icon" ng-click="del_card($index)"
+                    <md-icon md-svg-src="md-close" class="card_chip_close_icon" ng-click="delCard($index)"
                              aria-label="Close Icon"></md-icon>
                   </div>
                 </md-checkbox>
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div layout='row' layout-align='center center'>
-            <canvas id="stats_displayer"></canvas>
+            <canvas id="statsGraph"></canvas>
           </div>
           <md-icon md-svg-src="md-close" aria-label="Close Icon"></md-icon>
         </md-card-content>
@@ -69,21 +69,21 @@
               </div>
             </div>
             <div layout='row'>
-              <div flex ng-repeat="value in card.base_stats track by $index" layout='column'
+              <div flex ng-repeat="value in card.baseStats track by $index" layout='column'
                    layout-align='center center'>
-                <div>{{stat_names[$index]}}</div>
+                <div>{{statNames[$index]}}</div>
                 <div>{{value}}</div>
               </div>
               <div flex layout='column' layout-align='center center'>
                 <div>总和</div>
-                <div>{{card.base_stats[0] + card.base_stats[1] + card.base_stats[2] +
-                  card.base_stats[3] + card.base_stats[4] + card.base_stats[5]}}
+                <div>{{card.baseStats[0] + card.baseStats[1] + card.baseStats[2] +
+                  card.baseStats[3] + card.baseStats[4] + card.baseStats[5]}}
                 </div>
               </div>
             </div>
             <md-divider layout-margin></md-divider>
             <div layout layout-align='center center'>
-              <md-button ng-click="del_card($index)">关闭</md-button>
+              <md-button ng-click="delCard($index)">关闭</md-button>
             </div>
           </div>
         </md-card-content>

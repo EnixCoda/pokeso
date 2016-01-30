@@ -4,47 +4,33 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
   window.onload = function () {
     loadController.init($scope);
     if (localStorageService.isSupported) {
-      var tmpMainData  = localStorageService.get('mainDataJSON');
-      var tmpOtherData = localStorageService.get('otherDataJSON');
-      var tmpLearnSet  = localStorageService.get('learnSetJSON');
+      var tmpMainData = localStorageService.get('mainDataJSON');
+      var tmpLearnSet = localStorageService.get('learnSetJSON');
     }
-    if (!localStorageService.isSupported || !tmpMainData || !tmpOtherData || !tmpLearnSet) {
+    if (!localStorageService.isSupported || !tmpMainData || !tmpLearnSet) {
       $http({method: 'GET', url: serverAddr + 'data/mainData.json'})
         .then(
-          function successCallback(response) {
+          function successCallback (response) {
             mainData = response.data;
             loadController.questSucceeded('A');
             if (localStorageService.isSupported) {
               localStorageService.set('mainDataJSON', mainData);
             }
           },
-          function errorCallback(response) {
+          function errorCallback (response) {
             loadController.fail();
           }
         );
       $http({method: 'GET', url: serverAddr + 'data/learnSet.json'})
         .then(
-          function successCallback(response) {
+          function successCallback (response) {
             learnSet = response.data;
             loadController.questSucceeded('B');
             if (localStorageService.isSupported) {
               localStorageService.set('learnSetJSON', learnSet);
             }
           },
-          function errorCallback(response) {
-            loadController.fail();
-          }
-        );
-      $http({method: 'GET', url: serverAddr + 'data/otherData.json'})
-        .then(
-          function successCallback(response) {
-            otherData = response.data;
-            loadController.questSucceeded('C');
-            if (localStorageService.isSupported) {
-              localStorageService.set('otherDataJSON', otherData);
-            }
-          },
-          function errorCallback(response) {
+          function errorCallback (response) {
             loadController.fail();
           }
         );
@@ -53,10 +39,10 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       loadController.questSucceeded('A');
       learnSet = tmpLearnSet;
       loadController.questSucceeded('B');
-      otherData = tmpOtherData;
-      loadController.questSucceeded('C');
     }
   };
+
+  $scope.apng = {load: !isMobile()};
 
   $scope.MainFunctions = [
     {
@@ -123,12 +109,13 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
       enterable:    true
     }
   ];
-  $scope.typeColors    = typeColors;
 
-  (function set_balls() {
-    function ball_duplicate(ball, index) {
+  $scope.typeColors = typeColors;
+
+  (function setBalls () {
+    function ballDuplicate (ball, index) {
       for (var i = 0; i < $scope.MainFunctions.length; i++) {
-        if ($scope.MainFunctions[i].ball != null && $scope.MainFunctions[i].ball == ball && i != index) {
+        if ($scope.MainFunctions[i].ball && $scope.MainFunctions[i].ball == ball && i != index) {
           return true;
         }
       }
@@ -138,25 +125,22 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
     var ball;
     for (var i = 0; i < $scope.MainFunctions.length; i++) {
       ball = Math.ceil(Math.random() * 26);//1~26
-      while (ball_duplicate(ball, i)) {
+      while (ballDuplicate(ball, i)) {
         ball = Math.ceil(Math.random() * 26);//1~26
       }
       $scope.MainFunctions[i].ball = ball;
     }
   })();
 
-  $scope.apng      = {load: true};
-  $scope.apng.load = !isMobile();
-
-  (function get_home_apng_urls() {
+  (function getHomeApngUrls () {
     var amount = $scope.MainFunctions.length;
     for (var i = 0; i < amount; i++) {
       $scope.MainFunctions[i].apng = storageAddr + ("000" + Math.ceil(Math.random() * 721)).substr(-3) + ".png";
     }
-    animate();
+    animateAPNG();
   })();
 
-  $scope.toggle_animation = function () {
+  $scope.toggleAnimation = function () {
     APNG.ifNeeded().then(function () {
       var images = document.querySelectorAll(".apng-image");
       for (var i = 0; i < images.length; i++) {
@@ -169,12 +153,12 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
     });
   };
 
-  $scope.closeSideNav    = function () {
+  $scope.closeSideNav = function () {
     $mdSidenav('leftSideNav').close();
   };
-  $scope.openSideNav    = function () {
+
+  $scope.openSideNav = function () {
     $mdSidenav('leftSideNav').open();
     $scope.userHideSideNav = false;
   };
-
 });

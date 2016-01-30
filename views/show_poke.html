@@ -1,6 +1,6 @@
 <md-dialog layout layout-padding layout-wrap aria-label="show pokemon">
   <div layout="column" layout-padding>
-    <div class="vertical-align-container-out" ng-if="load_apng" >
+    <div class="vertical-align-container-out" ng-if="loadAPNG" >
       <div class="vertical-align-container-in-bottom">
         <img class="apng-image" ng-src='{{pokemon.apng}}'>
       </div>
@@ -50,12 +50,12 @@
     <md-divider md-margin></md-divider>
     <div layout="column" class="border-bottom space-bottom">
       <div class="text-centered" layout="row">
-        <div flex ng-repeat="name in stat_names">
+        <div flex ng-repeat="name in statNames">
           {{name}}
         </div>
       </div>
       <div class="text-centered" layout="row">
-        <div flex ng-repeat="value in pokemon.base_stats track by $index">
+        <div flex ng-repeat="value in pokemon.baseStats track by $index">
           {{value}}
         </div>
       </div>

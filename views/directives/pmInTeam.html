@@ -8,7 +8,7 @@
         </div>
         <div>
           {{pokemon.name}}
-          {{sexs[pokemon.sex]}}
+          {{sexes[pokemon.sex]}}
         </div>
       </div>
       <div layout='row' layout-align='space-around center' layout-wrap>
@@ -16,7 +16,7 @@
           Lv.{{pokemon.level}}
         </div>
         <div flex>
-          {{abilities[pokemon.selected_ability_index].name}}
+          {{abilities[pokemon.selectedAbilityIndex].name}}
         </div>
         <div flex layout>
           <div class="icon-item icon-item-{{pokemon.item.ID}}"></div>
