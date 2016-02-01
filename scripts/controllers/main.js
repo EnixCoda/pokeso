@@ -4,20 +4,25 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
   window.onload = function () {
     loadController.init($scope);
     if (localStorageService.isSupported) {
-      var tmpMainData = localStorageService.get('mainDataJSON');
-      var tmpLearnSet = localStorageService.get('learnSetJSON');
+      var localMainData = localStorageService.get('mainDataJSON');
+      var localLearnSet = localStorageService.get('learnSetJSON');
+    } else {
+      alert('您的浏览器不支持本地存储数据，可能导致页面加载缓慢！\n' +
+        '建议使用Chrome, FireFox, Safari。')
     }
-    if (!localStorageService.isSupported || !tmpMainData || !tmpLearnSet) {
+    if (!localStorageService.isSupported
+      || !localMainData || !localLearnSet
+      || localMainData.updateDate != '20160201') {
       $http({method: 'GET', url: serverAddr + 'data/mainData.json'})
         .then(
           function successCallback (response) {
             mainData = response.data;
-            loadController.questSucceeded('A');
             if (localStorageService.isSupported) {
               localStorageService.set('mainDataJSON', mainData);
             }
+            loadController.questSucceeded('A');
           },
-          function errorCallback (response) {
+          function errorCallback () {
             loadController.fail();
           }
         );
@@ -25,19 +30,19 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
         .then(
           function successCallback (response) {
             learnSet = response.data;
-            loadController.questSucceeded('B');
             if (localStorageService.isSupported) {
               localStorageService.set('learnSetJSON', learnSet);
             }
+            loadController.questSucceeded('B');
           },
-          function errorCallback (response) {
+          function errorCallback () {
             loadController.fail();
           }
         );
     } else {
-      mainData = tmpMainData;
+      mainData = localMainData;
       loadController.questSucceeded('A');
-      learnSet = tmpLearnSet;
+      learnSet = localLearnSet;
       loadController.questSucceeded('B');
     }
   };

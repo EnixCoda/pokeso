@@ -95,7 +95,6 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
         }
         learnablePokemons = allLearnablePokemons;
       }
-
       learnablePokemons = learnablePokemons.sort(
         function (p1, p2) {
           if (parseInt(p1.ID) > parseInt(p2.ID)) return 1;
@@ -105,18 +104,18 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       if (moveFilter.definePokeAbility) {
         var learnablePokemonsWithAbility = [];
         for (i = 0; i < learnablePokemons.length; i++) {
-          if (learnablePokemons[i].ability1 == $scope.selectedPokeAbility || learnablePokemons[i].ability2 == $scope.selectedPokeAbility || learnablePokemons[i].ability3 == $scope.selectedPokeAbility) learnablePokemonsWithAbility.push(learnablePokemons[i]);
+          if (learnablePokemons[i].ability1 == moveFilter.selectedPokeAbility
+            || learnablePokemons[i].ability2 == moveFilter.selectedPokeAbility
+            || learnablePokemons[i].ability3 == $scope.selectedPokeAbility) {
+            learnablePokemonsWithAbility.push(learnablePokemons[i]);
+          }
         }
         learnablePokemons = learnablePokemonsWithAbility;
       }
-      $scope.pokemonsCanLearn = learnablePokemons;
-
-      if ($scope.pokemonsCanLearn.length === 0) {
-        $scope.pokemonsCanLearn = [{
-          ID:   '0',
-          name: '没有符合要求的PM'
-        }];
-      }
+      $scope.pokemonsCanLearn = learnablePokemons.length ? learnablePokemons : [{
+        ID:   '0',
+        name: '没有符合要求的PM'
+      }];
     };
 
     $scope.showPoke = function (event, ID) {

@@ -26,7 +26,7 @@ function isMobile () {
 
 var LoadController = {
   new: function () {
-    var Quest = {
+    var Quest             = {
       new: function () {
         var quest    = {};
         quest.status = "STAND BY";
@@ -41,7 +41,7 @@ var LoadController = {
     quests["B"]           = Quest.new();
     loadController.status = "NORMAL";
 
-    loadController.init   = function ($scope) {
+    loadController.init = function ($scope) {
       scope         = $scope;
       scope.loading = true;
       return true;
@@ -68,7 +68,7 @@ var LoadController = {
         loadController.status = "SUCCESS";
         extractData();
         var initing;
-        while (initing = inits.pop()){
+        while (initing = inits.pop()) {
           setTimeout(initing, 0);
         }
       }
@@ -90,13 +90,13 @@ var loadController = LoadController.new();
 
 function loadData (scope) {
   if (loadController.status == "SUCCESS") {
-    scope.pokemons  = mainData.pokemons;
-    scope.statNames = mainData.statNames;
-    scope.natures   = mainData.natures;
-    scope.abilities = mainData.abilities;
-    scope.types     = mainData.types;
-    scope.kinds     = mainData.kinds;
-    scope.typeColors   = typeColors;
+    scope.pokemons   = mainData.pokemons;
+    scope.statNames  = mainData.statNames;
+    scope.natures    = mainData.natures;
+    scope.abilities  = mainData.abilities;
+    scope.types      = mainData.types;
+    scope.kinds      = mainData.kinds;
+    scope.typeColors = typeColors;
     return true;
   } else {
     return false;
@@ -105,7 +105,7 @@ function loadData (scope) {
 
 function extractData () {
   function extractMainData () {
-    pokemons   = [0];
+    pokemons = [0];
     for (var i = 1; i < mainData.pokemons.length; i++) {
       var pokemon       = mainData.pokemons[i];
       pokemon.ability1  = mainData.abilities[pokemon.ability1];
@@ -130,6 +130,7 @@ function extractData () {
     }
     statNames = mainData.statNames;
   }
+
   function extractLearnSet () {
     for (var i = 0; i < learnSet.length; i++) {
       var pokemonID                = learnSet[i][0], moveID = learnSet[i][1];
@@ -139,6 +140,7 @@ function extractData () {
       learnSetDictPokeMove[pokemonID].push(moveID);
     }
   }
+
   extractMainData();
   extractLearnSet();
 }
@@ -147,12 +149,12 @@ var canvasColors = ("#4caf50 #ffc10d #f44336 #9c27b0 #2196f3 #888888").split(" "
 
 function drawCanvas (elementId, pokemons, max) {
   var i, j, x, y, v;
-  var t                        = 2 * Math.PI / 360;
-  var newCanvas                = document.getElementById(elementId);
-  newCanvas.width              = 512;
-  newCanvas.height             = 512;
-  var newCanvasContext         = newCanvas.getContext("2d");
-  var lengthLimit = newCanvas.width * 88 / 100;
+  var t                = 2 * Math.PI / 360;
+  var newCanvas        = document.getElementById(elementId);
+  newCanvas.width      = 512;
+  newCanvas.height     = 512;
+  var newCanvasContext = newCanvas.getContext("2d");
+  var lengthLimit      = newCanvas.width * 88 / 100;
 
   // cross lines and border
   newCanvasContext.globalAlpha = 0.5;
@@ -177,7 +179,7 @@ function drawCanvas (elementId, pokemons, max) {
     baseStats                  = pokemons[i].baseStats;
     positions                  = [];
     for (j = 0; j < baseStats.length; j++) {
-      v = parseInt(baseStats[i]);
+      v = parseInt(baseStats[j]);
       x = v / max * Math.cos((-90 + j * 60) * t) * lengthLimit / 2 + newCanvas.width / 2;
       y = v / max * Math.sin((-90 + j * 60) * t) * lengthLimit / 2 + newCanvas.width / 2;
       positions.push({x: x, y: y});
@@ -264,12 +266,11 @@ var loadGenerationSearcher = function ($scope) {
         return searchedPokemons;
       };
 
-      var searcher = {
-        generation:      generation,
-        generations:     generations,
-        generationIndex: generationIndex,
-        search:          search
-      };
+      var searcher             = {};
+      searcher.generation      = generation;
+      searcher.generations     = generations;
+      searcher.generationIndex = generationIndex;
+      searcher.search          = search;
       return searcher;
     }
   };
@@ -291,7 +292,7 @@ function isNumber (sth) {
 
 var MoveFilter = {
   new: function () {
-    var moveFilter = {
+    var moveFilter           = {
       powerIndeterminable:    false,
       powerMin:               0,
       powerMax:               250,
@@ -303,11 +304,12 @@ var MoveFilter = {
       selectedTypeID:         undefined,
       selectedKindID:         undefined,
       definePokeType:         undefined,
-      definePokeAbility:      undefined,
       selectedPokeType1:      undefined,
-      selectedPokeType2:      undefined
+      selectedPokeType2:      undefined,
+      definePokeAbility:      undefined,
+      selectedPokeAbility:    undefined
     };
-    moveFilter.searchMove = function () {
+    moveFilter.searchMove    = function () {
       var searchResultMoves = [], thisMove;
       for (var i = 0; i < mainData.moves.length; i++) {
         thisMove = mainData.moves[i];
@@ -331,7 +333,6 @@ var MoveFilter = {
     return moveFilter;
   }
 };
-
 
 function inArray (value, array) {
   if (array instanceof Array) {
