@@ -1,34 +1,33 @@
 "use strict";
 
-angular.module('pokesoApp').controller('SuggestionController', function ($scope, $http) {
-  $scope.title        = '';
-  $scope.name         = '';
-  $scope.content      = '';
-  $scope.state        = '';
-  $scope.stateColor   = '#f88';
+angular.module('pokesoApp').controller('SuggestionController', function ($scope, $http, $mdToast) {
+  var suggestion    = {
+    title:   '',
+    name:    '',
+    content: ''
+  };
+  $scope.suggestion = suggestion;
 
   $scope.submit = function () {
-    $scope.stateColor = '#f88';
-    $scope.state      = '正在提交';
-    if ($scope.title !== '' || $scope.content !== '') {
-      if ($scope.title.length < 5 && $scope.content.length < 5) {
-        $scope.state = '内容过短';
-        return;
-      }
-      var data = {
-        title: $scope.title,
-        name: $scope.name,
-        content: $scope.content
-      };
-      $http.post(serverAddr + '/suggestion.php', data)
-        .then(function () {
-          $scope.state      = '提交成功';
-          $scope.stateColor = '#8c8';
-        }, function () {
-          $scope.state = '提交失败, 请重试';
-        });
+    function showToast (toastText, status) {
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent(toastText)
+          .position('bottom right')
+          .hideDelay(1000)
+          .theme(status + "-toast")
+      );
+    }
+
+    if (suggestion.title.length < 5 && suggestion.content.length < 5) {
+      showToast('内容过短', 'warning');
     } else {
-      $scope.state = '内容为空';
+      $http.post(serverAddr + '/suggest.php', suggestion)
+        .then(function () {
+          showToast('提交成功', 'success');
+        }, function () {
+          showToast('提交失败', 'error');
+        });
     }
   };
 });

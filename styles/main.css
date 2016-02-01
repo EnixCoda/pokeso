@@ -203,3 +203,14 @@ md-virtual-repeat-container {
 .gray-svg-icon svg{
     fill: #666;
 }
+
+
+md-toast.md-success-toast-theme .md-toast-content{
+    background-color: #4caf50;
+}
+md-toast.md-error-toast-theme .md-toast-content{
+    background-color: #f44336;
+}
+md-toast.md-warning-toast-theme .md-toast-content{
+    background-color: #40c4ff;
+}

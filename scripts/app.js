@@ -1,7 +1,6 @@
 'use strict';
 
-angular
-  .module('pokesoApp', [
+angular.module('pokesoApp', [
     'ngMaterial',
     'ngRoute',
     'LocalStorageModule'
@@ -60,7 +59,7 @@ angular
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
       .accentPalette('orange')
-      .warnPalette('pink');
+      .warnPalette('red');
   })
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider
@@ -72,4 +71,13 @@ angular
     $mdIconProvider
       .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
       .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-  }]);
+  }])
+  .config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('error-toast');
+  })
+  .config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('success-toast');
+  })
+  .config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('warning-toast');
+  });
