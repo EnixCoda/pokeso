@@ -5,13 +5,13 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
     loadData($scope);
     $scope.loaded = true;
 
-    var moveFilter = MoveFilter.new();
+    var moveFilter       = MoveFilter.new();
     $scope.moveFilter    = moveFilter;
     $scope.selectedMoves = [];
 
     $scope.detectOverlap = moveFilter.detectOverlap;
 
-    $scope.searchMove    = function () {
+    $scope.searchMove = function () {
       $scope.searchResultMoves = moveFilter.searchMove();
     };
 
@@ -30,7 +30,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       }
     };
 
-    $scope.addMove     = function (move) {
+    $scope.addMove = function (move) {
       if ($scope.selectedMoves.length === 4) {
         return;
       }
@@ -42,7 +42,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       $scope.selectedMoves.push(move);
     };
 
-    $scope.removeMove  = function (index) {
+    $scope.removeMove = function (index) {
       $scope.selectedMoves.splice(index, 1);
     };
 
@@ -60,7 +60,7 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
       for (i = 0; i < $scope.selectedMoves.length; i++) {
         pokemonIDs = pokemonIDs.concat(learnSetDictMovePoke[$scope.selectedMoves[i].ID]);
       }
-      var counter            = {};
+      var counter           = {};
       var learnablePokemons = [];
       for (i = 0; i < pokemonIDs.length; i++) {
         counter[pokemonIDs[i]] = counter[pokemonIDs[i]] == undefined ? 1 : counter[pokemonIDs[i]] + 1;
@@ -95,6 +95,13 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
         }
         learnablePokemons = allLearnablePokemons;
       }
+
+      learnablePokemons = learnablePokemons.sort(
+        function (p1, p2) {
+          if (parseInt(p1.ID) > parseInt(p2.ID)) return 1;
+          if (parseInt(p1.ID) < parseInt(p2.ID)) return -1;
+          if (parseInt(p1.ID) == parseInt(p2.ID)) return 0;
+        });
       if (moveFilter.definePokeAbility) {
         var learnablePokemonsWithAbility = [];
         for (i = 0; i < learnablePokemons.length; i++) {
@@ -115,8 +122,8 @@ angular.module('pokesoApp').controller('MovesController', function ($scope, $htt
     $scope.showPoke = function (event, ID) {
       function ShowPokeController ($scope, $mdDialog, pokemon, loadAPNG) {
         loadData($scope);
-        $scope.pokemon      = pokemon;
-        $scope.loadAPNG     = loadAPNG;
+        $scope.pokemon  = pokemon;
+        $scope.loadAPNG = loadAPNG;
         animateAPNG();
 
         //TODO
