@@ -22,8 +22,7 @@
       <md-card-content>
         <md-tabs md-dynamic-height md-border-bottom>
           <md-tab label="基本信息">
-            <div class="space-bottom"></div>
-            <div class="text-centered" flex layout='column'>
+            <md-content class="text-centered" flex layout='column' layout-padding>
               <div class="space-bottom" layout='row'>
                 <div flex>{{pokemon.ID}}</div>
                 <div flex><b>{{pokemon.name}}</b></div>
@@ -37,8 +36,19 @@
               <div ng-repeat="pokemon in [pokemon]">
                 <img class="apng-image" ng-src="{{pokemon.apng}}">
               </div>
-              <md-divider layout-margin></md-divider>
+              <md-divider></md-divider>
+              <div ng-if="pokemon.appearance || pokemon.dexInfo.length" style="text-align: left">
+                <div ng-if="pokemon.appearance">外貌特征：</div>
+                <div>{{pokemon.appearance}}</div>
+                <div ng-if="pokemon.dexInfo.length">图鉴信息：</div>
+                <div ng-repeat="info in pokemon.dexInfo">{{info}}</div>
+              </div>
+              <div ng-if="!pokemon.appearance && !pokemon.dexInfo.length">
+                缺少该PM的信息
+              </div>
+              <md-divider></md-divider>
               <div layout='column'>
+                特性
                 <div ng-if="pokemon.ability1" layout='row' layout-padding>
                   <div flex='30' class="text-centered">
                     <p class="md-body-1">{{pokemon.ability1.name}}</p>
@@ -67,7 +77,7 @@
                   </div>
                 </div>
               </div>
-              <md-divider layout-margin></md-divider>
+              <md-divider></md-divider>
               <div class="space-bottom" layout='row' layout-wrap>
                 <div flex layout='column'>
                   <div>身高</div>
@@ -90,6 +100,13 @@
                   <div>{{pokemon.sexRate.male}}:{{pokemon.sexRate.female}}</div>
                 </div>
               </div>
+            </md-content>
+          </md-tab>
+          <md-tab label="技能学习">
+            2
+          </md-tab>
+          <md-tab label="战力数据">
+            <md-content class="text-centered" layout="column" layout-padding>
               <div>
                 努力值
               </div>
@@ -108,13 +125,7 @@
                 <canvas id="statsGraph">
                 </canvas>
               </div>
-            </div>
-          </md-tab>
-          <md-tab label="技能学习">
-            2
-          </md-tab>
-          <md-tab label="其他">
-            3
+            </md-content>
           </md-tab>
         </md-tabs>
       </md-card-content>
