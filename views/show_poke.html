@@ -5,7 +5,7 @@
         <img class="apng-image" ng-src='{{pokemon.apng}}'>
       </div>
     </div>
-    <md-divider md-margin></md-divider>
+    <md-divider></md-divider>
     <div class="text-centered" layout='row'>
       <div flex>
         <p>{{pokemon.ID}}</p>
@@ -47,8 +47,8 @@
         <p class="md-body-1">{{pokemon.abilityd.description}}</p>
       </div>
     </div>
-    <md-divider md-margin></md-divider>
-    <div layout="column" class="border-bottom space-bottom">
+    <md-divider></md-divider>
+    <div layout="column">
       <div class="text-centered" layout="row">
         <div flex ng-repeat="name in statNames">
           {{name}}
@@ -63,7 +63,7 @@
     <div layout='row' layout-align='space-around center'>
       <!--TODO: Evolve Chain-->
     </div>
-    <md-divider md-margin></md-divider>
+    <md-divider></md-divider>
     <md-button ng-click="hide()" class="md-raised">
       关闭
     </md-button>
