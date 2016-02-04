@@ -118,7 +118,7 @@ function extractData () {
       pokemon.dexInfo   = pokemon["dexInfo"];
       pokemon.weight    = pokemon["weight"];
       pokemon.height    = pokemon["height"];
-      pokemon.apng      = storageAddr + pokemon["ID"] + ".png";
+      if (pokemon.ID < 721) pokemon.apng      = storageAddr + pokemon["ID"] + ".png";
     }
     for (i = 0; i < mainData.moves.length; i++) {
       var move = mainData.moves[i];
