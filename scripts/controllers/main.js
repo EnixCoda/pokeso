@@ -12,7 +12,7 @@ angular.module('pokesoApp').controller('MainController', function ($scope, $http
     }
     if (!localStorageService.isSupported
       || !localMainData || !localLearnSet
-      || localMainData.updateDate != '20160201') {
+      || localMainData.updateDate != '20160202') {
       $http({method: 'GET', url: serverAddr + 'data/mainData.json'})
         .then(
           function successCallback (response) {

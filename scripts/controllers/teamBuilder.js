@@ -13,8 +13,9 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
     $scope.searchMove = function () {
       var searchResultMoves    = moveFilter.searchMove();
       $scope.searchResultMoves = [];
+      var movesThisPokemonCanLearn = learnSetDictPokeMove[parseInt($scope.current.ID)];
       for (var i = 0; i < searchResultMoves.length; i++) {
-        if (inArray(searchResultMoves[i].ID, learnSetDictPokeMove[($scope.current.ID)]) != -1) {
+        if (inArray(searchResultMoves[i].ID, movesThisPokemonCanLearn) != -1) {
           $scope.searchResultMoves.push(searchResultMoves[i]);
         }
       }
@@ -38,6 +39,14 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       }
       for (var i = 1; i < 6; i++) {
         pokemon.stats[i] = Math.floor(((pokemon.IV[i] + pokemon.baseStats[i] * 2 + pokemon.baseStat[i] / 4) * pokemon.level / 100 + 5) * $scope.natures[pokemon.natureID].value[i]);  //ATK//DEF//SPATK//SPDEF//SPD
+      }
+    };
+
+    $scope.levelChanged = function () {
+      if (isNumber($scope.current.level)) {
+        if ($scope.current.level < 5) $scope.current.level = 5;
+        if ($scope.current.level > 100) $scope.current.level = 100;
+        $scope.calculate($scope.current);
       }
     };
 
@@ -75,7 +84,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
         IV:                   [31, 31, 31, 31, 31, 31],
         stats:                [0, 0, 0, 0, 0, 0],
         level:                100,
-        natureID:             1,
+        natureID:             0,
         sex:                  0,
         moves:                []
       };
@@ -143,6 +152,8 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
         //parent:        angular.element(document.getElementById('editorWindow'))
       });
     };
+
+    $scope.$apply();
   };
   loadController.toInit(init);
 });
@@ -163,18 +174,18 @@ angular.module('pokesoApp').controller('StatEditorController', function ($scope)
     }
     if (area[index] > 252) {
       area[index] = 252;
-      alert('单项努力值不能超过252!');
+      showToast($mdToast, '单项努力值不能超过252!', 'error');
     }
     if (area[index] < 0) {
       area[index] = 0;
-      alert('不能为负数!');
+      showToast($mdToast, '不能为负数!', 'error');
     }
     var sum = area.reduce(function (prev, current) {
       return prev + current;
     });
     if (sum > 510) {
       area[index] = 0;
-      alert('努力值总和不能超过510!');
+      showToast($mdToast, '努力值总和不能超过510!', 'error');
     }
     $scope.calculate($scope.current);
   };

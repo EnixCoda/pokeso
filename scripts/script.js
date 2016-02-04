@@ -64,13 +64,13 @@ var LoadController = {
         }
       }
       if (allSuccess) {
-        scope.loading         = false;
         loadController.status = "SUCCESS";
         extractData();
         var initing;
         while (initing = inits.pop()) {
           setTimeout(initing, 0);
         }
+        scope.loading         = false;
       }
     };
 
@@ -343,4 +343,14 @@ function inArray (value, array) {
     }
   }
   return -1;
+}
+
+function showToast ($mdToast, toastText, status) {
+  $mdToast.show(
+    $mdToast.simple()
+      .textContent(toastText)
+      .position('top left')
+      .hideDelay(1000)
+      .theme(status + "-toast")
+  );
 }

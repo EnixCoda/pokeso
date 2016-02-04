@@ -2,8 +2,7 @@ html, body, h5, h4, h3, h2, h1, textarea, input {
     font-family: 'Roboto', '黑体', 'Helvetica', 'Arial', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    line-height: 20px;
-    -webkit-font-smoothing: antialiased;
+    line-height: 18px;
 }
 
 a {
@@ -183,10 +182,18 @@ md-checkbox.md-checked.faint_checkbox .md-icon {
 
 .type-wrapper {
     display: inline-block;
-    border-radius: 999px;
+    border-radius: 100px;
     color: white;
-    min-width: 54px;
+    min-width: 48px;
     max-height: 36px;
+}
+
+type-wrapper {
+    display: inline-block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }
 
 md-virtual-repeat-container {
@@ -213,4 +220,8 @@ md-toast.md-error-toast-theme .md-toast-content{
 }
 md-toast.md-warning-toast-theme .md-toast-content{
     background-color: #40c4ff;
+}
+
+md-input-container .md-errors-spacer {
+    min-height: 0;
 }
