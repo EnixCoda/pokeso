@@ -1,4 +1,4 @@
-<div layout="row" layout-padding layout-wrap>
+<div layout="row" layout-align="center center" layout-padding layout-wrap>
   <md-card ng-repeat="function in MainFunctions" flex-xs="100" flex-sm="45" flex-md="35" flex-lg="25">
     <div style="position: inherit;">
       <md-card-title style="position: relative;">
@@ -8,7 +8,7 @@
           <p ng-repeat="des in function.description">{{des}}</p>
         </span>
         </md-card-title-text>
-        <md-card-title-media style="position: absolute;top: 25%;left: 25%;opacity: 0.5;text-align: right">
+        <md-card-title-media style="position: absolute;top: 25%;right: 5%;opacity: 0.5;text-align: right">
           <div class="md-media-lg card-media">
             <img ng-if='apng.load' class="apng-image" ng-src="{{ function.apng }}">
           </div>
