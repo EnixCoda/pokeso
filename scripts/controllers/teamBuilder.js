@@ -91,6 +91,7 @@ angular.module('pokesoApp').controller('TeamBuilderController', function ($scope
       $scope.team.push(newPokemon);
       $scope.current = newPokemon;
       $scope.calculate(newPokemon);
+      $scope.searchMove();
       animateAPNG();
     };
 

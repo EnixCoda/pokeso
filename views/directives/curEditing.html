@@ -46,7 +46,7 @@
   </section>
   <md-divider></md-divider>
   <section style="text-align: right;" layout-padding>
-    <div layout='row' layout-wrap layout-align="start center">
+    <div layout='row' layout-wrap>
       <md-input-container class="no-margin">
         <label>等级</label>
         <input ng-model="current.level" ng-change="levelChanged()" ng-pattern="/^([5-9]|[1-9]\d|100)$/"
@@ -60,16 +60,20 @@
           Lv.100
         </md-radio-button>
       </md-radio-group>
+      <div flex></div>
       <md-input-container class="no-margin">
+        <label>性格</label>
         <md-select ng-model="current.natureID" aria-label="current nature" ng-change="calculate(current)">
           <md-option ng-repeat="nature in natures" ng-value="$index">{{nature.name}}</md-option>
         </md-select>
       </md-input-container>
     </div>
     <div layout='row'>
-      <div>能力源</div>
-      <div flex ng-repeat="name in statNames">
-        {{name}}
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div flex layout layout-align="end center" ng-repeat="name in statNames track by $index">
+        <div ng-show="natures[current.natureID].value[$index]==1">{{name}}</div>
+        <div ng-show="natures[current.natureID].value[$index]>1">↑<b>{{name}}</b></div>
+        <div ng-show="natures[current.natureID].value[$index]<1">↓<b>{{name}}</b></div>
       </div>
     </div>
     <div layout='row'>
