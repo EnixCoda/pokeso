@@ -2,6 +2,7 @@ major
 homepage layout on xs screens
 showPoke.html、skim.html中的进化展示
 属性相性
+使用bower, grunt/gulp
 
 other
 SVG的statsGraph
