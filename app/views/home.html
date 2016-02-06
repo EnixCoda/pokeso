@@ -1,0 +1,23 @@
+<div layout="row" layout-align="center center" layout-padding layout-wrap>
+  <md-card ng-repeat="function in MainFunctions" flex-xs="100" flex-sm="45" flex-md="35" flex-lg="25">
+    <div style="position: inherit;">
+      <md-card-title style="position: relative;">
+        <md-card-title-text>
+          <span class="md-headline">{{function.name}}</span>
+        <span class="md-subhead">
+          <p ng-repeat="des in function.description">{{des}}</p>
+        </span>
+        </md-card-title-text>
+        <md-card-title-media style="position: absolute;top: 25%;right: 5%;opacity: 0.5;text-align: right">
+          <div class="md-media-lg card-media">
+            <img ng-if='apng.load' class="apng-image" ng-src="{{ function.apng }}">
+          </div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised" href="{{function.link}}" ng-if="!function.constructing">进入</md-button>
+        <md-button class="md-raised" ng-if="function.constructing" ng-disabled="true">施工中</md-button>
+      </md-card-actions>
+    </div>
+  </md-card>
+</div>

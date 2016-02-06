@@ -1,0 +1,13 @@
+<md-button class="md-raised" style="width:100%">
+  <div layout='row' layout-align='start center'>
+    <div class='pm-icon pm-icon-{{pokemon.ID}}'>
+    </div>
+    <div flex='10'>{{pokemon.ID}}</div>
+    <div flex>{{pokemon.name}}</div>
+    <div flex='15'>{{pokemon.type1.name}}</div>
+    <div flex='15'>
+      <div ng-if="pokemon.type2!=0">{{pokemon.type2.name}}
+      </div>
+    </div>
+  </div>
+</md-button>

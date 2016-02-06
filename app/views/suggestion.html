@@ -1,0 +1,32 @@
+<div layout="row">
+  <div flex-md='15' flex-lg='20'></div>
+  <md-card flex>
+    <md-card-content layout-padding>
+      <md-content flex layout='column'>
+        <div layout>
+          <p class="md-title">这里是提交意见和建议和吐槽的地方！</p>
+        </div>
+        <div layout="row" layout-xs="column" layout-wrap>
+          <md-input-container flex>
+            <label for="title">标题</label>
+            <input id="title" ng-model="suggestion.title" md-maxlength='20'>
+          </md-input-container>
+          <md-input-container flex>
+            <label for="username">名字</label>
+            <input id="username" ng-model="suggestion.name" md-maxlength='20'>
+          </md-input-container>
+        </div>
+        <md-input-container flex>
+          <label for="content">正文</label>
+          <textarea id="content" ng-model="suggestion.content" md-maxlength="400"></textarea>
+        </md-input-container>
+        <div layout="row" layout-align='end center'>
+          <md-button class="md-raised" ng-click="submit()">
+            提交
+          </md-button>
+        </div>
+      </md-content>
+    </md-card-content>
+  </md-card>
+  <div flex-md='15' flex-lg='20'></div>
+</div>
