@@ -10,7 +10,9 @@
   <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png"/>
   <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png"/>
 
-  <link rel="stylesheet" href="deps/angular-material.min.css"/>
+  <!-- bower:css -->
+  <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+  <!-- endbower -->
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/pm-icons.css">
   <link rel="stylesheet" href="styles/pokeball.css">
@@ -52,7 +54,7 @@
       <md-switch ng-model='apng.load' aria-label='loadAPNG' ng-change='toggleAnimation()'>
         动态图片
       </md-switch>
-      <div ng-click="userHideSideNav = true; sideNavIsOpen = false">
+      <div ng-click="userHideSideNav=true; sideNavIsOpen=false">
         <md-icon class="gray-svg-icon" style="cursor: pointer"
                  md-svg-src="//poke.so/storage/icons/ic_keyboard_arrow_left_black_24px.svg"
                  aria-label="hide menu"></md-icon>
@@ -66,14 +68,16 @@
 <md-content flex ng-view ng-cloak>
 </md-content>
 
-<script src="deps/angular.min.js"></script>
-<script src="deps/angular-animate.min.js"></script>
-<script src="deps/angular-aria.min.js"></script>
-<script src="deps/angular-material.min.js"></script>
-<script src="deps/angular-route.min.js"></script>
-<script src="deps/angular-local-storage.min.js"></script>
-<script src="deps/apng-canvas.min.js"></script>
-<script src="deps/hashdown.min.js"></script>
+<!-- bower:js -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/angular-aria/angular-aria.js"></script>
+<script src="../bower_components/angular-material/angular-material.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
+<script src="../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<!-- endbower -->
+<script src="../other_dependencies/apng-canvas.min.js"></script>
+<script src="../other_dependencies/hashdown.min.js"></script>
 
 <script src="scripts/app.js"></script>
 <script src="scripts/directives.js"></script>

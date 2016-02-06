@@ -3,24 +3,23 @@
   "authors": [
     "Exin Coda <ggaao1994@gmail.com>"
   ],
-  "description": "",
+  "description": "client of pokeso",
   "main": "",
   "moduleType": [],
-  "license": "MIT",
+  "license": "GNU",
   "homepage": "",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "other dependencies",
     "test",
     "tests"
   ],
   "dependencies": {
-    "angular-ui-sortable": "latest",
     "angular-material": "latest",
     "angular-route": "latest",
-    "material-design-lite": "latest",
-    "angular-local-storage": "~0.2.3"
+    "angular-local-storage": "*"
   }
 }
