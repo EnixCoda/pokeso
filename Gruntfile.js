@@ -44,9 +44,17 @@ module.exports = function(grunt) {
         options: {
           // See wiredep's configuration documentation for the options
           // you may pass:
-          exclude: ['/angular-messages/']
+          exclude: ['/angular-messages/', '/angular-local-storage/']
           // https://github.com/taptapship/wiredep#configuration
         }
+      }
+    },
+    cdnify: {
+      options: {
+        cdn: require('google-cdn-data')
+      },
+      dist: {
+        html: ['app/index.html']
       }
     }
   });
@@ -55,6 +63,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-wiredep');
-  // 默认被执行的任务列表。
+  grunt.loadNpmTasks('grunt-google-cdn');
+
   grunt.registerTask('default', ['concat', 'uglify', 'clean']);
 }
