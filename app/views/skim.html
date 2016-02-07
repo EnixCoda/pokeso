@@ -1,9 +1,9 @@
 <div layout="row" layout-xs="column">
   <div flex flex-sm="40" flex-gt-sm="nogrow">
     <md-card>
-      <md-card-content layout='column'>
+      <md-card-content layout="column">
         <pm-selector></pm-selector>
-        <div layout='column'>
+        <div layout="column">
           <md-virtual-repeat-container>
             <div md-virtual-repeat="pokemon in searchedPokemons" ng-show="pokemon!=0">
               <pm-in-list ng-click="checkPM(pokemon.ID)"></pm-in-list>
@@ -22,8 +22,8 @@
       <md-card-content>
         <md-tabs md-dynamic-height md-border-bottom>
           <md-tab label="基本信息">
-            <md-content class="text-centered" flex layout='column' layout-padding>
-              <div class="space-bottom" layout='row'>
+            <md-content class="text-centered" flex layout="column" layout-padding>
+              <div class="space-bottom" layout="row">
                 <div flex>{{pokemon.ID}}</div>
                 <div flex><b>{{pokemon.name}}</b></div>
                 <div flex>
@@ -47,10 +47,10 @@
                 缺少该PM的信息
               </div>
               <md-divider></md-divider>
-              <div layout='column'>
+              <div layout="column">
                 特性
-                <div ng-if="pokemon.ability1" layout='row' layout-padding>
-                  <div flex='30' class="text-centered">
+                <div ng-if="pokemon.ability1" layout="row" layout-padding>
+                  <div flex="30" class="text-centered">
                     <p class="md-body-1">{{pokemon.ability1.name}}</p>
                   </div>
                   <md-divider></md-divider>
@@ -58,8 +58,8 @@
                     <p class="md-body-1">{{pokemon.ability1.description}}</p>
                   </div>
                 </div>
-                <div ng-if="pokemon.ability2" layout='row' layout-padding>
-                  <div flex='30' class="text-centered">
+                <div ng-if="pokemon.ability2" layout="row" layout-padding>
+                  <div flex="30" class="text-centered">
                     <p class="md-body-1">{{pokemon.ability2.name}}</p>
                   </div>
                   <md-divider></md-divider>
@@ -67,8 +67,8 @@
                     <p class="md-body-1">{{pokemon.ability2.description}}</p>
                   </div>
                 </div>
-                <div ng-if="pokemon.abilityd" layout='row' layout-padding>
-                  <div flex='30' class="text-centered">
+                <div ng-if="pokemon.abilityd" layout="row" layout-padding>
+                  <div flex="30" class="text-centered">
                     <p class="md-body-1">{{pokemon.abilityd.name}}</p>
                   </div>
                   <md-divider></md-divider>
@@ -78,24 +78,24 @@
                 </div>
               </div>
               <md-divider></md-divider>
-              <div class="space-bottom" layout='row' layout-wrap>
-                <div flex layout='column'>
+              <div class="space-bottom" layout="row" layout-wrap>
+                <div flex layout="column">
                   <div>身高</div>
                   <div>{{pokemon.height}}m</div>
                 </div>
-                <div flex layout='column'>
+                <div flex layout="column">
                   <div>体重</div>
                   <div>{{pokemon.weight}}kg</div>
                 </div>
-                <div flex layout='column'>
+                <div flex layout="column">
                   <div>捕获率</div>
                   <div>{{pokemon.catchRate}}%</div>
                 </div>
-                <div flex layout='column'>
+                <div flex layout="column">
                   <div>孵化步数</div>
                   <div>{{pokemon.birthStep}}</div>
                 </div>
-                <div flex layout='column'>
+                <div flex layout="column">
                   <div>♂:♀</div>
                   <div>{{pokemon.sexRate.male}}:{{pokemon.sexRate.female}}</div>
                 </div>
@@ -110,12 +110,12 @@
               <div>
                 努力值
               </div>
-              <div layout='row'>
+              <div layout="row">
                 <div flex ng-repeat="statName in statNames track by $index">
                   {{statName}}
                 </div>
               </div>
-              <div class="space-bottom" layout='row'>
+              <div class="space-bottom" layout="row">
                 <div flex ng-repeat="value in pokemon.baseStat track by $index">
                   {{value}}
                 </div>

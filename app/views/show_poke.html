@@ -2,11 +2,11 @@
   <div layout="column" layout-padding>
     <div class="vertical-align-container-out" ng-if="loadAPNG" >
       <div class="vertical-align-container-in-bottom">
-        <img class="apng-image" ng-src='{{pokemon.apng}}'>
+        <img class="apng-image" ng-src="{{pokemon.apng}}">
       </div>
     </div>
     <md-divider></md-divider>
-    <div class="text-centered" layout='row'>
+    <div class="text-centered" layout="row">
       <div flex>
         <p>{{pokemon.ID}}</p>
       </div>
@@ -20,8 +20,8 @@
         <type-wrapper type="pokemon.type2" colors="typeColors"></type-wrapper>
       </div>
     </div>
-    <div ng-if="pokemon.ability1" layout='row' layout-padding>
-      <div flex='30' class="text-centered">
+    <div ng-if="pokemon.ability1" layout="row" layout-padding>
+      <div flex="30" class="text-centered">
         <p class="md-body-1">{{pokemon.ability1.name}}</p>
       </div>
       <md-divider></md-divider>
@@ -29,8 +29,8 @@
         <p class="md-body-1">{{pokemon.ability1.description}}</p>
       </div>
     </div>
-    <div ng-if="pokemon.ability2" layout='row' layout-padding>
-      <div flex='30' class="text-centered">
+    <div ng-if="pokemon.ability2" layout="row" layout-padding>
+      <div flex="30" class="text-centered">
         <p class="md-body-1">{{pokemon.ability2.name}}</p>
       </div>
       <md-divider></md-divider>
@@ -38,8 +38,8 @@
         <p class="md-body-1">{{pokemon.ability2.description}}</p>
       </div>
     </div>
-    <div ng-if="pokemon.abilityd" layout='row' layout-padding>
-      <div flex='30' class="text-centered">
+    <div ng-if="pokemon.abilityd" layout="row" layout-padding>
+      <div flex="30" class="text-centered">
         <p class="md-body-1">{{pokemon.abilityd.name}}</p>
       </div>
       <md-divider></md-divider>
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <div layout='row' layout-align='space-around center'>
+    <div layout="row" layout-align="space-around center">
       <!--TODO: Evolve Chain-->
     </div>
     <md-divider></md-divider>

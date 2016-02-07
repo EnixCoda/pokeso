@@ -1,29 +1,29 @@
 <md-bottom-sheet class="md-list" layout>
 	<md-list flex>
-		<md-list-item layout='row'>
+		<md-list-item layout="row">
 			<div flex class="text-centered"></div>
 			<div flex class="text-centered" ng-repeat="name in statNames">{{name}}</div>
 		</md-list-item>
-		<md-list-item layout='row'>
+		<md-list-item layout="row">
 			<div flex class="text-centered">种族值</div>
 			<div flex ng-repeat="value in current.baseStats track by $index" layout>
 				<div class="text-centered" flex>{{value}}</div>
 			</div>
 		</md-list-item>
-		<md-list-item layout='row'>
+		<md-list-item layout="row">
 			<div flex class="text-centered">努力值</div>
 			<md-input-container flex class="no-padding-bottom" ng-repeat="value in current.baseStat track by $index">
 				<input class="text-centered" type="number" step="4" ng-model="current.baseStat[$index]" min="0" max="252"
 							 ng-pattern="/[0-9]|[0-9]{2}|1[0-9]{2}|2[01234][0-9]|25[012]/"
-							 ng-change="statChange(current.baseStat, $index)" aria-label='base stat' ng-focus="clearThisInput(current.baseStat, $index)" ng-blur="onBlur(current.baseStat, $index)">
+							 ng-change="statChange(current.baseStat, $index)" aria-label="base stat" ng-focus="clearThisInput(current.baseStat, $index)" ng-blur="onBlur(current.baseStat, $index)">
 			</md-input-container>
 		</md-list-item>
-		<md-list-item layout='row'>
+		<md-list-item layout="row">
 			<div flex class="text-centered">个体值</div>
 			<md-input-container flex class="no-padding-bottom" ng-repeat="value in current.IV track by $index">
 				<input class="text-centered" type="number" step="1" ng-model="current.IV[$index]" min="0" max="31"
 							 ng-pattern="/[1-2]?[0-9]|3[0-1]/"
-							 ng-change="statChange(current.IV, $index)" aria-label='IV' ng-focus="clearThisInput(current.IV, $index)" ng-blur="onBlur(current.IV, $index)">
+							 ng-change="statChange(current.IV, $index)" aria-label="IV" ng-focus="clearThisInput(current.IV, $index)" ng-blur="onBlur(current.IV, $index)">
 			</md-input-container>
 		</md-list-item>
 		<md-list-item>

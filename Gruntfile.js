@@ -1,69 +1,84 @@
-module.exports = function(grunt) {
-  
+module.exports = function (grunt) {
+
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      options: {
-        separator: ';',
+    pkg:     grunt.file.readJSON('package.json'),
+    concat:  {
+      options:     {
+        separator: ';'
       },
-      scripts: {
-        src: ['app/scripts/*.js'],
-        dest: 'dist/scripts.js'
+      scripts:     {
+        src:  ['app/scripts/*.js'],
+        dest: 'dist/concated/scripts.js'
       },
       controllers: {
-        src: ['app/scripts/controllers/*.js'],
-        dest: 'dist/controllers.js'
+        src:  ['app/scripts/controllers/*.js'],
+        dest: 'dist/concated/controllers.js'
       },
-      styles: {
-        src: ['app/styles/*.css'],
-        dest: 'dist/sugar.css'
+      styles:      {
+        src:  ['app/styles/*.css'],
+        dest: 'dist/concated/sugar.css'
       }
     },
-    uglify: {
+    uglify:  {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      dist:{
+      dist:    {
         files: {
-          'dist/scripts.min.js': '<%= concat.scripts.dest %>',
+          'dist/scripts.min.js':     '<%= concat.scripts.dest %>',
           'dist/controllers.min.js': '<%= concat.controllers.dest %>'
         }
       }
     },
-    clean: {
-      concated: ['dist/scripts.js', 'dist/controllers.js']
-    },
-    wiredep: {
-      task: {
-        // Point to the files that should be updated when
-        // you run `grunt wiredep`
-        src: [
-          'app/index.html'
-        ],
-
-        options: {
-          // See wiredep's configuration documentation for the options
-          // you may pass:
-          exclude: ['/angular-messages/', '/angular-local-storage/']
-          // https://github.com/taptapship/wiredep#configuration
+    cssmin:  {
+      target: {
+        files: {
+          'dist/sugar.min.css': ['<%= concat.styles.dest %>']
         }
       }
     },
-    cdnify: {
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments:     true,
+          collapseWhitespace: true
+        },
+        files:   {
+          'dist/index.html': 'app/index.html',
+
+        }
+      }
+    },
+    clean:   {
+      concated: ['dist/concated/']
+    },
+    wiredep: {
+      task: {
+        src:     [
+          'app/index.html'
+        ],
+        options: {
+          exclude: ['/angular-messages/', '/angular-local-storage/']
+        }
+      }
+    },
+    cdnify:  {
       options: {
         cdn: require('google-cdn-data')
       },
-      dist: {
+      dist:    {
         html: ['app/index.html']
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-google-cdn');
 
-  grunt.registerTask('default', ['concat', 'uglify', 'clean']);
+  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'clean']);
 }

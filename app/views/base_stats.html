@@ -4,7 +4,7 @@
       <md-card class="md-raised md-whiteframe-z3">
         <md-card-content>
           <pm-selector></pm-selector>
-          <div layout='column'>
+          <div layout="column">
             <md-virtual-repeat-container>
               <div md-virtual-repeat="pokemon in searchedPokemons">
                 <pm-in-list ng-click="addCard(pokemon.ID)"></pm-in-list>
@@ -17,14 +17,14 @@
     </div>
     <div flex flex-sm="60" flex-gt-sm="nogrow">
       <md-card ng-show="cards.length>0" class="md-raised">
-        <md-card-content layout-padding layout='column'>
-          <div layout='row' layout-wrap>
+        <md-card-content layout-padding layout="column">
+          <div layout="row" layout-wrap>
             <div ng-repeat="card in cards track by $index">
               <div class="margin-right"
                    style="background-color:{{backgroundColors[$index]}};border-radius:20px;margin: 10px;">
                 <md-checkbox class="faint_checkbox" style="margin: 0 10px" ng-click="toggleShowCard($index)"
-                             ng-checked="showCards[$index]" aria-label='small card'>
-                  <div layout='row' layout-align='center center'>
+                             ng-checked="showCards[$index]" aria-label="small card">
+                  <div layout="row" layout-align="center center">
                     <div style="margin-left:-10px" class="pm-icon pm-icon-{{card.ID}}"></div>
                     <div style="color:#fff">{{card.name}}</div>
                     <div class="border-right"></div>
@@ -35,7 +35,7 @@
               </div>
             </div>
           </div>
-          <div layout='row' layout-align='center center'>
+          <div layout="row" layout-align="center center">
             <canvas id="statsGraph"></canvas>
           </div>
           <md-icon md-svg-src="md-close" aria-label="Close Icon"></md-icon>
@@ -47,14 +47,14 @@
     <md-card flex-xs="100" flex-sm="45" flex-md="31" flex-gt-md="25" ng-if="cards.length > 0" ng-repeat="card in cards"
                class="md-raised md-whiteframe-z3">
         <md-card-content>
-          <div layout='column'>
-            <div ng-if='apng.load' class="vertical-align-container-out">
+          <div layout="column">
+            <div ng-if="apng.load" class="vertical-align-container-out">
               <div class="vertical-align-container-in-bottom">
-                <img class="apng-image" ng-src='{{card.apng}}'>
+                <img class="apng-image" ng-src="{{card.apng}}">
               </div>
             </div>
             <md-divider layout-margin></md-divider>
-            <div layout='row' class="text-centered">
+            <div layout="row" class="text-centered">
               <div flex>
                 <p class="md-body-2">{{card.ID}}</p>
               </div>
@@ -68,13 +68,13 @@
                 <type-wrapper type="pokemon.type2" colors="typeColors"></type-wrapper>
               </div>
             </div>
-            <div layout='row'>
-              <div flex ng-repeat="value in card.baseStats track by $index" layout='column'
-                   layout-align='center center'>
+            <div layout="row">
+              <div flex ng-repeat="value in card.baseStats track by $index" layout="column"
+                   layout-align="center center">
                 <div>{{statNames[$index]}}</div>
                 <div>{{value}}</div>
               </div>
-              <div flex layout='column' layout-align='center center'>
+              <div flex layout="column" layout-align="center center">
                 <div>总和</div>
                 <div>{{card.baseStats[0] + card.baseStats[1] + card.baseStats[2] +
                   card.baseStats[3] + card.baseStats[4] + card.baseStats[5]}}
@@ -82,7 +82,7 @@
               </div>
             </div>
             <md-divider layout-margin></md-divider>
-            <div layout layout-align='center center'>
+            <div layout layout-align="center center">
               <md-button ng-click="delCard($index)">关闭</md-button>
             </div>
           </div>

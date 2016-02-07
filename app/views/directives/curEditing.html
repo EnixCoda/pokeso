@@ -1,11 +1,11 @@
 <div layout-padding>
-  <div class="vertical-align-container-out" ng-if='apng.load'>
+  <div class="vertical-align-container-out" ng-if="apng.load">
     <div class="vertical-align-container-in-bottom">
-      <img class="apng-image" ng-src='{{current.apng}}'>
+      <img class="apng-image" ng-src="{{current.apng}}">
     </div>
   </div>
   <md-divider></md-divider>
-  <section class="text-centered" layout='row'>
+  <section class="text-centered" layout="row">
     <div flex>
       <p>{{current.ID}}</p>
     </div>
@@ -46,7 +46,7 @@
   </section>
   <md-divider></md-divider>
   <section style="text-align: right;" layout-padding>
-    <div layout='row' layout-wrap>
+    <div layout="row" layout-wrap>
       <md-input-container class="no-margin">
         <label>等级</label>
         <input ng-model="current.level" ng-change="levelChanged()" ng-pattern="/^([5-9]|[1-9]\d|100)$/"
@@ -68,7 +68,7 @@
         </md-select>
       </md-input-container>
     </div>
-    <div layout='row'>
+    <div layout="row">
       <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
       <div flex layout layout-align="end center" ng-repeat="name in statNames track by $index">
         <div ng-show="natures[current.natureID].value[$index]==1">{{name}}</div>
@@ -76,19 +76,19 @@
         <div ng-show="natures[current.natureID].value[$index]<1">↓<b>{{name}}</b></div>
       </div>
     </div>
-    <div layout='row'>
+    <div layout="row">
       <div>种族值</div>
       <div flex ng-repeat="bs in current.baseStats track by $index">
         {{bs}}
       </div>
     </div>
-    <div layout='row'>
+    <div layout="row">
       <div>努力值</div>
       <div flex ng-repeat="bss in current.baseStat track by $index">
         {{bss}}
       </div>
     </div>
-    <div layout='row'>
+    <div layout="row">
       <div>个体值</div>
       <div flex ng-repeat="iv in current.IV track by $index">
         {{iv}}
@@ -103,10 +103,10 @@
     <md-divider></md-divider>
   </section>
   <section ng-show="current.moves.length">
-    <div layout='row' layout-wrap>
+    <div layout="row" layout-wrap>
       <div flex="23" flex-xs="46" ng-repeat="move in current.moves" class="type-wrapper move_chip"
            style="background-color: {{typeColors[move.type.ID]}}">
-        <div layout layout-align='space-between center'>
+        <div layout layout-align="space-between center">
           <div flex></div>
           <div>{{move.name}}</div>
           <div flex></div>
@@ -128,7 +128,7 @@
     </div>
   </section>
   <div layout="row" layout-align="end center">
-    <md-button class='md-raised md-warn' ng-click='removeCurrent()'>
+    <md-button class="md-raised md-warn" ng-click="removeCurrent()">
       从队伍删除
     </md-button>
     <md-button class="md-raised md-primary" ng-click="openEditor($event)">

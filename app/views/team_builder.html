@@ -5,7 +5,7 @@
         <md-tabs md-dynamic-height md-border-bottom>
           <md-tab label="选择PM">
             <pm-selector></pm-selector>
-            <div layout='column'>
+            <div layout="column">
               <md-virtual-repeat-container>
                 <div md-virtual-repeat="pokemon in searchedPokemons">
                   <pm-in-list ng-click="editPokemon(pokemon.ID)"></pm-in-list>
@@ -20,7 +20,7 @@
               <md-button ng-disabled="!current" ng-click="searchMove()" class="md-raised md-primary">
                 搜索技能
               </md-button>
-              <div layout='row' layout-align='space-between center'>
+              <div layout="row" layout-align="space-between center">
                 <div></div>
                 <div>ID</div>
                 <div>名称</div>
@@ -51,11 +51,11 @@
   <div layout="column" flex flex-gt-md="nogrow">
     <md-card class="md-raised md-whiteframe-z3">
       <md-card-content>
-        <div layout layout-align='center center' layout-wrap>
+        <div layout layout-align="center center" layout-wrap>
           <div flex></div>
-          <div layout="row" layout-wrap layout-align='start center'>
+          <div layout="row" layout-wrap layout-align="start center">
             <md-button class="md-primary thin-button-phone" ng-click="load()"
-            ng-disabled='serial.text.length==0'>
+            ng-disabled="serial.text.length==0">
               加载
             </md-button>
             <md-button class="md-primary thin-button-phone" ng-click="save()" ng-disabled="team.length==0">
@@ -64,7 +64,7 @@
             <md-input-container>
               <label>奇怪的蝌蚪码</label>
               <input ng-model="serial.text">
-              <md-icon ng-show="serial.text!=''" md-svg-src="md-close"
+              <md-icon ng-show="serial.text.length" md-svg-src="md-close"
                        aria-label="clear serial text"
                        ng-click="serial.text=''"></md-icon>
               <div flex></div>
@@ -79,7 +79,7 @@
       </md-card-content>
     </md-card>
     <md-card ng-show="team.length>0" class="md-raised md-whiteframe-z3">
-      <md-card-content layout='column'>
+      <md-card-content layout="column">
         <cur-editing ng-repeat="current in [current]"></cur-editing>
       </md-card-content>
     </md-card>

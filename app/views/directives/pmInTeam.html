@@ -1,8 +1,8 @@
 <md-button class="no-margin fill-width">
-  <div layout='row' layout-wrap>
-    <div flex layout='column'>
-      <div layout='row'>
-        <span class='pm-icon pm-icon-{{pokemon.ID}}'></span>
+  <div layout="row" layout-wrap>
+    <div flex layout="column">
+      <div layout="row">
+        <span class="pm-icon pm-icon-{{pokemon.ID}}"></span>
         <div class="space-right-lite">
           {{pokemon.ID}}
         </div>
@@ -11,7 +11,7 @@
           {{sexes[pokemon.sex]}}
         </div>
       </div>
-      <div layout='row' layout-align='space-around center' layout-wrap>
+      <div layout="row" layout-align="space-around center" layout-wrap>
         <div flex>
           Lv.{{pokemon.level}}
         </div>
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div flex layout='row' layout-wrap>
+    <div flex layout="row" layout-wrap>
       <div flex="45" ng-repeat="move in pokemon.moves"
            style="color: {{typeColors[move.type.ID]}}">
         {{move.name}}

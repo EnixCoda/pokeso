@@ -25,26 +25,26 @@
   </div>
   <div layout="row" layout-align="space-between center">
     <label>威力</label>
-    <md-checkbox ng-model="moveFilter.powerIndeterminable" ng-disabled='selectedKindID==3'>
+    <md-checkbox ng-model="moveFilter.powerIndeterminable" ng-disabled="selectedKindID==3">
       必杀/威力变化
     </md-checkbox>
   </div>
   <div>
     <div layout>
-      <div flex='20' layout layout-align='center center'><span>最小值</span></div>
-      <md-slider flex min='0' max='250' step='5' aria-label='powerMin'
+      <div flex="20" layout layout-align="center center"><span>最小值</span></div>
+      <md-slider flex min="0" max="250" step="5" aria-label="powerMin"
                  ng-model="moveFilter.powerMin"
-                 ng-change='detectOverlap()'
-                 ng-disabled='moveFilter.powerIndeterminable || selectedKindID==3'></md-slider>
-      <div flex='20' layout layout-align='center center'><span>{{moveFilter.powerMin}}</span></div>
+                 ng-change="detectOverlap()"
+                 ng-disabled="moveFilter.powerIndeterminable || selectedKindID==3"></md-slider>
+      <div flex="20" layout layout-align="center center"><span>{{moveFilter.powerMin}}</span></div>
     </div>
     <div layout>
-      <div flex='20' layout layout-align='center center'><span>最大值</span></div>
-      <md-slider flex min='0' max='250' step='5' aria-label='powerMax'
+      <div flex="20" layout layout-align="center center"><span>最大值</span></div>
+      <md-slider flex min="0" max="250" step="5" aria-label="powerMax"
                  ng-model="moveFilter.powerMax"
-                 ng-change='detectOverlap()'
-                 ng-disabled='moveFilter.powerIndeterminable || selectedKindID==3'></md-slider>
-      <div flex='20' layout layout-align='center center'><span>{{moveFilter.powerMax}}</span></div>
+                 ng-change="detectOverlap()"
+                 ng-disabled="moveFilter.powerIndeterminable || selectedKindID==3"></md-slider>
+      <div flex="20" layout layout-align="center center"><span>{{moveFilter.powerMax}}</span></div>
     </div>
   </div>
   <div layout="row" layout-align="space-between center">
@@ -55,19 +55,19 @@
   </div>
   <div>
     <div layout>
-      <div flex='20' layout layout-align='center center'><span>最小值</span></div>
-      <md-slider flex min='0' max='100' step='5' aria-label='accuracyMin'
+      <div flex="20" layout layout-align="center center"><span>最小值</span></div>
+      <md-slider flex min="0" max="100" step="5" aria-label="accuracyMin"
                  ng-model="moveFilter.accuracyMin"
-                 ng-change='detectOverlap()' ng-disabled='moveFilter.accuracyIndeterminable'></md-slider>
-      <div flex='20' layout layout-align='center center'><span>{{moveFilter.accuracyMin}}</span></div>
+                 ng-change="detectOverlap()" ng-disabled="moveFilter.accuracyIndeterminable"></md-slider>
+      <div flex="20" layout layout-align="center center"><span>{{moveFilter.accuracyMin}}</span></div>
     </div>
     <div layout>
-      <div flex='20' layout layout-align='center center'><span>最大值</span></div>
-      <md-slider flex min='0' max='100' step='5' aria-label='accuracyMax'
+      <div flex="20" layout layout-align="center center"><span>最大值</span></div>
+      <md-slider flex min="0" max="100" step="5" aria-label="accuracyMax"
                  ng-model="moveFilter.accuracyMax"
-                 ng-change='detectOverlap()'
-                 ng-disabled='moveFilter.accuracyIndeterminable'></md-slider>
-      <div flex='20' layout layout-align='center center'><span>{{moveFilter.accuracyMax}}</span></div>
+                 ng-change="detectOverlap()"
+                 ng-disabled="moveFilter.accuracyIndeterminable"></md-slider>
+      <div flex="20" layout layout-align="center center"><span>{{moveFilter.accuracyMax}}</span></div>
     </div>
   </div>
   <div layout="row" layout-align="space-between start">
@@ -75,20 +75,20 @@
   </div>
   <div>
     <div layout>
-      <div flex='20' layout layout-align='center center'><span>最小值</span></div>
-      <md-slider flex min='0' max='50' step='5' aria-label='ppMin'
+      <div flex="20" layout layout-align="center center"><span>最小值</span></div>
+      <md-slider flex min="0" max="50" step="5" aria-label="ppMin"
                  ng-model="moveFilter.ppMin"
-                 ng-change='detectOverlap()'></md-slider>
-      <div flex='20' layout layout-align='center center'><span>{{moveFilter.ppMin}}</span></div>
+                 ng-change="detectOverlap()"></md-slider>
+      <div flex="20" layout layout-align="center center"><span>{{moveFilter.ppMin}}</span></div>
     </div>
     <div layout>
-      <div flex='20' layout layout-align='center center'>
+      <div flex="20" layout layout-align="center center">
         <span>最大值</span>
       </div>
-      <md-slider flex min='0' max='50' step='5' aria-label='ppMax'
+      <md-slider flex min="0" max="50" step="5" aria-label="ppMax"
                  ng-model="moveFilter.ppMax"
-                 ng-change='detectOverlap()'></md-slider>
-      <div flex='20' layout layout-align='center center'>
+                 ng-change="detectOverlap()"></md-slider>
+      <div flex="20" layout layout-align="center center">
         <span>{{moveFilter.ppMax}}</span>
       </div>
     </div>
