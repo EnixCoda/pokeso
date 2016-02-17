@@ -69,8 +69,7 @@ module.exports = function (grunt) {
       }
     },
     clean:   {
-      sugar: ['preproc/sugar.css'],
-      JS: ['preproc/*']
+      preproc: ['preproc']
     },
     wiredep: {
       task: {
