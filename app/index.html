@@ -37,14 +37,12 @@
     </a>
   </div>
   <md-content layout-padding layout="column" layout-align="start stretch">
-    <md-button layout-align="start start"
-               ng-repeat="function in MainFunctions track by $index"
-               ng-if="!function.constructing"
-               ng-click="closeSideNav()"
-               href="{{function.link}}">
+    <md-button layout-align="start start" ng-if="!func.constructing"
+               ng-repeat="func in MainFunctions track by $index"
+               ng-click="closeSideNav()" href="{{func.link}}">
       <div layout="row" layout-align="start center">
-        <span class="pokeball pokeball-{{function.ball}}"></span>
-        {{function.name}}
+        <span class="pokeball pokeball-{{func.ball}}"></span>
+        {{func.name}}
       </div>
     </md-button>
     <div layout="row" layout-align="space-between center">
