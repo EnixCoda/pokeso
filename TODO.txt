@@ -1,5 +1,4 @@
 首要：
-    使用bower, grunt/gulp
     showPoke.html、skim.html中的进化展示
     属性相性
     速度线
