@@ -70,6 +70,7 @@ module.exports = function (grunt) {
     },
     clean:   {
       preproc: ['preproc']
+
     },
     wiredep: {
       task: {
@@ -215,4 +216,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-replace');
 
   grunt.registerTask('default', ['concat', 'cssmin', 'cdnify', 'replace', 'clean']);
+
 };
