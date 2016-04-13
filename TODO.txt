@@ -19,5 +19,7 @@
     伤害计算&技能承受
 
 次要
+    首页card内容、按钮填充底色，文字转白色
+    delayed load layer
     SVG的statsGraph
     居中typeWrapper
