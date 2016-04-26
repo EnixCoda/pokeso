@@ -14,6 +14,9 @@
 可发布文件将集中在dist文件夹下。
 
 界面预览：
+
+### 桌面版页面
+
 ![](https://github.com/ExinCoda/pokeso/blob/master/previews/11.png?raw=true)
 ![](https://github.com/ExinCoda/pokeso/blob/master/previews/13.png?raw=true)
 ![](https://github.com/ExinCoda/pokeso/blob/master/previews/21.png?raw=true)
@@ -22,4 +25,11 @@
 ![](https://github.com/ExinCoda/pokeso/blob/master/previews/32.png?raw=true)
 ![](https://github.com/ExinCoda/pokeso/blob/master/previews/33.png?raw=true)
 ![](https://github.com/ExinCoda/pokeso/blob/master/previews/61.png?raw=true)
-![](https://github.com/ExinCoda/pokeso/blob/master/previews/m3.png?raw=true)![](https://github.com/ExinCoda/pokeso/blob/master/previews/m11.png?raw=true)![](https://github.com/ExinCoda/pokeso/blob/master/previews/m21.png?raw=true)
+
+---
+
+### 移动版页面
+
+![](https://github.com/ExinCoda/pokeso/blob/master/previews/m3.png?raw=true)
+![](https://github.com/ExinCoda/pokeso/blob/master/previews/m11.png?raw=true)
+![](https://github.com/ExinCoda/pokeso/blob/master/previews/m21.png?raw=true)
